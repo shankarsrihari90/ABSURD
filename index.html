@@ -208,6 +208,43 @@
     .brutal-btn:active{transform:translateY(3px) scale(.99);}
     @media(max-width:640px){button{touch-action:manipulation;}}
 
+    /* LANDING CTA — sized to stay one line on narrow phones. */
+    #enter-absurd {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:.28em;
+      white-space:nowrap;
+      line-height:1;
+      letter-spacing:.055em;
+      box-shadow:0 0 0 0 rgba(57,255,136,.45), 0 0 18px rgba(57,255,136,.3);
+      animation:enter-glow 1.7s ease-in-out infinite;
+    }
+    #enter-absurd .enter-arrow {
+      display:inline-block;
+      flex:0 0 auto;
+      animation:enter-arrow-bounce .7s ease-in-out infinite alternate;
+    }
+    @keyframes enter-glow {
+      0%,100% { filter:brightness(1); box-shadow:0 0 0 0 rgba(57,255,136,.45),0 0 16px rgba(57,255,136,.25); }
+      50% { filter:brightness(1.18); box-shadow:0 0 0 5px rgba(57,255,136,.12),0 0 29px rgba(57,255,136,.72); }
+    }
+    @keyframes enter-arrow-bounce {
+      from { transform:translateX(-1px); }
+      to { transform:translateX(5px); }
+    }
+    @media(max-width:420px) {
+      #enter-absurd {
+        min-height:56px;
+        padding:.9rem .55rem;
+        font-size:clamp(1.15rem,6.3vw,1.55rem);
+        letter-spacing:.035em;
+      }
+    }
+    @media(prefers-reduced-motion:reduce) {
+      #enter-absurd, #enter-absurd .enter-arrow { animation:none; }
+    }
+
 
     #ask-answer{max-width:100%;overflow-wrap:anywhere;hyphens:none;}
     #ask-footnote{overflow-wrap:anywhere;}
@@ -269,8 +306,8 @@
         There is absolutely no reason for you to be here.
       </p>
       
-      <button onclick="enterAbsurd()" class="brutal-btn w-full bg-green-400 hover:bg-yellow-300 text-black font-impact text-3xl py-4 border-4 border-black uppercase tracking-widest cursor-pointer">
-        [ ENTER ABSURD → ]
+      <button id="enter-absurd" type="button" onclick="enterAbsurd()" class="brutal-btn w-full min-h-[60px] bg-green-400 hover:bg-yellow-300 text-black font-impact text-3xl py-4 border-4 border-black uppercase cursor-pointer touch-manipulation" aria-label="Enter ABSURD">
+        <span>[ ENTER ABSURD</span><span class="enter-arrow" aria-hidden="true">→ ]</span>
       </button>
 
       <p class="text-[10px] text-zinc-500 mt-6 uppercase tracking-widest">
@@ -750,6 +787,12 @@
       }, 1000);
     }
 
+    function scrollToTop() {
+      // `instant` is not a valid value in older mobile browsers. Using the
+      // two-argument form avoids a WebKit exception during view changes.
+      window.scrollTo(0, 0);
+    }
+
     // View Switcher
     function switchView(viewId) {
       const aliases = { landing:'view-landing', home:'view-hub', hub:'view-hub', report:'view-report' };
@@ -792,38 +835,17 @@
       if (ticker) { ticker.classList.toggle('hidden', !inside); ticker.style.display = inside ? 'block' : 'none'; }
 
       if (targetId === 'view-report') populateReport();
-      window.scrollTo({top:0, behavior:'instant'});
+      scrollToTop();
     }
 
     // Landing Page Entry
     function enterAbsurd() {
-      const landing = document.getElementById('view-landing');
-      const hub = document.getElementById('view-hub');
-      const topBar = document.getElementById('top-bar');
-      const ticker = document.getElementById('ticker');
-
-      if (landing) {
-        landing.style.display = 'none';
-        landing.classList.add('hidden');
-      }
-      if (topBar) {
-        topBar.classList.remove('hidden');
-        topBar.style.display = 'flex';
-      }
-      if (ticker) {
-        ticker.classList.remove('hidden');
-        ticker.style.display = 'block';
-      }
-      if (hub) {
-        hub.classList.remove('hidden');
-        hub.style.display = 'block';
-        hub.style.visibility = 'visible';
-        hub.style.opacity = '1';
-      }
-
+      // Use the shared view switcher so touch and mouse entry follow exactly
+      // the same visibility and navigation path.
+      switchView('view-hub');
       startTimer();
       rotateAbsurdFeed();
-      window.scrollTo({top: 0, behavior: 'instant'});
+      scrollToTop();
     }
 
     function rotateAbsurdFeed() {
