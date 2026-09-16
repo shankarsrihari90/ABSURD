@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ABSURD — Nobody asked for this.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>.hidden{display:none!important}
+    @import url('https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Impact&display=swap');
+    
+    :root {
+      --font-display: 'Impact', 'VT323', sans-serif;
+      --font-mono: 'Space Mono', monospace;
+    }
+
+    #view-hub {
+      width: 100%;
+      max-width: 1280px;
+      min-height: calc(100vh - 95px);
+      margin: 0 auto;
+      box-sizing: border-box;
+      position: relative;
+      z-index: 10;
+    }
+    #view-hub .brutal-border, #view-hub .brutal-border-yellow {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-mono);
+      background-color: #0d0d0d;
+      color: #00ff66;
+      cursor: crosshair;
+      overflow-x: hidden;
+    }
+
+    /* Absurd Chaos Stylings */
+    .font-impact { font-family: 'Impact', sans-serif; }
+    .font-vt { font-family: 'VT323', monospace; }
+
+    .brutal-border {
+      border: 4px solid #00ff66;
+      box-shadow: 6px 6px 0px #ff0055;
+    }
+
+    .brutal-border-yellow {
+      border: 4px solid #fffb00;
+      box-shadow: 6px 6px 0px #00e5ff;
+    }
+
+    .brutal-btn {
+      transition: all 0.05s ease-in-out;
+    }
+    .brutal-btn:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 9px 9px 0px #ff0055;
+    }
+    .brutal-btn:active {
+      transform: translate(3px, 3px);
+      box-shadow: 2px 2px 0px #ff0055;
+    }
+
+    @keyframes jitter {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      20% { transform: translate(-2px, 2px) rotate(-0.5deg); }
+      40% { transform: translate(2px, -1px) rotate(0.5deg); }
+      60% { transform: translate(-1px, -2px) rotate(0deg); }
+      80% { transform: translate(2px, 1px) rotate(0.5deg); }
+      100% { transform: translate(0, 0) rotate(0deg); }
+    }
+    .jitter-slow { animation: jitter 3s infinite; }
+    .jitter-fast { animation: jitter 0.15s infinite; }
+
+    /* Scanline Overlay */
+    .scanlines {
+      background: linear-gradient(
+        rgba(18, 16, 16, 0) 50%, 
+        rgba(0, 0, 0, 0.25) 50%
+      ), linear-gradient(
+        90deg,
+        rgba(255, 0, 0, 0.03),
+        rgba(0, 255, 0, 0.01),
+        rgba(0, 0, 255, 0.03)
+      );
+      background-size: 100% 3px, 6px 100%;
+      pointer-events: none;
+    }
+
+    /* Custom Ticker */
+    @keyframes marquee {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    .animate-marquee {
+      display: inline-block;
+      white-space: nowrap;
+      animation: marquee 20s linear infinite;
+    }
+  
+    /* DAD JOKES — MOBILE FIRST */
+    #tool-dad { box-sizing: border-box; overflow-x: hidden; }
+    #tool-dad button { -webkit-tap-highlight-color: transparent; }
+    #dad-machine { box-shadow: 7px 7px 0 rgba(249,115,22,.35); }
+    @media (max-width: 640px) {
+      #tool-dad { padding-left: 10px !important; padding-right: 10px !important; }
+      #tool-dad > div { padding: 14px !important; }
+      #dad-machine { min-height: 290px !important; padding: 20px 13px !important; }
+      #dad-question { word-break: normal; overflow-wrap: anywhere; }
+      #dad-answer { word-break: normal; overflow-wrap: anywhere; }
+      #dad-new, #dad-reveal { width: 100%; font-size: 1.2rem !important; }
+    }
+
+    /* ASK ME ANYTHING + NEWS — MOBILE FIRST */
+    .ask-chip {
+      min-height: 44px;
+      padding: 8px 7px;
+      border: 2px solid #2563eb;
+      background: #050505;
+      color: #60a5fa;
+      font-family: monospace;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .ask-chip:hover { background: #2563eb; color: white; }
+    @media (max-width: 640px) {
+      #tool-ask, #tool-absurdity { padding-left: 8px !important; padding-right: 8px !important; }
+      #tool-ask > div, #tool-absurdity > div { padding: 14px !important; }
+      #ask-input { font-size: 16px !important; } /* prevents iOS zoom */
+      #ask-answer, #news-headline { overflow-wrap: anywhere; }
+      .ask-chip { font-size: 8px; line-height: 1.1; }
+      #news-card { word-break: normal; }
+    }
+
+    /* ABSURD 2.0 — INTERACTION SYSTEM */
+    .absurd-view { box-sizing:border-box; min-height:calc(100vh - 92px); }
+    .hub-card { transition:transform .12s ease, background .12s ease; }
+    .hub-card:hover { transform:translate(-3px,-3px); background:#18181b; }
+    .hub-card:active { transform:translate(0,0); }
+    .back-home {
+      display:inline-flex; align-items:center; justify-content:center;
+      min-height:46px; padding:10px 14px; margin-top:22px;
+      color:#71717a; text-decoration:underline; text-transform:uppercase;
+      font-size:10px; font-weight:700; background:transparent; border:0; cursor:pointer;
+      touch-action:manipulation;
+    }
+    .back-home:hover { color:#fff; }
+    .mood-btn {
+      min-height:56px; border:3px solid #000; padding:12px 6px;
+      font-size:11px; font-weight:900; font-family:monospace;
+      cursor:pointer; touch-action:manipulation;
+    }
+    .mood-btn:active { transform:translateY(3px); }
+    input, select, textarea, button { max-width:100%; }
+    @media(max-width:640px) {
+      body { overflow-x:hidden; }
+      #top-bar { gap:5px; }
+      #top-bar > div:last-child { gap:7px; font-size:9px; }
+      #top-bar > div:last-child > div:nth-child(1),
+      #top-bar > div:last-child > div:nth-child(2) { display:none; }
+      .absurd-view { min-height:calc(100vh - 70px); }
+      .hub-card { min-height:190px !important; }
+      .brutal-border, .brutal-border-yellow { max-width:100%; }
+      #useless-btn { width:min(72vw,270px) !important; height:min(72vw,270px) !important; }
+      #ask-input { font-size:16px !important; }
+      #dad-question, #dad-answer, #ask-answer, #news-headline { overflow-wrap:anywhere; }
+    }
+
+
+    /* ABSURD HUB — CLEAN 3-COLUMN SYSTEM */
+    .hub-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;}
+    .hub-card{position:relative;min-height:265px;padding:22px;background:#111;border:3px solid #39ff88;box-shadow:7px 7px 0 #ff006e;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;overflow:hidden;transition:transform .16s ease,box-shadow .16s ease,background .16s ease;}
+    .hub-card:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 4px);pointer-events:none;}
+    .hub-card:hover{transform:translate(-3px,-3px);box-shadow:10px 10px 0 #ff006e;background:#151515;}
+    .hub-card:active{transform:translate(0,0);box-shadow:4px 4px 0 #ff006e;}
+    .hub-card-top{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;}
+    .hub-number{display:inline-block;padding:4px 8px;border:1px solid #000;background:#f44;color:#fff;font:700 10px monospace;}
+    .hub-arrow{font:700 18px monospace;opacity:.45;transition:transform .16s ease,opacity .16s ease;}
+    .hub-card:hover .hub-arrow{transform:translate(3px,-3px);opacity:1;}
+    .hub-card h3{font-family:Impact, Haettenschweiler, "Arial Narrow Bold",sans-serif;font-size:clamp(2.3rem,4vw,3.4rem);line-height:.83;letter-spacing:-.02em;margin:20px 0 12px;position:relative;z-index:1;}
+    .hub-card p{font:400 13px/1.35 monospace;color:#a1a1aa;max-width:33ch;position:relative;z-index:1;}
+    .hub-cta{font:700 10px monospace;position:relative;z-index:1;margin-top:18px;}
+    .hub-blue .hub-number{background:#3b82f6}.hub-blue h3,.hub-blue .hub-cta{color:#60a5fa}
+    .hub-pink .hub-number{background:#db2777}.hub-pink h3,.hub-pink .hub-cta{color:#ec4899}
+    .hub-purple .hub-number{background:#7c3aed}.hub-purple h3,.hub-purple .hub-cta{color:#a78bfa}
+    .hub-orange .hub-number{background:#f97316;color:#000}.hub-orange h3,.hub-orange .hub-cta{color:#fb923c}
+    .hub-green .hub-number{background:#4ade80;color:#000}.hub-green h3,.hub-green .hub-cta{color:#86efac}
+    .hub-red h3,.hub-red .hub-cta{color:#ff7b7b}
+    .hub-stat{border:2px solid #27272a;background:#080808;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .hub-stat span{font:700 8px monospace;color:#52525b}.hub-stat b{font:900 18px Impact, sans-serif;color:#f4f4f5}
+    .back-home{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:10px 14px;margin-top:22px;color:#71717a;text-decoration:underline;text-transform:uppercase;font:700 10px monospace;background:transparent;border:0;cursor:pointer;touch-action:manipulation}
+    .back-home:hover{color:#fff}
+    @media(max-width:900px){.hub-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.hub-card{min-height:230px;}}
+    @media(max-width:640px){
+      .hub-grid{grid-template-columns:1fr;gap:12px;}
+      .hub-card{min-height:190px;padding:18px;box-shadow:5px 5px 0 #ff006e;}
+      .hub-card:hover{transform:none;box-shadow:5px 5px 0 #ff006e;}
+      .hub-card h3{font-size:clamp(2.4rem,12vw,4rem);margin:13px 0 9px;}
+      .hub-card p{font-size:12px;}
+      .hub-intro{padding:18px !important;}
+      .hub-stat{padding:9px 7px;display:block}.hub-stat b{display:block;margin-top:4px;}
+    }
+
+
+    .brutal-btn{transition:transform .12s ease,filter .12s ease;touch-action:manipulation;}
+    .brutal-btn:hover{filter:brightness(1.06);}
+    .brutal-btn:active{transform:translateY(3px) scale(.99);}
+    @media(max-width:640px){button{touch-action:manipulation;}}
+
+
+    #ask-answer{max-width:100%;overflow-wrap:anywhere;hyphens:none;}
+    #ask-footnote{overflow-wrap:anywhere;}
+    @media(max-width:640px){#ask-answer{font-size:clamp(1.9rem,9vw,3.8rem)!important;line-height:.92!important;}}
+
+
+    #ask-answer-box{transition:transform .18s ease,opacity .18s ease;}
+    #ask-answer-box:hover{transform:translateY(-2px);}
+    #ask-answer{overflow-wrap:anywhere;}
+    @media(max-width:640px){
+      #ask-answer{font-size:clamp(2rem,9vw,4rem)!important;line-height:.9!important;}
+      #ask-footnote{font-size:8px!important;line-height:1.35!important;}
+    }
+
+</style>
+</head>
+<body class="min-h-screen relative flex flex-col justify-between selection:bg-pink-600 selection:text-white">
+
+  <!-- Scanline Overlay -->
+  <div class="fixed inset-0 scanlines z-50 pointer-events-none"></div>
+
+  <!-- Random Floating Popup Overlay Container -->
+  <div id="popup-layer" class="fixed inset-0 z-40 pointer-events-none overflow-hidden"></div>
+
+  <!-- Custom Cursor Trail Canvas -->
+  <canvas id="cursor-canvas" class="fixed inset-0 pointer-events-none z-30"></canvas>
+
+  <!-- Navigation / Live Stats Bar (Hidden on landing) -->
+  <nav id="top-bar" class="hidden bg-yellow-300 text-black border-b-4 border-black p-2 font-bold text-xs md:text-sm flex justify-between items-center z-20">
+    <div class="flex items-center gap-3">
+      <span class="bg-black text-white px-2 py-0.5 font-impact text-lg tracking-wider cursor-pointer" onclick="switchView('view-hub')">ABSURD</span>
+      <span class="hidden md:inline text-xs uppercase bg-pink-500 text-white px-2 py-0.5 border border-black">V1.04-BROKEN</span>
+    </div>
+    <div class="flex gap-4 font-mono text-xs">
+      <div>CLICKS: <span id="stat-clicks" class="text-pink-600 font-extrabold">0</span></div>
+      <div>DECISIONS: <span id="stat-decisions" class="text-blue-700 font-extrabold">0</span></div>
+      <div>TIME WASTED: <span id="stat-time" class="text-purple-800 font-extrabold">00:00</span></div>
+      <button onclick="switchView('view-report')" class="bg-red-600 text-white px-2 py-0.5 hover:bg-black uppercase border border-black">End Session</button>
+    </div>
+  </nav>
+
+  <!-- Marquee Ticker -->
+  <div id="ticker" class="hidden bg-pink-600 text-black font-extrabold text-xs py-1 border-b-2 border-black overflow-hidden uppercase z-20">
+    <div class="animate-marquee">
+      ⚠️ WARNING: DO NOT TRY TO FIND PURPOSE HERE • TAXES ARE STILL DUE IN REAL LIFE • COFFEES CONSUMED state: UNKNOWN • THE COMPUTER IS THINKING ABOUT CHEESE • ⚠️
+    </div>
+  </div>
+
+  <!-- ==================== LANDING PAGE ==================== -->
+  <section id="view-landing" style="display:flex;" class="min-h-screen flex flex-col items-center justify-center p-6 text-center z-10 relative">
+    <div class="max-w-xl w-full bg-black brutal-border p-8 jitter-slow relative">
+      <div class="absolute -top-6 -left-6 bg-pink-600 text-white font-impact text-xl px-4 py-1 border-2 border-white transform -rotate-6">
+        NO REASON AT ALL
+      </div>
+      <h1 class="font-impact text-6xl md:text-8xl text-yellow-300 tracking-wider mb-2 uppercase">
+        WELCOME TO ABSURD.
+      </h1>
+      <p class="text-lg md:text-xl text-white mb-8 border-y-2 border-dashed border-zinc-700 py-3 font-vt">
+        There is absolutely no reason for you to be here.
+      </p>
+      
+      <button onclick="enterAbsurd()" class="brutal-btn w-full bg-green-400 hover:bg-yellow-300 text-black font-impact text-3xl py-4 border-4 border-black uppercase tracking-widest cursor-pointer">
+        [ ENTER ABSURD → ]
+      </button>
+
+      <p class="text-[10px] text-zinc-500 mt-6 uppercase tracking-widest">
+        By entering, you forfeit 100% of your right to productivity.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== MAIN HUB (COLLECTION) ==================== -->
+  <section id="view-hub" style="display:none;" class="hidden absurd-view w-full max-w-[1180px] mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-8 z-10">
+  <div class="hub-intro brutal-border-yellow bg-yellow-300 text-black p-5 sm:p-7 md:p-9 mb-7 relative overflow-hidden">
+    <div class="absolute right-[-20px] top-[-55px] font-impact text-[150px] sm:text-[220px] opacity-10 pointer-events-none">?</div>
+    <div class="relative z-10">
+      <div class="flex flex-wrap gap-2 items-center mb-4">
+        <span class="bg-black text-yellow-300 px-2.5 py-1 text-[10px] font-bold border-2 border-black">ABSURD V2.0</span>
+        <span class="bg-pink-600 text-white px-2.5 py-1 text-[10px] font-bold border-2 border-black">LIVE</span>
+      </div>
+      <h2 class="font-impact text-[clamp(4rem,12vw,8rem)] leading-[.75] uppercase">WELCOME<br><span class="text-pink-600">TO ABSURD.</span></h2>
+      <p class="font-vt text-lg sm:text-2xl md:text-3xl max-w-3xl mt-5 leading-tight">Six completely unnecessary experiences. Pick one. Waste some time. Question your decisions.</p>
+    </div>
+  </div>
+
+  <div class="flex items-end justify-between gap-4 mb-4 border-b-2 border-green-400 pb-3">
+    <div>
+      <p class="text-green-400 text-[10px] font-bold uppercase tracking-[.3em]">THE COLLECTION</p>
+      <h3 class="font-impact text-4xl sm:text-5xl md:text-6xl text-white uppercase leading-none">CHOOSE YOUR PROBLEM.</h3>
+    </div>
+    <p class="hidden sm:block text-zinc-600 text-[9px] uppercase text-right">No accounts.<br>No purpose.</p>
+  </div>
+
+  <div class="hub-grid">
+    <article onclick="switchView('tool-button')" class="hub-card hub-red">
+      <div class="hub-card-top"><span class="hub-number">#01</span><span class="hub-arrow">↗</span></div>
+      <div><h3>THE USELESS<br>BUTTON</h3><p>Press a button that does nothing. Then make it personal.</p></div>
+      <div class="hub-cta">PRESS IT →</div>
+    </article>
+
+    <article onclick="switchView('tool-ask')" class="hub-card hub-blue">
+      <div class="hub-card-top"><span class="hub-number">#02</span><span class="hub-arrow">↗</span></div>
+      <div><h3>ASK ME<br>ANYTHING</h3><p>Ask a normal question. Receive an aggressively confident nonsense answer.</p></div>
+      <div class="hub-cta">ASK ABSURD AI →</div>
+    </article>
+
+    <article onclick="switchView('tool-mood')" class="hub-card hub-pink">
+      <div class="hub-card-top"><span class="hub-number">#03</span><span class="hub-arrow">↗</span></div>
+      <div><h3>MOOD<br>MACHINE</h3><p>Tell the machine how you feel. It will immediately make it worse.</p></div>
+      <div class="hub-cta">DIAGNOSE ME →</div>
+    </article>
+
+    <article onclick="switchView('tool-absurdity')" class="hub-card hub-purple">
+      <div class="hub-card-top"><span class="hub-number">#04</span><span class="hub-arrow">↗</span></div>
+      <div><h3>ABSURDITY<br>NEWS</h3><p>Manufacture breaking news from absolutely nothing.</p></div>
+      <div class="hub-cta">BREAK THE INTERNET →</div>
+    </article>
+
+    <article onclick="switchView('tool-dad')" class="hub-card hub-orange">
+      <div class="hub-card-top"><span class="hub-number">#05</span><span class="hub-arrow">↗</span></div>
+      <div><h3>DAD<br>JOKES</h3><p>Setup. Anticipation. Punchline. Regret.</p></div>
+      <div class="hub-cta">DAMAGE MY HUMOUR →</div>
+    </article>
+
+    <article onclick="switchView('tool-veg')" class="hub-card hub-green">
+      <div class="hub-card-top"><span class="hub-number">#06</span><span class="hub-arrow">↗</span></div>
+      <div><h3>VEGETABLE<br>DATING</h3><p>Find your produce soulmate. Swipe is apparently too normal.</p></div>
+      <div class="hub-cta">FIND LOVE →</div>
+    </article>
+  </div>
+
+  <div class="mt-7 grid grid-cols-3 gap-2 sm:gap-3">
+    <div class="hub-stat"><span>USEFUL THINGS</span><b>0</b></div>
+    <div class="hub-stat"><span>REGRETS</span><b>HIGH</b></div>
+    <div class="hub-stat"><span>EXIT STRATEGY</span><b>NONE</b></div>
+  </div>
+</section>
+
+<section id="tool-button" style="display:none;" class="hidden absurd-view w-full max-w-2xl mx-auto px-3 sm:px-5 py-5 sm:py-8 text-center z-10">
+  <div class="bg-zinc-900 brutal-border p-5 sm:p-8">
+    <span class="text-[10px] bg-red-600 text-white px-3 py-1 font-bold uppercase border-2 border-black">EXPERIENCE 01</span>
+    <h2 class="font-impact text-[clamp(3rem,12vw,6rem)] leading-[.8] text-red-400 my-5">THE USELESS<br>BUTTON</h2>
+    <p class="text-zinc-400 text-xs sm:text-sm mb-6">This button serves no operational purpose. That will not stop you.</p>
+
+    <button id="useless-btn" onclick="pressUselessButton()" class="brutal-btn w-[min(70vw,280px)] h-[min(70vw,280px)] max-w-[280px] max-h-[280px] rounded-full bg-red-600 hover:bg-red-500 text-white font-impact text-2xl sm:text-3xl border-8 border-black shadow-2xl mx-auto flex items-center justify-center cursor-pointer uppercase tracking-wider touch-manipulation">
+      DO NOT PRESS
+    </button>
+
+    <div class="mt-7 bg-black border-2 border-green-500 p-4 font-mono text-green-400 min-h-[88px] flex flex-col items-center justify-center text-xs sm:text-sm">
+      <span id="button-response">SYSTEM IDLE. WAITING FOR DISOBEYING...</span>
+      <span id="button-counter" class="text-yellow-300 mt-2">PRESS COUNT: 0</span>
+    </div>
+
+    <div class="mt-4 h-2 bg-zinc-800 border border-zinc-700"><div id="button-progress" class="h-full bg-red-500 transition-all" style="width:0%"></div></div>
+    <p id="button-secret" class="text-[9px] text-zinc-600 uppercase mt-2">THE BUTTON IS JUDGING YOU.</p>
+
+    <button onclick="switchView('view-hub')" class="back-home">← BACK TO ABSURD HUB</button>
+  </div>
+</section>
+
+<section id="tool-ask" style="display:none;" class="hidden w-full max-w-4xl mx-auto px-3 sm:px-5 py-4 sm:py-8 z-10">
+  <div class="bg-zinc-900 brutal-border p-4 sm:p-6 md:p-9 relative overflow-hidden">
+    <div class="absolute -right-8 -top-12 font-impact text-[170px] sm:text-[230px] text-blue-500 opacity-10 pointer-events-none rotate-12">AI</div>
+
+    <div class="relative z-10">
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+        <div class="flex gap-2">
+          <span class="text-[10px] sm:text-xs bg-blue-500 text-white font-bold px-2.5 py-1 uppercase border-2 border-black">EXPERIENCE 02</span>
+          <span id="ask-status" class="text-[10px] sm:text-xs bg-green-400 text-black font-bold px-2.5 py-1 uppercase border-2 border-black">AI: CONFIDENT</span>
+        </div>
+        <span class="font-mono text-[9px] text-zinc-600 uppercase">MODEL: ABSURD-7B*</span>
+      </div>
+
+      <h2 class="font-impact text-[clamp(3.5rem,13vw,7rem)] leading-[.78] text-blue-400 uppercase my-4">ASK ME<br>ANYTHING.</h2>
+      <p class="text-xs sm:text-sm text-zinc-400 max-w-2xl mb-6 uppercase">
+        The world's least qualified artificial intelligence. Ask a question. Get an answer that sounds confident for absolutely no reason.
+      </p>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
+        <button onclick="askPreset('Why is my cat staring at the wall?')" class="ask-chip">WHY IS MY CAT STARING?</button>
+        <button onclick="askPreset('Should I quit my job?')" class="ask-chip">SHOULD I QUIT?</button>
+        <button onclick="askPreset('What is the meaning of life?')" class="ask-chip">MEANING OF LIFE?</button>
+        <button onclick="askPreset('Why is Monday so long?')" class="ask-chip">WHY IS MONDAY?</button>
+      </div>
+
+      <div class="bg-black border-4 border-blue-400 p-3 sm:p-4">
+        <label for="ask-input" class="block text-[9px] sm:text-[10px] text-blue-300 uppercase tracking-[.22em] mb-2">YOUR QUESTION</label>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <input id="ask-input" type="text" maxlength="180" autocomplete="off"
+            placeholder="e.g. Why do pigeons walk like that?"
+            class="flex-1 min-h-[58px] bg-zinc-950 border-2 border-zinc-700 px-4 text-white font-mono text-sm sm:text-base focus:outline-none focus:border-blue-400">
+          <button onclick="askAbsurdAI()"
+            class="brutal-btn min-h-[58px] bg-blue-500 text-white font-impact text-xl sm:text-2xl px-6 py-3 border-4 border-black uppercase touch-manipulation">
+            ASK AI →
+          </button>
+        </div>
+      </div>
+
+      <div id="ask-output" class="hidden mt-5">
+        <div class="flex items-center justify-between border-b-2 border-blue-400 pb-2 mb-3">
+          <span class="text-[10px] text-green-400 font-bold uppercase">ABSURD AI HAS SPOKEN</span>
+          <span id="ask-confidence" class="text-[9px] text-zinc-500 uppercase">CONFIDENCE: 104%</span>
+        </div>
+        <div id="ask-thinking" class="hidden bg-black border-2 border-zinc-800 p-4 font-mono text-xs text-green-400">
+          <span class="animate-pulse">▮</span> CONSULTING 14 COMPLETELY UNRELATED SOURCES...
+        </div>
+        <div id="ask-answer-box" class="hidden bg-yellow-300 text-black border-4 border-black p-5 sm:p-7">
+          <p class="text-[9px] font-bold uppercase tracking-[.2em] mb-3">ANSWER</p>
+          <p id="ask-answer" class="font-impact text-[clamp(2rem,8vw,4.5rem)] leading-[.9] uppercase"></p>
+          <p id="ask-footnote" class="font-mono text-[9px] sm:text-[10px] mt-5 pt-3 border-t-2 border-black/30 uppercase"></p>
+        </div>
+      </div>
+
+      <div class="mt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p class="text-[9px] text-zinc-600 uppercase">*Not trained on facts. Trained primarily on confidence.</p>
+        <button onclick="switchView('view-hub')" class="min-h-[44px] px-3 text-xs text-zinc-500 hover:text-white underline uppercase touch-manipulation">← BACK TO ABSURD HUB</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tool-mood" style="display:none;" class="hidden absurd-view w-full max-w-2xl mx-auto px-3 sm:px-5 py-5 sm:py-8 text-center z-10">
+  <div class="bg-zinc-900 brutal-border p-5 sm:p-8">
+    <span class="text-[10px] bg-pink-600 text-white font-bold px-3 py-1 uppercase border-2 border-black">EXPERIENCE 03</span>
+    <h2 class="font-impact text-[clamp(3rem,12vw,6rem)] leading-[.8] text-pink-500 my-5">MOOD<br>MACHINE</h2>
+    <p class="text-xs text-zinc-400 mb-6 uppercase">Select your current emotional operating system.</p>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 mb-5">
+      <button onclick="diagnoseMood('GOOD')" class="mood-btn bg-green-500 text-black">GOOD</button>
+      <button onclick="diagnoseMood('BAD')" class="mood-btn bg-red-500 text-white">BAD</button>
+      <button onclick="diagnoseMood('CONFUSED')" class="mood-btn bg-yellow-400 text-black">CONFUSED</button>
+      <button onclick="diagnoseMood('HUNGRY')" class="mood-btn bg-orange-500 text-black">HUNGRY</button>
+      <button onclick="diagnoseMood('EXISTING')" class="mood-btn bg-purple-500 text-white">EXISTING</button>
+      <button onclick="diagnoseMood('NUMB')" class="mood-btn bg-cyan-400 text-black">NUMB</button>
+    </div>
+
+    <div id="mood-output" class="hidden bg-black border-4 border-pink-500 p-5 text-left">
+      <div class="flex justify-between items-center border-b border-zinc-800 pb-2 mb-4"><span class="text-[9px] text-pink-500 uppercase">MACHINE DIAGNOSIS</span><span id="mood-confidence" class="text-[9px] text-yellow-300">CONFIDENCE: 0%</span></div>
+      <p id="mood-feeling" class="font-impact text-3xl text-yellow-300 uppercase"></p>
+      <p id="mood-diagnosis" class="font-mono text-xs sm:text-sm text-pink-300 mt-3 leading-relaxed"></p>
+      <button onclick="diagnoseMood(state.mood || 'EXISTING')" class="mt-5 bg-pink-600 text-white px-4 py-3 border-2 border-black font-bold text-xs uppercase">RERUN THE SCIENCE →</button>
+    </div>
+
+    <button onclick="switchView('view-hub')" class="back-home">← BACK TO ABSURD HUB</button>
+  </div>
+</section>
+
+<section id="tool-absurdity" style="display:none;" class="hidden w-full max-w-4xl mx-auto px-3 sm:px-5 py-4 sm:py-8 z-10">
+  <div class="bg-zinc-900 brutal-border p-4 sm:p-7 md:p-9 relative overflow-hidden">
+    <div class="absolute -left-10 -bottom-20 font-impact text-[220px] text-purple-500 opacity-5 pointer-events-none">NEWS</div>
+
+    <div class="relative z-10">
+      <div class="flex flex-wrap items-center gap-2 mb-4">
+        <span class="text-[10px] sm:text-xs bg-purple-600 text-white font-bold px-2.5 py-1 uppercase border-2 border-black">EXPERIENCE 04</span>
+        <span class="text-[10px] sm:text-xs bg-red-600 text-white font-bold px-2.5 py-1 uppercase border-2 border-black">BREAKING</span>
+      </div>
+
+      <h2 class="font-impact text-[clamp(3rem,12vw,6.5rem)] leading-[.8] text-purple-400 uppercase my-4">ABSURDITY<br>NEWS.</h2>
+      <p class="text-xs sm:text-sm text-zinc-400 mb-6 uppercase max-w-2xl">
+        Manufacture a completely unnecessary breaking-news event. No journalism degree required. No facts permitted.
+      </p>
+
+      <div class="bg-black border-4 border-purple-500 p-4 sm:p-6">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono text-xs">
+          <div>
+            <label class="block text-zinc-400 mb-1 uppercase">WHO</label>
+            <select id="abs-person" class="w-full min-h-[48px] bg-zinc-950 border-2 border-zinc-700 p-2 text-white">
+              <option>Grandmother</option><option>Tech CEO</option><option>Stray Cat</option><option>Local Politician</option><option>Alien Visitor</option><option>You</option><option>A Man Named Ramesh</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-zinc-400 mb-1 uppercase">WHAT</label>
+            <select id="abs-object" class="w-full min-h-[48px] bg-zinc-950 border-2 border-zinc-700 p-2 text-white">
+              <option>Banana</option><option>Folding Chair</option><option>Used Toothbrush</option><option>₹2 Coin</option><option>Traffic Cone</option><option>Vintage Microwave</option><option>One Extremely Suspicious Potato</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-zinc-400 mb-1 uppercase">WHY</label>
+            <select id="abs-action" class="w-full min-h-[48px] bg-zinc-950 border-2 border-zinc-700 p-2 text-white">
+              <option>runs for president</option><option>launches a ₹800 Cr startup</option><option>gets married to</option><option>opens a five-star restaurant for</option><option>becomes an underground DJ</option><option>declares war on</option><option>files a complaint against</option>
+            </select>
+          </div>
+        </div>
+
+        <button onclick="generateAbsurdityNews()" class="brutal-btn w-full mt-4 bg-purple-600 hover:bg-purple-500 text-white font-impact text-2xl sm:text-3xl py-4 border-4 border-black uppercase tracking-wider touch-manipulation">
+          BREAK THE INTERNET →
+        </button>
+      </div>
+
+      <div id="news-card" class="hidden mt-5 bg-yellow-100 text-black p-4 sm:p-7 border-4 border-black font-mono relative shadow-2xl">
+        <div class="flex justify-between items-start gap-3 border-b-4 border-black pb-3 mb-4">
+          <div>
+            <p class="font-impact text-3xl sm:text-5xl leading-none">THE DAILY ABSURD</p>
+            <p class="text-[9px] font-bold mt-1 uppercase">NO FACTS • NO CORRECTIONS • NO REFUNDS</p>
+          </div>
+          <div class="text-right text-[9px] font-bold uppercase whitespace-nowrap">LIVE<br>RIGHT NOW</div>
+        </div>
+        <div class="flex items-center gap-2 mb-3">
+          <span class="bg-red-600 text-white px-2 py-1 text-[9px] font-bold uppercase">BREAKING</span>
+          <span id="news-time" class="text-[9px] uppercase">JUST NOW</span>
+        </div>
+        <h3 id="news-headline" class="font-impact text-[clamp(2rem,8vw,4rem)] leading-[.9] uppercase mb-4"></h3>
+        <p id="news-subhead" class="text-sm sm:text-base font-bold border-t-2 border-black pt-3"></p>
+        <div class="grid grid-cols-2 gap-3 mt-5 text-[9px] uppercase font-bold">
+          <div class="border-2 border-black p-2">SOURCE: <span class="font-normal">A GUY WHO WAS THERE</span></div>
+          <div class="border-2 border-black p-2">CONFIDENCE: <span id="news-confidence">100%</span></div>
+        </div>
+        <div class="mt-4 flex flex-col sm:flex-row gap-2">
+          <button onclick="copyNewsText()" class="flex-1 bg-pink-600 text-white min-h-[48px] px-3 py-2 border-2 border-black font-bold text-xs uppercase">COPY THIS NONSENSE</button>
+          <button onclick="generateAbsurdityNews()" class="flex-1 bg-black text-white min-h-[48px] px-3 py-2 border-2 border-black font-bold text-xs uppercase">MAKE IT WORSE →</button>
+        </div>
+      </div>
+
+      <div class="text-center mt-6">
+        <button onclick="switchView('view-hub')" class="min-h-[44px] px-3 text-xs text-zinc-500 hover:text-white underline uppercase touch-manipulation">← BACK TO ABSURD HUB</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tool-dad" style="display:none;" class="hidden w-full max-w-3xl mx-auto px-3 sm:px-5 py-4 sm:py-8 z-10">
+  <div class="bg-zinc-900 brutal-border-yellow p-4 sm:p-7 md:p-10 text-center relative overflow-hidden">
+
+    <!-- Decorative nonsense -->
+    <div class="absolute -top-5 -left-5 text-7xl opacity-10 rotate-12 pointer-events-none">😂</div>
+    <div class="absolute -bottom-8 -right-3 text-8xl opacity-10 -rotate-12 pointer-events-none">🥁</div>
+
+    <div class="relative z-10">
+      <div class="flex flex-wrap justify-center items-center gap-2 mb-4">
+        <span class="text-[10px] sm:text-xs bg-orange-500 text-black font-bold px-2.5 py-1 uppercase border-2 border-black">EXPERIENCE 05</span>
+        <span id="dad-round" class="text-[10px] sm:text-xs bg-pink-600 text-white font-bold px-2.5 py-1 uppercase border-2 border-black">JOKE #00</span>
+      </div>
+
+      <h2 class="font-impact text-[clamp(3rem,14vw,6rem)] leading-[.82] text-orange-400 uppercase my-4">
+        DAD JOKES
+      </h2>
+      <p class="text-xs sm:text-sm text-zinc-400 mb-5 uppercase tracking-wide">
+        Terrible jokes. Questionable answers. Zero regrets.
+      </p>
+
+      <!-- Joke machine -->
+      <div id="dad-machine" class="bg-black border-4 border-orange-400 p-5 sm:p-8 min-h-[260px] sm:min-h-[310px] flex flex-col justify-center relative transition-transform">
+        <div class="absolute top-0 left-0 right-0 h-2 bg-orange-400"></div>
+
+        <p class="text-[10px] sm:text-xs text-pink-500 uppercase tracking-[0.22em] mb-5">
+          <span class="inline-block border-2 border-pink-500 px-2 py-1">DAD JOKE INCOMING</span>
+        </p>
+
+        <p id="dad-question" class="font-vt text-[clamp(1.65rem,7vw,3.5rem)] text-white leading-tight">
+          PRESS “GIVE ME A JOKE”.
+        </p>
+
+        <div id="dad-thinking" class="hidden mt-5 text-green-400 font-mono text-xs sm:text-sm uppercase">
+          <span class="animate-pulse">▮</span> SEARCHING THE DAD JOKE DATABASE...
+        </div>
+
+        <div id="dad-answer-wrap" class="hidden mt-7 pt-5 border-t-2 border-zinc-800">
+          <p class="text-[10px] text-yellow-300 uppercase tracking-[0.25em] mb-2">THE DAMAGE</p>
+          <p id="dad-answer" class="font-impact text-[clamp(2.3rem,11vw,5rem)] leading-[.9] text-yellow-300 uppercase"></p>
+          <div id="dad-laugh-meter" class="mt-5">
+            <div class="flex justify-between text-[9px] text-zinc-500 uppercase mb-1">
+              <span>COMEDY LEVEL</span><span id="dad-meter-text">0%</span>
+            </div>
+            <div class="h-3 border-2 border-zinc-700 bg-zinc-950 p-0.5">
+              <div id="dad-meter" class="h-full bg-pink-500 transition-all duration-700" style="width:0%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Primary actions: always stacked on small screens -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-4 sm:mt-6">
+        <button id="dad-new" onclick="newDadJoke()"
+          class="brutal-btn w-full min-h-[60px] sm:min-h-[68px] bg-orange-400 text-black font-impact text-xl sm:text-2xl px-4 py-4 border-4 border-black uppercase touch-manipulation active:translate-y-1">
+          GIVE ME A JOKE →
+        </button>
+
+        <button id="dad-reveal" onclick="revealDadJoke()" disabled
+          class="brutal-btn w-full min-h-[60px] sm:min-h-[68px] bg-yellow-300 text-black font-impact text-xl sm:text-2xl px-4 py-4 border-4 border-black uppercase opacity-40 cursor-not-allowed touch-manipulation">
+          REVEAL THE DAMAGE →
+        </button>
+      </div>
+
+      <div class="mt-5 flex items-center justify-center gap-2 text-zinc-600 text-[9px] sm:text-[10px] uppercase">
+        <span>WARNING:</span>
+        <span id="dad-verdict" class="text-pink-500 font-bold">YOUR DIGNITY IS ALREADY GONE.</span>
+      </div>
+
+      <button onclick="switchView('view-hub')"
+        class="mt-6 min-h-[48px] px-4 text-xs sm:text-sm text-zinc-500 hover:text-white underline uppercase touch-manipulation">
+        ← BACK TO ABSURD HUB
+      </button>
+    </div>
+  </div>
+</section>
+
+<section id="tool-veg" style="display:none;" class="hidden absurd-view w-full max-w-2xl mx-auto px-3 sm:px-5 py-5 sm:py-8 z-10">
+  <div class="bg-zinc-900 brutal-border p-5 sm:p-8 text-center">
+    <span class="text-[10px] bg-green-400 text-black font-bold px-3 py-1 uppercase border-2 border-black">EXPERIENCE 06</span>
+    <h2 class="font-impact text-[clamp(3rem,12vw,6rem)] leading-[.8] text-green-300 my-5">VEGETABLE<br>DATING</h2>
+    <p class="text-xs text-zinc-400 mb-5 uppercase">Because humans have already complicated dating enough.</p>
+
+    <div class="bg-black border-4 border-green-400 p-6 sm:p-8 min-h-[270px] flex flex-col justify-center">
+      <div class="text-7xl sm:text-8xl mb-4" id="veg-emoji">🥔</div>
+      <p class="text-[9px] text-zinc-500 uppercase">YOUR MATCH</p>
+      <p id="veg-name" class="font-impact text-4xl sm:text-5xl text-green-300 mt-2">POTATO</p>
+      <p id="veg-bio" class="font-mono text-xs text-zinc-300 mt-3">Emotionally available. Slightly starchy.</p>
+      <div class="mt-5"><span id="veg-score" class="bg-pink-600 text-white px-3 py-1 font-bold text-xs">COMPATIBILITY: 0%</span></div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-3 mt-4">
+      <button onclick="vegDecision('YES')" class="brutal-btn bg-green-400 text-black font-impact text-xl py-4 border-4 border-black">SWIPE YES ♥</button>
+      <button onclick="vegDecision('NO')" class="brutal-btn bg-red-500 text-white font-impact text-xl py-4 border-4 border-black">SWIPE NO ✕</button>
+    </div>
+    <p id="veg-result" class="text-xs text-pink-500 font-bold uppercase min-h-[18px] mt-4"></p>
+    <button onclick="switchView('view-hub')" class="back-home">← BACK TO ABSURD HUB</button>
+  </div>
+</section>
+
+<section id="tool-end" style="display:none;" class="hidden absurd-view w-full max-w-2xl mx-auto px-3 sm:px-5 py-5 sm:py-8 text-center z-10">
+  <div class="bg-red-600 text-black brutal-border p-6 sm:p-9 relative overflow-hidden">
+    <div class="absolute -right-10 -top-20 font-impact text-[180px] opacity-10 pointer-events-none">END</div>
+    <span class="relative z-10 bg-black text-white px-3 py-1 text-[10px] font-bold uppercase border-2 border-white">EXPERIENCE 06</span>
+    <h2 class="relative z-10 font-impact text-[clamp(4rem,15vw,8rem)] leading-[.75] uppercase my-6">YOU WERE<br>WARNED.</h2>
+    <div class="relative z-10 bg-black text-green-400 p-4 font-mono text-left text-[10px] sm:text-xs border-2 border-white space-y-2 mb-6">
+      <p>> INITIATING SYSTEM DESTRUCTION...</p><p>> DELETING COMMON SENSE... DONE.</p><p>> RESTORING PRODUCTIVITY... FAILED.</p><p>> USER IS STILL HERE.</p>
+    </div>
+    <button onclick="finishSession()" class="relative z-10 brutal-btn w-full bg-black text-white font-impact text-xl sm:text-2xl px-5 py-4 border-4 border-white uppercase">GENERATE MY DAMAGE REPORT →</button>
+    <button onclick="switchView('view-hub')" class="relative z-10 back-home text-black/70">← GO BACK ANYWAY</button>
+  </div>
+</section>
+
+<section id="view-report" style="display:none;" class="hidden max-w-2xl mx-auto p-6 my-auto z-10 w-full">
+    <div class="bg-zinc-900 brutal-border-yellow p-6 md:p-8 text-white font-mono">
+      <div class="border-b-4 border-yellow-400 pb-3 mb-6 text-center">
+        <span class="bg-pink-600 text-white text-xs font-bold px-3 py-1 uppercase">FINAL CERTIFICATE</span>
+        <h2 class="font-impact text-4xl md:text-6xl text-yellow-300 mt-2">YOUR ABSURDITY REPORT</h2>
+      </div>
+
+      <div class="space-y-4 text-sm bg-black p-5 border-2 border-zinc-800 mb-6">
+        <div class="flex justify-between border-b border-zinc-800 pb-2">
+          <span class="text-zinc-400">BUTTONS PRESSED:</span>
+          <span id="rpt-clicks" class="font-bold text-pink-500">0</span>
+        </div>
+        <div class="flex justify-between border-b border-zinc-800 pb-2">
+          <span class="text-zinc-400">DECISIONS MADE:</span>
+          <span id="rpt-decisions" class="font-bold text-blue-400">0</span>
+        </div>
+        <div class="flex justify-between border-b border-zinc-800 pb-2">
+          <span class="text-zinc-400">USEFUL DECISIONS:</span>
+          <span class="font-bold text-red-500">0</span>
+        </div>
+        <div class="flex justify-between border-b border-zinc-800 pb-2">
+          <span class="text-zinc-400">EXISTENTIAL CRISES TRIGGERED:</span>
+          <span id="rpt-crises" class="font-bold text-yellow-400">3</span>
+        </div>
+        <div class="flex justify-between border-b border-zinc-800 pb-2">
+          <span class="text-zinc-400">TOTAL TIME WASTED:</span>
+          <span id="rpt-time" class="font-bold text-green-400">00:00</span>
+        </div>
+        <div class="pt-2 flex justify-between items-center text-base font-bold">
+          <span class="text-white">ABSURDITY SCORE:</span>
+          <span id="rpt-score" class="font-impact text-3xl text-pink-500">94/100</span>
+        </div>
+      </div>
+
+      <div class="text-center bg-zinc-800 p-3 text-xs text-yellow-300 mb-6 border border-zinc-700">
+        "You are officially a problem to society."
+      </div>
+
+      <button onclick="shareReport()" class="brutal-btn w-full bg-pink-600 hover:bg-pink-500 text-white font-impact text-2xl py-4 border-2 border-black uppercase tracking-wider">
+        [ SHARE MY ABSURDITY REPORT ]
+      </button>
+
+      <div class="text-center mt-4">
+        <button onclick="switchView('view-hub')" class="text-xs text-zinc-500 hover:text-white underline uppercase">← Back to start another useless loop</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FAKE THINKING / OVERLAY MODAL ==================== -->
+  <div id="thinking-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex flex-col items-center justify-center p-6 text-center">
+    <div class="bg-zinc-900 brutal-border p-8 max-w-md w-full">
+      <div class="w-12 h-12 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+      <h3 id="thinking-title" class="font-impact text-3xl text-white mb-2">PLEASE WAIT.</h3>
+      <p id="thinking-sub" class="text-zinc-400 text-sm font-mono">We are currently thinking...</p>
+    </div>
+  </div>
+
+  <!-- ==================== SCRIPT ENGINE ==================== -->
+  <script>
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const landing = document.getElementById('view-landing');
+      const hub = document.getElementById('view-hub');
+      if (landing && hub) {
+        landing.style.display = 'flex';
+        landing.style.visibility = 'visible';
+        landing.style.opacity = '1';
+        hub.style.display = 'none';
+      }
+    });
+
+    // System State Tracking
+    const state = {
+      clicks: 0,
+      decisions: 0,
+      crises: 0,
+      secondsWasted: 0,
+      buttonPresses: 0,
+      dadJokeIndex: -1,
+      dadJokeRound: 0,
+      askQuestion: '',
+      lastAbsurdAnswer: '',
+      mood: '',
+      vegRound: 0,
+      timerInterval: null
+    };
+
+    // Global Click Tracker
+    document.addEventListener('click', (e) => {
+      state.clicks++;
+      document.getElementById('stat-clicks').innerText = state.clicks;
+      
+      // Randomly spawn tiny absurd disclaimer floating near click (5% chance)
+      if (Math.random() < 0.08) {
+        spawnRandomDisclaimer(e.clientX, e.clientY);
+      }
+    });
+
+    // Time Tracking
+    function startTimer() {
+      if (state.timerInterval) return;
+      state.timerInterval = setInterval(() => {
+        state.secondsWasted++;
+        const mins = String(Math.floor(state.secondsWasted / 60)).padStart(2, '0');
+        const secs = String(state.secondsWasted % 60).padStart(2, '0');
+        const formatted = `${mins}:${secs}`;
+        document.getElementById('stat-time').innerText = formatted;
+      }, 1000);
+    }
+
+    // View Switcher
+    function switchView(viewId) {
+      const aliases = { landing:'view-landing', home:'view-hub', hub:'view-hub', report:'view-report' };
+      const targetId = aliases[viewId] || viewId;
+      const views = ['view-landing','view-hub','tool-button','tool-ask','tool-mood','tool-absurdity','tool-dad','tool-veg','tool-end','view-report'];
+
+      views.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.style.display = 'none';
+          el.style.visibility = 'hidden';
+          el.style.opacity = '0';
+          el.classList.add('hidden');
+        }
+      });
+
+      const target = document.getElementById(targetId);
+      if (!target) {
+        console.warn('ABSURD fallback:', targetId);
+        const fallback = document.getElementById('view-hub');
+        if (fallback) {
+          fallback.classList.remove('hidden');
+          fallback.style.display = 'block';
+          fallback.style.visibility = 'visible';
+          fallback.style.opacity = '1';
+        }
+        window.scrollTo(0,0);
+        return;
+      }
+
+      target.classList.remove('hidden');
+      target.style.display = targetId === 'view-landing' ? 'flex' : 'block';
+      target.style.visibility = 'visible';
+      target.style.opacity = '1';
+
+      const inside = targetId !== 'view-landing';
+      const top = document.getElementById('top-bar');
+      const ticker = document.getElementById('ticker');
+      if (top) { top.classList.toggle('hidden', !inside); top.style.display = inside ? 'flex' : 'none'; }
+      if (ticker) { ticker.classList.toggle('hidden', !inside); ticker.style.display = inside ? 'block' : 'none'; }
+
+      if (targetId === 'view-report') populateReport();
+      window.scrollTo({top:0, behavior:'instant'});
+    }
+
+    // Landing Page Entry
+    function enterAbsurd() {
+      const landing = document.getElementById('view-landing');
+      const hub = document.getElementById('view-hub');
+      const topBar = document.getElementById('top-bar');
+      const ticker = document.getElementById('ticker');
+
+      if (landing) {
+        landing.style.display = 'none';
+        landing.classList.add('hidden');
+      }
+      if (topBar) {
+        topBar.classList.remove('hidden');
+        topBar.style.display = 'flex';
+      }
+      if (ticker) {
+        ticker.classList.remove('hidden');
+        ticker.style.display = 'block';
+      }
+      if (hub) {
+        hub.classList.remove('hidden');
+        hub.style.display = 'block';
+        hub.style.visibility = 'visible';
+        hub.style.opacity = '1';
+      }
+
+      startTimer();
+      rotateAbsurdFeed();
+      window.scrollTo({top: 0, behavior: 'instant'});
+    }
+
+    function rotateAbsurdFeed() {
+      const messages = [
+        'THE COMPUTER IS CURRENTLY THINKING ABOUT CHEESE.',
+        'YOUR PRODUCTIVITY HAS LEFT THE BUILDING.',
+        'PLEASE REMAIN CALM. NOTHING IMPORTANT IS HAPPENING.',
+        'A TEAM OF INTERNS HAS BEEN ASKED TO FIND THE POINT.',
+        'ERROR 404: PURPOSE NOT FOUND.',
+        'THIS WEBSITE HAS BEEN REVIEWED BY NOBODY.',
+        'SOMEWHERE, A BUTTON IS BEING PRESSED FOR NO REASON.'
+      ];
+      let i = 0;
+      const el = document.getElementById('live-nonsense');
+      if (!el) return;
+      setInterval(() => {
+        i = (i + 1) % messages.length;
+        el.innerText = messages[i];
+      }, 2600);
+    }
+
+    // Fake Thinking Mechanic
+    const dadJokes = [
+  ["What do you call a fish wearing a bowtie?", "Sofishticated."],
+  ["What do you call a cow with no legs?", "Ground beef."],
+  ["What do you call a dog magician?", "A Labracadabrador."],
+  ["What do you call a bear with no teeth?", "A gummy bear."],
+  ["What do you call a sleeping bull?", "A bulldozer."],
+  ["What do you call a deer with no eyes?", "No eye deer."],
+  ["What do you call a factory that makes okay products?", "A satisfactory."],
+  ["What do you call a dinosaur that crashes his car?", "Tyrannosaurus wrecks."],
+  ["What do you call a duck that gets all A's?", "A wise quacker."],
+  ["What do you call a man who lies on his doorstep?", "Matt."],
+  ["What kind of geese can't fly?", "Portuguese."]
+];
+
+function dadButtonState(button, enabled) {
+      if (!button) return;
+      button.disabled = !enabled;
+      if (enabled) {
+        button.classList.remove('opacity-40','cursor-not-allowed');
+      } else {
+        button.classList.add('opacity-40','cursor-not-allowed');
+      }
+    }
+
+    function dadShake() {
+      const machine = document.getElementById('dad-machine');
+      if (!machine) return;
+      machine.classList.remove('jitter-fast');
+      void machine.offsetWidth;
+      machine.classList.add('jitter-fast');
+      setTimeout(() => machine.classList.remove('jitter-fast'), 500);
+    }
+
+    function newDadJoke(){
+      if (!Array.isArray(dadJokes) || !dadJokes.length) return;
+
+      let n;
+      do {
+        n = Math.floor(Math.random() * dadJokes.length);
+      } while (dadJokes.length > 1 && n === state.dadJokeIndex);
+
+      state.dadJokeIndex = n;
+      state.dadJokeRound++;
+      state.decisions++;
+
+      const q = document.getElementById('dad-question');
+      const answerWrap = document.getElementById('dad-answer-wrap');
+      const answer = document.getElementById('dad-answer');
+      const thinking = document.getElementById('dad-thinking');
+      const reveal = document.getElementById('dad-reveal');
+      const verdict = document.getElementById('dad-verdict');
+      const round = document.getElementById('dad-round');
+      const meter = document.getElementById('dad-meter');
+      const meterText = document.getElementById('dad-meter-text');
+
+      if (document.getElementById('stat-decisions')) {
+        document.getElementById('stat-decisions').innerText = state.decisions;
+      }
+
+      if (round) round.innerText = `JOKE #${String(state.dadJokeRound).padStart(2,'0')}`;
+      if (answerWrap) answerWrap.classList.add('hidden');
+      if (answer) answer.innerText = '';
+      if (meter) meter.style.width = '0%';
+      if (meterText) meterText.innerText = '0%';
+      if (thinking) thinking.classList.remove('hidden');
+      if (q) {
+        q.innerText = 'CALCULATING THE LEAST FUNNY WAY TO SAY THIS...';
+        q.classList.add('animate-pulse');
+      }
+
+      dadButtonState(reveal, false);
+      if (verdict) verdict.innerText = 'THE PUNCHLINE IS BEING VERIFIED BY THE MINISTRY OF BAD HUMOUR.';
+
+      dadShake();
+
+      setTimeout(() => {
+        if (thinking) thinking.classList.add('hidden');
+        if (q) {
+          q.innerText = dadJokes[n][0];
+          q.classList.remove('animate-pulse');
+        }
+        dadButtonState(reveal, true);
+        if (verdict) verdict.innerText = 'YOU MAY NOW MAKE A TERRIBLE DECISION.';
+      }, 650);
+    }
+
+    function revealDadJoke(){
+      if (state.dadJokeIndex < 0 || !dadJokes[state.dadJokeIndex]) return;
+
+      state.decisions++;
+      if (document.getElementById('stat-decisions')) {
+        document.getElementById('stat-decisions').innerText = state.decisions;
+      }
+
+      const answerWrap = document.getElementById('dad-answer-wrap');
+      const answer = document.getElementById('dad-answer');
+      const verdict = document.getElementById('dad-verdict');
+      const meter = document.getElementById('dad-meter');
+      const meterText = document.getElementById('dad-meter-text');
+      const reveal = document.getElementById('dad-reveal');
+
+      if (answer) {
+        answer.innerText = dadJokes[state.dadJokeIndex][1];
+        answer.classList.remove('hidden');
+      }
+      if (answerWrap) answerWrap.classList.remove('hidden');
+
+      const levels = [7, 11, 18, 24, 31];
+      const level = levels[Math.floor(Math.random() * levels.length)];
+      if (meter) meter.style.width = level + '%';
+      if (meterText) meterText.innerText = level + '%';
+
+      const verdicts = [
+        'THAT WAS TERRIBLE.',
+        'WE APOLOGISE TO COMEDY.',
+        'YOUR DAD IS PROUD.',
+        'THIS IS WHY THE INTERNET EXISTS.',
+        'PLEASE DO NOT TELL ANYONE YOU LAUGHED.'
+      ];
+      if (verdict) verdict.innerText = verdicts[Math.floor(Math.random() * verdicts.length)];
+
+      dadButtonState(reveal, false);
+      dadShake();
+
+      // Tiny, harmless celebration burst.
+      const emojis = ['😂','🥁','💀','😭','👏'];
+      for (let i = 0; i < 7; i++) {
+        const e = document.createElement('span');
+        e.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+        e.style.position = 'fixed';
+        e.style.left = (35 + Math.random()*30) + 'vw';
+        e.style.top = (45 + Math.random()*15) + 'vh';
+        e.style.zIndex = '9999';
+        e.style.pointerEvents = 'none';
+        e.style.fontSize = (18 + Math.random()*18) + 'px';
+        e.style.transition = 'transform 900ms ease, opacity 900ms ease';
+        document.body.appendChild(e);
+        requestAnimationFrame(() => {
+          e.style.transform = `translate(${(Math.random()-0.5)*220}px, ${-80-Math.random()*180}px) rotate(${(Math.random()-0.5)*360}deg)`;
+          e.style.opacity = '0';
+        });
+        setTimeout(() => e.remove(), 950);
+      }
+    }
+
+function triggerStupidThinking(customMessage) {
+      state.decisions++;
+      document.getElementById('stat-decisions').innerText = state.decisions;
+
+      const modal = document.getElementById('thinking-modal');
+      const title = document.getElementById('thinking-title');
+      const sub = document.getElementById('thinking-sub');
+
+      title.innerText = "PLEASE WAIT.";
+      sub.innerText = "We are deeply thinking...";
+      modal.classList.remove('hidden');
+
+      setTimeout(() => {
+        title.innerText = "WE HAVE DECIDED NOT TO THINK.";
+        sub.innerText = customMessage || "Your request was discarded for being too sensible.";
+        
+        setTimeout(() => {
+          modal.classList.add('hidden');
+        }, 3000);
+      }, 2000);
+    }
+
+    // TOOL 1: USELESS BUTTON
+    function pressUselessButton() {
+      state.buttonPresses++;
+      state.decisions++;
+      const c = state.buttonPresses;
+      const resp = document.getElementById('button-response');
+      const counter = document.getElementById('button-counter');
+      const progress = document.getElementById('button-progress');
+      const btn = document.getElementById('useless-btn');
+      const secret = document.getElementById('button-secret');
+      if (document.getElementById('stat-decisions')) document.getElementById('stat-decisions').innerText = state.decisions;
+      if (counter) counter.innerText = `PRESS COUNT: ${c}`;
+      if (progress) progress.style.width = Math.min(100, c) + '%';
+
+      const lines = {
+        1:'CLICK 1: NOTHING HAPPENED.',
+        2:'CLICK 2: STILL NOTHING. YOU ARE LEARNING.',
+        3:'CLICK 3: THE BUTTON HAS BECOME AWARE OF YOU.',
+        7:'CLICK 7: WE NOTICED. PLEASE STOP.',
+        10:'CLICK 10: YOU HAVE ACHIEVED NOTHING AT SCALE.',
+        15:'CLICK 15: ARE YOU OKAY AT HOME?',
+        23:'CLICK 23: THIS COULD HAVE BEEN AN EMAIL.',
+        47:'CLICK 47: YOU COULD HAVE LEARNED SPANISH BY NOW.',
+        69:'CLICK 69: NICE. STILL USELESS.',
+        100:'CLICK 100: PROMOTED TO SENIOR BUTTON PRESSER.'
+      };
+      resp.innerText = lines[c] || `CLICK ${c}: ABSOLUTELY NOTHING CONTINUES TO HAPPEN.`;
+      if (secret) secret.innerText = c > 20 ? 'THE BUTTON HAS FILED A COMPLAINT AGAINST YOU.' : 'THE BUTTON IS JUDGING YOU.';
+      if (btn) {
+        btn.style.transform = `scale(${1 - Math.min(c,20)*0.003})`;
+        btn.classList.remove('jitter-fast'); void btn.offsetWidth; btn.classList.add('jitter-fast');
+        setTimeout(()=>btn.classList.remove('jitter-fast'),350);
+      }
+    }
+
+    // TOOL 3: MOOD MACHINE
+    function diagnoseMood(mood) {
+      state.decisions++;
+      state.crises++;
+      state.mood = mood;
+      if (document.getElementById('stat-decisions')) document.getElementById('stat-decisions').innerText = state.decisions;
+
+      const diagnoses = {
+        GOOD:['Suspicious. Nobody is allowed to be this functional on the internet.','THE MACHINE HAS DETECTED UNAUTHORIZED HAPPINESS.'],
+        BAD:['Correct. The algorithm agrees with your pessimism.','YOU ARE NOT HAVING A BAD DAY. YOU ARE HAVING A PREMIUM HUMAN EXPERIENCE.'],
+        CONFUSED:['You are not confused. You simply opened 19 tabs and trusted yourself.','YOUR BRAIN HAS CREATED A MEETING ABOUT ANOTHER MEETING.'],
+        HUNGRY:['You are not hungry. You are experiencing low snack availability.','THE SOLUTION IS FOOD. THE SCIENCE IS ALSO FOOD.'],
+        EXISTING:['Existing is a premium feature. Your trial expires eventually.','CONGRATULATIONS. YOU HAVE SUCCESSFULLY CONTINUED EXISTING.'],
+        NUMB:['Perfect score. You are ready for middle management.','EMOTIONAL RESPONSE NOT FOUND. HAVE YOU TRIED TURNING YOURSELF OFF?']
+      };
+      const item = diagnoses[mood] || diagnoses.EXISTING;
+      document.getElementById('mood-output').classList.remove('hidden');
+      document.getElementById('mood-feeling').innerText = `FEELING: ${mood}`;
+      document.getElementById('mood-diagnosis').innerText = item[Math.floor(Math.random()*item.length)];
+      document.getElementById('mood-confidence').innerText = `CONFIDENCE: ${82 + Math.floor(Math.random()*18)}%`;
+    }
+    // TOOL 5: ABSURDITY GENERATOR
+
+    // TOOL 5: ABSURDITY GENERATOR
+    function askPreset(question) {
+      const input = document.getElementById('ask-input');
+      if (input) {
+        input.value = question;
+        input.focus();
+        input.dispatchEvent(new Event('input', {bubbles:true}));
+      }
+    }
+
+    /*
+      ABSURD AI — NUTCASE ENGINE
+      Philosophy:
+      - Never behave like a normal assistant.
+      - Understand enough of the question to attack the premise.
+      - Pick one or two concrete words from the question.
+      - Turn them into an unexpectedly specific absurd theory.
+      - Deliver the answer as if it is settled science.
+      - Occasionally contradict itself.
+      - NEVER use "we have analysed..." or generic keyword explanations.
+    */
+    function askAbsurdAI() {
+      const input = document.getElementById('ask-input');
+      const output = document.getElementById('ask-output');
+      const thinking = document.getElementById('ask-thinking');
+      const answerBox = document.getElementById('ask-answer-box');
+      const answer = document.getElementById('ask-answer');
+      const footnote = document.getElementById('ask-footnote');
+      const status = document.getElementById('ask-status');
+      const confidence = document.getElementById('ask-confidence');
+
+      const q = (input ? input.value : '').trim();
+      if (!q) {
+        if (input) {
+          input.placeholder = 'ASK ANYTHING. SERIOUSLY. WE REGRET ENCOURAGING YOU.';
+          input.focus();
+        }
+        return;
+      }
+
+      state.decisions++;
+      state.askQuestion = q;
+      if (document.getElementById('stat-decisions')) {
+        document.getElementById('stat-decisions').innerText = state.decisions;
+      }
+
+      const clean = q.toLowerCase()
+        .replace(/[?!.,;:()[\]{}"'`]/g, ' ')
+        .replace(/\s+/g,' ')
+        .trim();
+
+      const words = clean.split(' ').filter(Boolean);
+      const stop = new Set([
+        'what','why','when','where','who','which','how','can','could','would','should',
+        'is','are','am','i','my','me','you','your','the','a','an','to','do','does',
+        'did','will','for','of','on','in','at','and','or','it','this','that','with',
+        'be','have','has','was','were','please','tell','give','explain','really',
+        'just','about','there','they','we','our','from','than','if','then','many',
+        'much','ever','not','one','some','any','number','kind','sort','going',
+        'going','gonna','im','i’m','i’m','yourself'
+      ]);
+
+      let key = [...new Set(words.filter(w => w.length > 2 && !stop.has(w)))];
+      if (!key.length) key = ['LIFE'];
+
+      const pick = a => a[Math.floor(Math.random()*a.length)];
+      const K = key[0].toUpperCase();
+      const K2 = (key[1] || pick(['CHAOS','THURSDAY','PIGEONS','POTATO'])).toUpperCase();
+      const lower = clean;
+
+      const weirdNouns = [
+        'a pigeon with a mortgage',
+        'three unemployed wizards',
+        'an extremely confident potato',
+        'a retired traffic policeman',
+        'a goose who knows too much',
+        'the intern who invented Tuesday',
+        'a committee of six ferrets',
+        'a man called Kevin who has seen things',
+        'an accountant with a sword',
+        'a suspiciously wet envelope',
+        'a very old fax machine',
+        'the CEO of a small puddle'
+      ];
+
+      const endings = [
+        'THIS IS NOT A JOKE. IT JUST SOUNDS LIKE ONE.',
+        'PLEASE DO NOT RESEARCH THIS.',
+        'THE ALGORITHM WILL NOT BE TAKING QUESTIONS.',
+        'THIS HAS BEEN PEER-REVIEWED BY NOBODY.',
+        'WE ARE ALREADY REGRETTING THE CONFIDENCE LEVEL.',
+        'DO NOT SHOW THIS ANSWER TO A PROFESSIONAL.',
+        'THAT IS ALL THE SCIENCE WE HAVE.',
+        'THIS EXPLAINS NOTHING. YOU ARE WELCOME.'
+      ];
+
+      let response = '';
+
+      // Questions become setups for a sharp, specific absurd premise.
+      if (/^why\b/.test(lower)) {
+        response = pick([
+          `BECAUSE ${K} WAS LEFT UNSUPERVISED IN 2017. WE HAVE BEEN DEALING WITH THE CONSEQUENCES EVER SINCE.`,
+          `BECAUSE ${K} AND ${K2} HAVE A LONG-STANDING DISPUTE. THE DETAILS ARE CLASSIFIED AND ALSO EXTREMELY STUPID.`,
+          `BECAUSE THE ${K} DEPARTMENT CLOSED EARLY THAT DAY. NOBODY KNOWS WHY. THAT IS ACTUALLY THE PROBLEM.`,
+          `BECAUSE ${K} IS POWERED BY A SMALL AMOUNT OF SPITE. THIS IS WELL DOCUMENTED.`,
+          `BECAUSE ${K} HAS BEEN PRETENDING TO BE NORMAL. IT IS NOT.`
+        ]);
+      } else if (/^how many\b/.test(lower)) {
+        response = pick([
+          `17. ONE OF THEM IS A LAWYER. NONE OF THEM KNOW WHY THEY ARE THERE.`,
+          `THREE. FOUR IF YOU COUNT THE ONE WHO HAS BEEN LYING ABOUT IT.`,
+          `EXACTLY 42, BUT ONLY ON WEEKDAYS. ON SUNDAYS THE NUMBER BECOMES RUDE.`,
+          `NOBODY KNOWS. WE ASKED ${weirdNouns[Math.floor(Math.random()*weirdNouns.length)]}. IT SAID “ENOUGH.”`,
+          `THE OFFICIAL NUMBER IS 8. THE UNOFFICIAL NUMBER IS “PLEASE STOP COUNTING.”`
+        ]);
+      } else if (/^how much\b/.test(lower)) {
+        response = pick([
+          `ENOUGH TO MAKE ${K} EVERYONE'S PROBLEM.`,
+          `ROUGHLY ONE SHOPPING TROLLEY FULL. TWO IF YOU ARE EMOTIONALLY UNSTABLE.`,
+          `₹7,431. THIS NUMBER HAS NO BASIS IN FACT, WHICH IS WHY IT IS SO CONFIDENT.`,
+          `MORE THAN YOU THINK. LESS THAN A BILLION. WE HAVE NARROWED IT DOWN CONSIDERABLY.`,
+          `THE EXACT AMOUNT IS CURRENTLY IN A SPREADSHEET THAT REFUSES TO OPEN.`
+        ]);
+      } else if (/^how\b/.test(lower)) {
+        response = pick([
+          `HOW? VERY CAREFULLY. OR VERY QUICKLY. BOTH METHODS HAVE A 50% SUCCESS RATE.`,
+          `STEP ONE: DO ${K}. STEP TWO: ACT SURPRISED. STEP THREE: BLAME ${K2}.`,
+          `WITH CONFIDENCE, A SLIGHTLY WRONG MAP, AND ONE PERSON WHO SAYS “I KNOW A GUY.”`,
+          `YOU DON'T. ${K} DOES. THIS IS AN IMPORTANT DISTINCTION.`,
+          `THERE ARE 14 STEPS. STEP 1 IS SNACKS. STEPS 2–14 ARE UNDER INVESTIGATION.`
+        ]);
+      } else if (/^(should|can|could|would)\b/.test(lower)) {
+        response = pick([
+          `YES. ABSOLUTELY. THIS IS A TERRIBLE IDEA, WHICH IS WHY I SUPPORT IT.`,
+          `NO. BUT ALSO YES. PLEASE DO NOT MAKE ME CHOOSE BETWEEN TWO BEAUTIFUL MISTAKES.`,
+          `YOU CAN. THE QUESTION IS WHETHER ${K} CAN SURVIVE THE EXPERIENCE.`,
+          `PROBABLY. BUT IF ${K2} GETS INVOLVED, ALL BETS ARE OFF.`,
+          `I WOULD. THEN AGAIN, I AM A MACHINE WITH NO LEGAL REPRESENTATION.`
+        ]);
+      }
+
+      // High-value absurd domains: the joke should be about the premise, not the keyword.
+      if (!response && /(cat|kitten|pussycat)/.test(lower)) {
+        response = pick([
+          `YOUR CAT IS NOT IGNORING YOU. IT IS WAITING FOR YOU TO MAKE A MISTAKE SO IT CAN LOOK DISAPPOINTED.`,
+          `YOUR CAT HAS ALREADY SOLVED THIS. IT IS JUST WATCHING TO SEE HOW LONG YOU TAKE.`,
+          `THE CAT KNOWS. THE CAT ALWAYS KNOWS. IT HAS CHOSEN SILENCE BECAUSE SILENCE HAS BETTER LEVERAGE.`,
+          `YOUR CAT STARES AT YOU BECAUSE YOU LIVE IN ITS HOUSE AND SOMEHOW STILL THINK YOU ARE THE OWNER.`
+        ]);
+      } else if (!response && /(dog|puppy)/.test(lower)) {
+        response = pick([
+          `YOUR DOG HAS NO IDEA WHAT YOU ARE TALKING ABOUT. IT WOULD, HOWEVER, LIKE TO GO OUT.`,
+          `THE DOG HAS A FIVE-YEAR PLAN. IT CONSISTS OF WALKS, SNACKS AND DESTROYING ONE UNIMPORTANT OBJECT.`,
+          `YOUR DOG UNDERSTANDS ${K}. IT HAS DECIDED THE CORRECT RESPONSE IS RUNNING IN A CIRCLE.`,
+          `THE DOG IS THE ONLY ONE IN THIS SITUATION WITH A WORKING BUSINESS MODEL: BE CUTE, RECEIVE FOOD.`
+        ]);
+      } else if (!response && /(sleep|sleepy|tired|awake|insomnia|nap)/.test(lower)) {
+        response = pick([
+          `YOU ARE SLEEPY BECAUSE YOUR BRAIN HAS 47 TABS OPEN AND ONE OF THEM IS PLAYING MUSIC.`,
+          `YOUR BODY WANTS SLEEP. YOUR BRAIN WANTS TO REMEMBER SOMETHING EMBARRASSING FROM 2014. THE BRAIN WON.`,
+          `SLEEP IS YOUR BODY'S WAY OF SAYING “I HAVE READ ENOUGH OF THIS EMAIL.”`,
+          `YOU ARE NOT TIRED. YOU ARE SIMPLY RUNNING THE HUMAN OPERATING SYSTEM ON 3% BATTERY.`
+        ]);
+      } else if (!response && /(love|relationship|girlfriend|boyfriend|dating|marriage|marry|crush)/.test(lower)) {
+        response = pick([
+          `LOVE IS TWO PEOPLE SAYING “WHAT DO YOU WANT TO EAT?” UNTIL SOMEONE MOVES HOUSE.`,
+          `THE SECRET TO A RELATIONSHIP IS COMMUNICATION. THE SECRET TO SURVIVING COMMUNICATION IS ALSO COMMUNICATION.`,
+          `ROMANCE IS BASICALLY DIPLOMACY WITH BETTER PHOTOS AND MORE ARGUMENTS ABOUT RESTAURANTS.`,
+          `THE ALGORITHM HAS REVIEWED YOUR LOVE LIFE. IT RECOMMENDS HONESTY, HUMOUR AND DELETING THE SCREENSHOTS.`
+        ]);
+      } else if (!response && /(job|work|office|boss|career|meeting|quit|promotion|email)/.test(lower)) {
+        response = pick([
+          `YOUR JOB IS NOT STRESSFUL. YOUR MEETINGS ARE JUST HAVING A VERY LOUD OPINION ABOUT YOUR FUTURE.`,
+          `DO NOT QUIT. DO NOT STAY. SIMPLY BECOME EXTREMELY BUSY WHEN ANYONE SAYS “QUICK CALL?”`,
+          `YOUR CAREER IS FINE. YOUR INBOX, HOWEVER, HAS FORMED A POLITICAL PARTY.`,
+          `THE OFFICE HAS DETECTED ${K}. HR HAS BEEN NOTIFIED. HR DOES NOT KNOW WHAT ${K} IS EITHER.`
+        ]);
+      } else if (!response && /(money|salary|rich|poor|cash|tax|finance|bank)/.test(lower)) {
+        response = pick([
+          `YOUR MONEY IS NOT GONE. IT HAS ENTERED A MORE EXPENSIVE DIMENSION.`,
+          `WE FOLLOWED THE MONEY. IT LED TO A SUBSCRIPTION YOU FORGOT TO CANCEL.`,
+          `YOUR BANK ACCOUNT IS CURRENTLY DOING ITS BEST. PLEASE DO NOT OPEN THE APP AGAIN.`,
+          `FINANCIAL ADVICE: CHECK YOUR BALANCE, SIGH ONCE, CLOSE THE APP. THIS IS CALLED DIVERSIFICATION.`
+        ]);
+      } else if (!response && /(thailand|bangkok|phuket|pattaya|krabi)/.test(lower)) {
+        response = pick([
+          `THAILAND HAS BEEN INFORMED OF YOUR QUESTION. IT HAS RESPONDED WITH A STREET, A SCOOTER AND NO EXPLANATION.`,
+          `THE THAILAND DEPARTMENT OF ${K} HAS REFUSED TO COMMENT. VERY ON BRAND.`,
+          `THAILAND IS RUNNING ${K} ON A VERY SUCCESSFUL “FIGURE IT OUT WHEN YOU GET THERE” SYSTEM.`,
+          `YOUR THAILAND PLAN IS SOLID. YOUR ITINERARY WILL BE REPLACED BY SOMEONE SAYING “COME, COME, I KNOW A PLACE.”`
+        ]);
+      } else if (!response && /(travel|flight|airport|holiday|vacation|trip|train)/.test(lower)) {
+        response = pick([
+          `YOUR TRIP WILL GO ACCORDING TO PLAN UNTIL SOMEONE SAYS “LET'S JUST TAKE A QUICK DETOUR.”`,
+          `TRAVEL IS SIMPLE: PACK LIGHT, LEAVE EARLY, ARRIVE LATE, BLAME THE WEATHER.`,
+          `YOUR ITINERARY HAS BEEN REVIEWED. IT IS NOW A SUGGESTION.`,
+          `THE DESTINATION IS FINE. THE REAL ADVENTURE IS GETTING EVERYONE TO AGREE WHERE TO EAT.`
+        ]);
+      } else if (!response && /(food|eat|hungry|pizza|burger|coffee|tea|restaurant)/.test(lower)) {
+        response = pick([
+          `YES. EAT. THIS IS THE ONLY QUESTION ON THIS WEBSITE WITH A RESPONSIBLE ANSWER.`,
+          `${K} IS THE CORRECT ANSWER. THIS HAS BEEN PEER-REVIEWED BY MY STOMACH.`,
+          `THE ALGORITHM RECOMMENDS ${K} WITH A SIDE OF REGRET AND AN UNREASONABLE AMOUNT OF SAUCE.`,
+          `WE CALCULATED THE CALORIES. THEN WE GOT HUNGRY AND DESTROYED THE EVIDENCE.`
+        ]);
+      } else if (!response && /(weather|rain|hot|cold|sun|temperature)/.test(lower)) {
+        response = pick([
+          `THE WEATHER HAS SEEN YOUR QUESTION AND CHOSEN CHAOS.`,
+          `FORECAST: ${K} WITH A 97% CHANCE OF SOMEONE SAYING “IT WASN'T LIKE THIS YESTERDAY.”`,
+          `THE SKY IS CURRENTLY MAKING DECISIONS WITHOUT CONSULTING HUMANS. STANDARD PROCEDURE.`,
+          `IT IS WEATHER. IT WILL CONTINUE TO BE WEATHER UNTIL FURTHER NOTICE.`
+        ]);
+      }
+
+      // Wild-card engine: when the subject is unfamiliar, invent a very specific
+      // relationship between it and an absurd object.
+      if (!response) {
+        const theories = [
+          `THE OFFICIAL THEORY IS THAT ${K} IS CONTROLLED BY ${weirdNouns[Math.floor(Math.random()*weirdNouns.length)]}. THEY HAVE DENIED EVERYTHING, INCLUDING OWNING A CALENDAR.`,
+          `${K} WAS NORMAL UNTIL ${K2} GOT INVOLVED. THIS HAPPENED AT 4:17 PM ON A TUESDAY. WE CANNOT DISCUSS THE TUESDAY.`,
+          `NOBODY EXPECTED ${K}. ESPECIALLY ${weirdNouns[Math.floor(Math.random()*weirdNouns.length)]}. THAT IS WHY THE MEETING ENDED SO EARLY.`,
+          `THE ANSWER IS ${K}. NO, THAT DOESN'T MAKE SENSE. YES, WE ARE CERTAIN.`,
+          `WE ASKED ${weirdNouns[Math.floor(Math.random()*weirdNouns.length)]} ABOUT ${K}. IT LEANED FORWARD AND SAID, “FINALLY, SOMEONE IS ASKING THE RIGHT QUESTION.”`,
+          `${K} IS NOT THE PROBLEM. ${K2} IS THE PROBLEM. ${K} HAS BEEN FRAMED.`,
+          `THIS QUESTION HAS BEEN ESCALATED TO THE DEPARTMENT OF ${K}. THE DEPARTMENT IS A ROOM WITH ONE CHAIR.`
+        ];
+        response = pick(theories);
+      }
+
+      // Optional second beat: makes many answers feel written rather than generated.
+      const tag = pick(endings);
+      response = `${response} ${tag}`;
+
+      // Never repeat an identical answer consecutively.
+      if (state.lastAbsurdAnswer === response) {
+        response = `${response} ALSO, WE HAVE CHANGED OUR MIND.`;
+      }
+      state.lastAbsurdAnswer = response;
+
+      if (output) output.classList.remove('hidden');
+      if (answerBox) answerBox.classList.add('hidden');
+      if (thinking) thinking.classList.remove('hidden');
+      if (status) status.innerText = 'AI: MAKING A TERRIBLE DECISION';
+      if (confidence) confidence.innerText = 'CONFIDENCE: 140%';
+
+      setTimeout(() => {
+        if (thinking) thinking.classList.add('hidden');
+        if (answer) answer.innerText = response;
+        if (footnote) {
+          footnote.innerText =
+            `QUESTION RECEIVED: YES • ORIGINAL QUESTION: "${q.slice(0,110)}${q.length>110?'…':''}" ` +
+            `• SOURCES CONSULTED: NONE • THERAPISTS CONSULTED: NONE • REGRET: ${pick(['LOW','RISING','SEVERE','IRREVERSIBLE'])}`;
+        }
+        if (answerBox) answerBox.classList.remove('hidden');
+        if (status) status.innerText = 'AI: ABSOLUTELY CERTAIN';
+        if (confidence) confidence.innerText = `CONFIDENCE: ${pick(['117','131','140','203','∞'])}%`;
+      }, 700);
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && document.activeElement && document.activeElement.id === 'ask-input') {
+        e.preventDefault();
+        askAbsurdAI();
+      }
+    });
+
+function generateAbsurdityNews() {
+      state.decisions++;
+      document.getElementById('stat-decisions').innerText = state.decisions;
+
+      const p = document.getElementById('abs-person').value;
+      const o = document.getElementById('abs-object').value;
+      const a = document.getElementById('abs-action').value;
+
+      const headline = `BREAKING: ${p.toUpperCase()} ${a.toUpperCase()} ${o.toUpperCase()}.`;
+      const subs = [
+        'WITNESSES DESCRIBED THE SCENE AS “UNNECESSARY BUT IMPRESSIVE.”',
+        'EXPERTS HAVE REFUSED TO COMMENT AFTER BEING SHOWN THE EVIDENCE.',
+        'THE INTERNET HAS BEEN ADVISED TO REMAIN CALM. IT HAS NOT.',
+        'AUTHORITIES CONFIRMED THAT NOBODY ASKED FOR THIS.',
+        'ECONOMISTS ARE CURRENTLY REASSESSING THE SITUATION USING A CRAYON.',
+        'A SPOKESPERSON SAID: “WE ALSO HAVE NO IDEA WHAT IS GOING ON.”'
+      ];
+
+      document.getElementById('news-headline').innerText = headline;
+      document.getElementById('news-subhead').innerText = subs[Math.floor(Math.random()*subs.length)];
+      document.getElementById('news-confidence').innerText = `${87 + Math.floor(Math.random()*14)}%`;
+      document.getElementById('news-time').innerText = 'JUST NOW';
+      document.getElementById('news-card').classList.remove('hidden');
+    }
+
+    function copyNewsText() {
+      const headline = document.getElementById('news-headline').innerText;
+      const sub = document.getElementById('news-subhead').innerText;
+      const txt = `${headline}\n${sub}\n— THE DAILY ABSURD`;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(txt).then(() => alert("Nonsense copied. Please misuse responsibly."));
+      } else {
+        window.prompt("COPY THIS NONSENSE:", txt);
+      }
+    }
+
+function vegDecision(choice) {
+      const vegs = [
+        ['🥔','POTATO','Emotionally available. Slightly starchy.'],
+        ['🥕','CARROT','Optimistic. Sees right through you.'],
+        ['🍆','AUBERGINE','Mysterious. Has excellent lighting.'],
+        ['🥦','BROCCOLI','Serious about commitment. Weirdly loud.'],
+        ['🌽','CORN','Too much confidence. Somehow still attractive.'],
+        ['🍅','TOMATO','Technically a fruit. Refuses to discuss it.'],
+        ['🥒','CUCUMBER','Chill. Almost suspiciously chill.'],
+        ['🧅','ONION','Will make you cry. Claims it is your fault.']
+      ];
+      const v = vegs[Math.floor(Math.random()*vegs.length)];
+      const score = 54 + Math.floor(Math.random()*46);
+      state.vegRound++;
+      state.decisions++;
+      document.getElementById('veg-emoji').innerText=v[0];
+      document.getElementById('veg-name').innerText=v[1];
+      document.getElementById('veg-bio').innerText=v[2];
+      document.getElementById('veg-score').innerText=`COMPATIBILITY: ${score}%`;
+      document.getElementById('veg-result').innerText = choice === 'YES'
+        ? `MATCH ACCEPTED. ${v[1]} HAS NOTIFIED ITS FRIENDS.`
+        : `MATCH REJECTED. ${v[1]} WILL BE THINKING ABOUT THIS IN THE PRODUCE AISLE.`;
+      if (document.getElementById('stat-decisions')) document.getElementById('stat-decisions').innerText=state.decisions;
+    }
+    function finishSession() {
+      populateReport();
+      switchView('view-report');
+    }
+
+    // REPORT GENERATOR
+    function populateReport() {
+      document.getElementById('rpt-clicks').innerText = state.clicks;
+      document.getElementById('rpt-decisions').innerText = state.decisions;
+      document.getElementById('rpt-crises').innerText = state.crises + 3;
+      const mins = String(Math.floor(state.secondsWasted / 60)).padStart(2,'0');
+      const secs = String(state.secondsWasted % 60).padStart(2,'0');
+      document.getElementById('rpt-time').innerText = `${mins}:${secs}`;
+      const score = Math.min(99, Math.max(42, state.clicks + state.decisions * 5 + Math.min(20,state.buttonPresses)));
+      document.getElementById('rpt-score').innerText = `${score}/100`;
+    }
+
+    function shareReport() {
+      const text = `🚨 MY ABSURDITY REPORT 🚨\nClicks: ${state.clicks}\nUseful Decisions: 0\nAbsurdity Score: ${document.getElementById('rpt-score').innerText}\n\nJoin the chaos: ABSURD`;
+      navigator.clipboard.writeText(text);
+      alert("Report summary copied to clipboard!");
+    }
+
+    // FLOATING DISCLAIMERS
+    function spawnRandomDisclaimer(x, y) {
+      const phrases = [
+        "Unnecessary click.",
+        "Why?",
+        "Taxes due soon.",
+        "Error 000",
+        "Pointless.",
+        "Stop moving.",
+        "Cheese."
+      ];
+      const div = document.createElement('div');
+      div.className = 'fixed font-mono text-[9px] bg-yellow-300 text-black px-1 border border-black z-40 pointer-events-none';
+      div.style.left = `${x + 10}px`;
+      div.style.top = `${y + 10}px`;
+      div.innerText = phrases[Math.floor(Math.random() * phrases.length)];
+      document.getElementById('popup-layer').appendChild(div);
+
+      setTimeout(() => div.remove(), 1200);
+    }
+
+    // CANVAS CURSOR TRAIL EFFECT
+    const canvas = document.getElementById('cursor-canvas');
+    const ctx = canvas.getContext('2d');
+    let points = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    document.addEventListener('mousemove', (e) => {
+      points.push({ x: e.clientX, y: e.clientY, life: 1.0 });
+    });
+
+    function drawCursorTrail() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < points.length; i++) {
+        const p = points[i];
+        ctx.fillStyle = `rgba(255, 0, 85, ${p.life})`;
+        ctx.fillRect(p.x, p.y, 4, 4);
+        p.life -= 0.04;
+      }
+      points = points.filter(p => p.life > 0);
+      requestAnimationFrame(drawCursorTrail);
+    }
+    drawCursorTrail();
+  </script>
+</body>
+</html>
