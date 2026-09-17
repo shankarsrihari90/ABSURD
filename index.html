@@ -6,6 +6,11 @@
   <title>ABSURD — Nobody asked for this.</title>
   <link rel="stylesheet" href="/calm-game.css" />
   <script defer src="/calm-game.js"></script>
+  <link rel="stylesheet" href="/make-it-absurd.css" />
+  <script defer src="/make-it-absurd.js"></script>
+  <script defer src="/absurd-version.js"></script>
+  <link rel="stylesheet" href="/absurd-dock.css" />
+  <script defer src="/absurd-dock.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>.hidden{display:none!important}
     @import url('https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Impact&display=swap');
@@ -233,8 +238,11 @@
     .back-home:hover{color:#fff}
     @media(max-width:900px){.hub-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.hub-card{min-height:230px;}}
     @media(max-width:640px){
-      .hub-grid{grid-template-columns:1fr;gap:12px;}
-      .hub-card{min-height:190px;padding:18px;box-shadow:5px 5px 0 #ff006e;}
+      /* On phones the collection becomes a swipeable deck. The exposed edge of
+         the following card is intentional: it quietly tells people to keep swiping. */
+      .hub-grid{display:flex;gap:12px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-left:2px;padding:2px 16vw 14px 2px;margin-right:-.75rem;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+      .hub-grid::-webkit-scrollbar{display:none;}
+      .hub-card{flex:0 0 min(82vw,360px);scroll-snap-align:start;min-height:190px;padding:18px;box-shadow:5px 5px 0 #ff006e;}
       .hub-card:hover{transform:none;box-shadow:5px 5px 0 #ff006e;}
       .hub-card h3{font-size:clamp(2.4rem,12vw,4rem);margin:13px 0 9px;}
       .hub-card p{font-size:12px;}
@@ -453,13 +461,13 @@
   <nav id="top-bar" class="hidden bg-yellow-300 text-black border-b-4 border-black p-2 font-bold text-xs md:text-sm flex justify-between items-center z-20">
     <div class="flex items-center gap-3">
       <span class="bg-black text-white px-2 py-0.5 font-impact text-lg tracking-wider cursor-pointer" onclick="switchView('view-hub')">ABSURD</span>
-      <span class="hidden md:inline text-xs uppercase bg-pink-500 text-white px-2 py-0.5 border border-black">V1.04-BROKEN</span>
+      <span id="release-version" class="hidden md:inline text-xs uppercase bg-pink-500 text-white px-2 py-0.5 border border-black">V0.0.0-BUILDING</span>
     </div>
-    <div class="flex gap-4 font-mono text-xs">
+    <div class="flex gap-4 font-mono text-xs items-center">
       <div>CLICKS: <span id="stat-clicks" class="text-pink-600 font-extrabold">0</span></div>
       <div>DECISIONS: <span id="stat-decisions" class="text-blue-700 font-extrabold">0</span></div>
-      <div>TIME WASTED: <span id="stat-time" class="text-purple-800 font-extrabold">00:00</span></div>
-      <button onclick="switchView('view-report')" class="bg-red-600 text-white px-2 py-0.5 hover:bg-black uppercase border border-black">End Session</button>
+      <div class="time-wasted-stat bg-purple-200 border-2 border-purple-900 px-2 py-1">TIME WASTED: <span id="stat-time" class="text-purple-900 font-extrabold">00:00</span></div>
+      <button onclick="window.openAbsurdProfile && window.openAbsurdProfile()" class="profile-link bg-pink-600 text-white px-2 py-1 hover:bg-black uppercase border border-black">Profile</button>
     </div>
   </nav>
 
@@ -509,6 +517,16 @@
     </div>
   </div>
 
+  <section class="mia3-card" aria-labelledby="mia3-card-title">
+    <div class="bar"><span><b>MAKE IT ABSURD</b> · CREATION LAB</span><span>TAKE NORMAL. ADD BAD DECISIONS.</span></div>
+    <div class="body">
+      <div class="mia3-k">ABSURDIFICATION ENGINE</div>
+      <h3 id="mia3-card-title">MAKE SOMETHING WORSE.</h3>
+      <p>You don't need to be creative. We give you the ingredients. You make the terrible decisions.</p>
+      <button class="mia3-open" id="mia3-open" type="button">ENTER THE CREATION LAB →</button>
+    </div>
+  </section>
+
   <div class="fact30"><small>ABSURD FACT / UNFORTUNATELY TRUE · <span id="fcount">01/30</span></small><h4 id="ftitle">WOMBATS PRODUCE CUBE-SHAPED DROPPINGS.</h4><p id="fcopy">Actually true. Geometry has entered wildlife.</p><button onclick="nextFact30()">I DON'T BELIEVE YOU. SHOW ME ANOTHER →</button></div>
 
 <div class="flex items-end justify-between gap-4 mb-4 border-b-2 border-green-400 pb-3">
@@ -556,7 +574,6 @@
       <div class="hub-cta">FIND LOVE →</div>
     </article>
   </div>
-
 
 </section>
 
@@ -855,6 +872,7 @@
     });
 
     // System State Tracking
+    const PROFILE_KEY = 'absurd.profile.v1';
     const state = {
       clicks: 0,
       decisions: 0,
@@ -870,10 +888,38 @@
       timerInterval: null
     };
 
+    function readProfile() {
+      try { return Object.assign({}, JSON.parse(localStorage.getItem(PROFILE_KEY) || '{}')); }
+      catch (_) { return {}; }
+    }
+    function saveProfile() {
+      try {
+        const current = readProfile();
+        localStorage.setItem(PROFILE_KEY, JSON.stringify(Object.assign(current, {
+          clicks: state.clicks, decisions: state.decisions, crises: state.crises,
+          buttonPresses: state.buttonPresses, secondsWasted: state.secondsWasted,
+          lastSeen: Date.now()
+        })));
+        window.dispatchEvent(new CustomEvent('absurd:profile-sync'));
+      } catch (_) {}
+    }
+    function restoreProfile() {
+      const saved = readProfile();
+      ['clicks','decisions','crises','buttonPresses','secondsWasted'].forEach(key => {
+        if (Number.isFinite(Number(saved[key]))) state[key] = Number(saved[key]);
+      });
+      document.getElementById('stat-clicks').innerText = state.clicks;
+      document.getElementById('stat-decisions').innerText = state.decisions;
+      const mins = String(Math.floor(state.secondsWasted / 60)).padStart(2, '0');
+      const secs = String(state.secondsWasted % 60).padStart(2, '0');
+      document.getElementById('stat-time').innerText = `${mins}:${secs}`;
+    }
+
     // Global Click Tracker
     document.addEventListener('click', (e) => {
       state.clicks++;
       document.getElementById('stat-clicks').innerText = state.clicks;
+      saveProfile();
       
       // Randomly spawn tiny absurd disclaimer floating near click (5% chance)
       if (Math.random() < 0.08) {
@@ -890,6 +936,7 @@
         const secs = String(state.secondsWasted % 60).padStart(2, '0');
         const formatted = `${mins}:${secs}`;
         document.getElementById('stat-time').innerText = formatted;
+        saveProfile();
       }, 1000);
     }
 
@@ -975,6 +1022,10 @@
       rotateAbsurdFeed();
       window.scrollTo({top: 0, behavior: 'instant'});
     }
+
+    // The site timer begins on page load and survives reloads through the local profile.
+    restoreProfile();
+    startTimer();
 
     function rotateAbsurdFeed() {
       const messages = [
@@ -1805,6 +1856,39 @@ function vegDecision(choice) {
     </div>
   </div>
 </footer>
+
+<div id="mia3" aria-hidden="true">
+  <div class="mia3-shell">
+    <div class="mia3-nav">
+      <button class="mia3-back" id="mia3-back" type="button">← BACK</button>
+      <span>MAKE IT ABSURD™</span>
+    </div>
+    <section class="mia3-home" id="mia3-home">
+      <div class="mia3-k">WHAT ARE WE MAKING ABSURD TODAY?</div>
+      <div class="mia3-h">PICK A VICTIM.</div>
+      <p class="mia3-copy">Every path starts normal. Every choice physically makes it worse.</p>
+      <div class="mia3-modes">
+        <button class="mia3-mode" data-mode="product" type="button"><i>01 / PRODUCT</i><b>A TOASTER.</b><span>Give breakfast technology, monetisation and emotional damage.</span></button>
+        <button class="mia3-mode" data-mode="ad" type="button"><i>02 / AD</i><b>A LUXURY AD.</b><span>Take something tasteful and ruin every decision.</span></button>
+        <button class="mia3-mode" data-mode="app" type="button"><i>03 / APP</i><b>FOOD DELIVERY.</b><span>Add the exact features users never requested.</span></button>
+        <button class="mia3-mode" data-mode="startup" type="button"><i>04 / STARTUP</i><b>A BAD IDEA.</b><span>Turn nonsense into a suspiciously valuable company.</span></button>
+      </div>
+    </section>
+    <section class="mia3-work" id="mia3-work">
+      <div class="mia3-k" id="mia3-k"></div>
+      <div class="mia3-h" id="mia3-title"></div>
+      <p class="mia3-copy" id="mia3-copy"></p>
+      <div class="mia3-grid">
+        <div class="mia3-lab"><small>LIVE ABSURDIFICATION</small><div class="mia3-scene" id="mia3-scene"></div><div class="mia3-status" id="mia3-status"></div></div>
+        <div id="mia3-steps"></div>
+      </div>
+      <div class="mia3-finish mia3-controls" id="mia3-finish">
+        <div class="mia3-actions"><button id="mia3-worse" type="button">MAKE THIS WORSE AGAIN →</button><button class="alt" id="mia3-another" type="button">RUIN SOMETHING ELSE →</button></div>
+        <div class="mia3-challenge"><b>📸 TAKE A SCREENSHOT.</b><br>Send the poster above to your most absurd friend and tell them: <b>“MAKE SOMETHING WORSE THAN THIS.”</b></div>
+      </div>
+    </section>
+  </div>
+</div>
 
 <div id="ap-backdrop" class="ap-backdrop">
   <section class="ap-drawer" aria-label="Absurd Products">
