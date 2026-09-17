@@ -864,6 +864,7 @@
       const landing = document.getElementById('view-landing');
       const hub = document.getElementById('view-hub');
       if (landing && hub) {
+        if (state.started) { enterAbsurd(); return; }
         landing.style.display = 'flex';
         landing.style.visibility = 'visible';
         landing.style.opacity = '1';
@@ -885,7 +886,8 @@
       lastAbsurdAnswer: '',
       mood: '',
       vegRound: 0,
-      timerInterval: null
+      timerInterval: null,
+      started: false
     };
 
     function readProfile() {
@@ -898,6 +900,7 @@
         localStorage.setItem(PROFILE_KEY, JSON.stringify(Object.assign(current, {
           clicks: state.clicks, decisions: state.decisions, crises: state.crises,
           buttonPresses: state.buttonPresses, secondsWasted: state.secondsWasted,
+          started: state.started,
           lastSeen: Date.now()
         })));
         window.dispatchEvent(new CustomEvent('absurd:profile-sync'));
@@ -913,7 +916,12 @@
       const mins = String(Math.floor(state.secondsWasted / 60)).padStart(2, '0');
       const secs = String(state.secondsWasted % 60).padStart(2, '0');
       document.getElementById('stat-time').innerText = `${mins}:${secs}`;
+      state.started = Boolean(saved.started || Number(saved.secondsWasted) > 0);
+      if (state.started) setTimeout(enterAbsurd, 0);
     }
+    window.addEventListener('storage', event => {
+      if (event.key === PROFILE_KEY) restoreProfile();
+    });
 
     // Global Click Tracker
     document.addEventListener('click', (e) => {
@@ -992,6 +1000,7 @@
 
     // Landing Page Entry
     function enterAbsurd() {
+      state.started = true;
       const landing = document.getElementById('view-landing');
       const hub = document.getElementById('view-hub');
       const topBar = document.getElementById('top-bar');
@@ -1019,6 +1028,7 @@
       document.getElementById('feature-back')?.classList.remove('show');
 
       startTimer();
+      saveProfile();
       rotateAbsurdFeed();
       window.scrollTo({top: 0, behavior: 'instant'});
     }
