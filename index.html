@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ABSURD — Nobody asked for this.</title>
+  <link rel="stylesheet" href="/calm-game.css" />
+  <script defer src="/calm-game.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>.hidden{display:none!important}
     @import url('https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Impact&display=swap');
@@ -895,7 +897,7 @@
     function switchView(viewId) {
       const aliases = { landing:'view-landing', home:'view-hub', hub:'view-hub', report:'view-report' };
       const targetId = aliases[viewId] || viewId;
-      const views = ['view-landing','view-hub','tool-button','tool-ask','tool-mood','tool-absurdity','tool-dad','tool-veg','tool-end','view-report'];
+      const views = ['view-landing','view-hub','tool-game','tool-button','tool-ask','tool-mood','tool-absurdity','tool-dad','tool-veg','tool-end','view-report'];
 
       views.forEach(id => {
         const el = document.getElementById(id);
@@ -937,6 +939,7 @@
       if (featureBack) featureBack.classList.toggle('show', targetId.startsWith('tool-'));
 
       if (targetId === 'view-report') populateReport();
+      window.dispatchEvent(new CustomEvent('absurd:view', {detail:targetId}));
       window.scrollTo({top:0, behavior:'instant'});
     }
 
