@@ -60,6 +60,28 @@
       box-shadow: 2px 2px 0px #ff0055;
     }
 
+    /* The entry label is one control, even on the narrowest phone. */
+    #enter-absurd {
+      display:flex;align-items:center;justify-content:center;gap:.28em;
+      width:100%;min-height:64px;padding:1rem .55rem;
+      white-space:nowrap;line-height:1;letter-spacing:.045em;
+      font-size:clamp(1rem,5.2vw,1.875rem);
+    }
+    #enter-absurd .enter-label,#enter-absurd .enter-arrow{
+      display:block;flex:0 0 auto;white-space:nowrap;
+    }
+    #enter-absurd .enter-arrow{
+      animation:absurd-entry-arrow .9s steps(2,end) infinite;
+      text-shadow:0 0 9px rgba(0,255,102,.95);
+    }
+    @keyframes absurd-entry-arrow{50%{transform:translateX(.15em);filter:brightness(1.25)}}
+    @media(max-width:360px){
+      #view-landing{padding:12px}
+      #view-landing>div{padding:20px}
+      #enter-absurd{font-size:1rem}
+    }
+    @media(prefers-reduced-motion:reduce){#enter-absurd .enter-arrow{animation:none}}
+
     @keyframes jitter {
       0% { transform: translate(0, 0) rotate(0deg); }
       20% { transform: translate(-2px, 2px) rotate(-0.5deg); }
@@ -419,8 +441,8 @@
         There is absolutely no reason for you to be here.
       </p>
       
-      <button onclick="enterAbsurd()" class="brutal-btn w-full bg-green-400 hover:bg-yellow-300 text-black font-impact text-3xl py-4 border-4 border-black uppercase tracking-widest cursor-pointer">
-        [ ENTER ABSURD → ]
+      <button id="enter-absurd" aria-label="Enter ABSURD" onclick="enterAbsurd()" class="brutal-btn bg-green-400 hover:bg-yellow-300 text-black font-impact border-4 border-black uppercase cursor-pointer">
+        <span class="enter-label">[ ENTER ABSURD</span><span class="enter-arrow" aria-hidden="true">→ ]</span>
       </button>
 
       <p class="text-[10px] text-zinc-500 mt-6 uppercase tracking-widest">
