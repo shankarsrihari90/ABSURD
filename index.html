@@ -82,6 +82,21 @@
     }
     @media(prefers-reduced-motion:reduce){#enter-absurd .enter-arrow{animation:none}}
 
+    /* A permanent escape hatch for every individual experience. */
+    #feature-back {
+      display:none;position:fixed;z-index:80;
+      top:calc(64px + env(safe-area-inset-top));left:calc(12px + env(safe-area-inset-left));
+      min-height:44px;padding:0 14px;border:2px solid #71717a;background:#090909;color:#fff;
+      font:800 10px monospace;text-transform:uppercase;cursor:pointer;
+      box-shadow:4px 4px 0 #ff006e;
+    }
+    #feature-back.show{display:block}
+    #feature-back:hover{border-color:#39ff88;color:#39ff88;transform:translate(-2px,-2px)}
+    #feature-back:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #ff006e}
+    @media(max-width:640px){
+      #feature-back{top:calc(58px + env(safe-area-inset-top));left:calc(8px + env(safe-area-inset-left));font-size:9px;padding:0 11px}
+    }
+
     @keyframes jitter {
       0% { transform: translate(0, 0) rotate(0deg); }
       20% { transform: translate(-2px, 2px) rotate(-0.5deg); }
@@ -427,6 +442,8 @@
       ⚠️ WARNING: DO NOT TRY TO FIND PURPOSE HERE • TAXES ARE STILL DUE IN REAL LIFE • COFFEES CONSUMED state: UNKNOWN • THE COMPUTER IS THINKING ABOUT CHEESE • ⚠️
     </div>
   </div>
+
+  <button id="feature-back" type="button" onclick="switchView('view-hub')">← BACK TO ABSURD</button>
 
   <!-- ==================== LANDING PAGE ==================== -->
   <section id="view-landing" style="display:flex;" class="min-h-screen flex flex-col items-center justify-center p-6 text-center z-10 relative">
@@ -875,6 +892,7 @@
           fallback.style.visibility = 'visible';
           fallback.style.opacity = '1';
         }
+        document.getElementById('feature-back')?.classList.remove('show');
         window.scrollTo(0,0);
         return;
       }
@@ -889,6 +907,9 @@
       const ticker = document.getElementById('ticker');
       if (top) { top.classList.toggle('hidden', !inside); top.style.display = inside ? 'flex' : 'none'; }
       if (ticker) { ticker.classList.toggle('hidden', !inside); ticker.style.display = inside ? 'block' : 'none'; }
+
+      const featureBack = document.getElementById('feature-back');
+      if (featureBack) featureBack.classList.toggle('show', targetId.startsWith('tool-'));
 
       if (targetId === 'view-report') populateReport();
       window.scrollTo({top:0, behavior:'instant'});
@@ -919,6 +940,8 @@
         hub.style.visibility = 'visible';
         hub.style.opacity = '1';
       }
+
+      document.getElementById('feature-back')?.classList.remove('show');
 
       startTimer();
       rotateAbsurdFeed();
@@ -1526,8 +1549,8 @@ veg:[["TOIT","FIRST DATE ENERGY. ONE DRINK HAS BECOME THREE."],["KOSHY'S","FOR V
           <div class="ap-regret-note" id="ap-regret-${i}"></div>
         </div>`).join('');
     }
-    function openAbsurdProducts(){renderAbsurdProducts();const x=document.getElementById('ap-backdrop');if(x){x.scrollTop=0;x.classList.add('open');}document.body.style.overflow='hidden';}
-    function closeAbsurdProducts(){document.getElementById('ap-backdrop')?.classList.remove('open');document.body.style.overflow='';}
+    function openAbsurdProducts(){document.getElementById('feature-back')?.classList.remove('show');renderAbsurdProducts();const x=document.getElementById('ap-backdrop');if(x){x.scrollTop=0;x.classList.add('open');}document.body.style.overflow='hidden';}
+    function closeAbsurdProducts(){document.getElementById('ap-backdrop')?.classList.remove('open');document.getElementById('feature-back')?.classList.remove('show');document.body.style.overflow='';}
     function closeProductsFromBackdrop(e){if(e.target && e.target.id==='ap-backdrop')closeAbsurdProducts();}
     function toggleProductWhy(i){document.getElementById('ap-why-'+i)?.classList.toggle('show');}
     function addToRegretCart(i){
