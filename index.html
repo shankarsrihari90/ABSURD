@@ -60,6 +60,37 @@
       box-shadow: 2px 2px 0px #ff0055;
     }
 
+    /* Keep the landing CTA as one unit on every screen width. */
+    #enter-absurd {
+      align-items: center;
+      justify-content: center;
+      gap: .3em;
+      white-space: nowrap;
+      font-size: clamp(1.15rem, 6.4vw, 1.875rem);
+      letter-spacing: .06em;
+      line-height: 1;
+    }
+    #enter-absurd .enter-label,
+    #enter-absurd .enter-arrow {
+      display: block;
+      white-space: nowrap;
+    }
+    #enter-absurd .enter-arrow {
+      animation: absurd-arrow-bounce 1s steps(2, end) infinite;
+      text-shadow: 0 0 10px rgba(0, 255, 102, .9);
+    }
+    @keyframes absurd-arrow-bounce {
+      50% { transform: translateX(.18em); filter: brightness(1.3); }
+    }
+    @media (max-width: 360px) {
+      #view-landing { padding: .75rem; }
+      #view-landing > div { padding: 1.25rem; }
+      #enter-absurd { font-size: 1.1rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #enter-absurd .enter-arrow { animation: none; }
+    }
+
     @keyframes jitter {
       0% { transform: translate(0, 0) rotate(0deg); }
       20% { transform: translate(-2px, 2px) rotate(-0.5deg); }
@@ -312,8 +343,8 @@
         There is absolutely no reason for you to be here.
       </p>
       
-      <button onclick="enterAbsurd()" class="brutal-btn w-full bg-green-400 hover:bg-yellow-300 text-black font-impact text-3xl py-4 border-4 border-black uppercase tracking-widest cursor-pointer">
-        [ ENTER ABSURD → ]
+      <button id="enter-absurd" onclick="enterAbsurd()" class="brutal-btn w-full bg-green-400 hover:bg-yellow-300 text-black font-impact py-4 px-3 border-4 border-black uppercase cursor-pointer flex">
+        <span class="enter-label">[ ENTER ABSURD</span><span class="enter-arrow" aria-hidden="true">→ ]</span>
       </button>
 
       <p class="text-[10px] text-zinc-500 mt-6 uppercase tracking-widest">
