@@ -208,43 +208,6 @@
     .brutal-btn:active{transform:translateY(3px) scale(.99);}
     @media(max-width:640px){button{touch-action:manipulation;}}
 
-    /* LANDING CTA — sized to stay one line on narrow phones. */
-    #enter-absurd {
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:.28em;
-      white-space:nowrap;
-      line-height:1;
-      letter-spacing:.055em;
-      box-shadow:0 0 0 0 rgba(57,255,136,.45), 0 0 18px rgba(57,255,136,.3);
-      animation:enter-glow 1.7s ease-in-out infinite;
-    }
-    #enter-absurd .enter-arrow {
-      display:inline-block;
-      flex:0 0 auto;
-      animation:enter-arrow-bounce .7s ease-in-out infinite alternate;
-    }
-    @keyframes enter-glow {
-      0%,100% { filter:brightness(1); box-shadow:0 0 0 0 rgba(57,255,136,.45),0 0 16px rgba(57,255,136,.25); }
-      50% { filter:brightness(1.18); box-shadow:0 0 0 5px rgba(57,255,136,.12),0 0 29px rgba(57,255,136,.72); }
-    }
-    @keyframes enter-arrow-bounce {
-      from { transform:translateX(-1px); }
-      to { transform:translateX(5px); }
-    }
-    @media(max-width:420px) {
-      #enter-absurd {
-        min-height:56px;
-        padding:.9rem .55rem;
-        font-size:clamp(1.15rem,6.3vw,1.55rem);
-        letter-spacing:.035em;
-      }
-    }
-    @media(prefers-reduced-motion:reduce) {
-      #enter-absurd, #enter-absurd .enter-arrow { animation:none; }
-    }
-
 
     #ask-answer{max-width:100%;overflow-wrap:anywhere;hyphens:none;}
     #ask-footnote{overflow-wrap:anywhere;}
@@ -258,6 +221,49 @@
       #ask-answer{font-size:clamp(2rem,9vw,4rem)!important;line-height:.9!important;}
       #ask-footnote{font-size:8px!important;line-height:1.35!important;}
     }
+
+
+/* PHASE2_NATIVE_V2 */
+.p2p{display:none!important;margin:10px 0 16px;border:1px solid #333;background:#090909;padding:10px 12px;text-align:left}.p2p small{display:block;color:#666;font:700 7px monospace;letter-spacing:.12em;margin-bottom:5px}.p2p strong{font:700 10px/1.35 monospace;color:#eee}.p2p b{color:#39ff88}.p2p button{border:0;background:none;color:#666;padding:7px 0 0;font:700 7px monospace;cursor:pointer}.fact30{margin:26px 0 8px;border:2px solid #292929;background:#090909;padding:18px}.fact30 small{color:#60a5fa;font:700 8px monospace;letter-spacing:.13em}.fact30 h4{font:900 clamp(2.2rem,5vw,4rem)/.88 Impact,sans-serif;margin:10px 0;text-transform:uppercase;max-width:18ch}.fact30 p{color:#aaa;font:10px/1.4 monospace;max-width:64ch}.fact30 button{border:0;background:none;color:#60a5fa;padding:10px 0 0;font:700 9px monospace;cursor:pointer}
+
+/* ===== PHASE 2 V3 — ABSURD PRODUCTS + LIVING WIDGETS ===== */
+.absurd-products-fab{
+  position:fixed;right:18px;bottom:18px;z-index:9000;border:3px solid #000;
+  background:#39ff88;color:#000;box-shadow:5px 5px 0 #ff006e;
+  padding:12px 14px;font:900 12px/1 monospace;text-transform:uppercase;
+  cursor:pointer;transform:rotate(-1deg);touch-action:manipulation
+}
+.absurd-products-fab:hover{transform:translateY(-2px) rotate(1deg)}
+.absurd-products-fab .ap-count{background:#000;color:#39ff88;padding:3px 6px;margin-left:5px}
+.ap-backdrop{display:none;position:fixed;inset:0;z-index:9001;background:rgba(0,0,0,.72);backdrop-filter:blur(3px)}
+.ap-backdrop.open{display:block}
+.ap-drawer{position:absolute;right:0;top:0;height:100%;width:min(470px,94vw);background:#090909;border-left:3px solid #39ff88;overflow:auto;padding:18px}
+.ap-top{display:flex;justify-content:space-between;gap:15px;align-items:flex-start;border-bottom:2px solid #27272a;padding-bottom:14px;margin-bottom:14px}
+.ap-top small{display:block;color:#39ff88;font:700 8px monospace;letter-spacing:.15em}
+.ap-top h3{font:900 clamp(2.7rem,8vw,4.8rem)/.78 Impact,sans-serif;text-transform:uppercase;margin:7px 0 0}
+.ap-close{border:2px solid #444;background:#111;color:#fff;width:42px;height:42px;font:900 20px monospace;cursor:pointer}
+.ap-product{border:2px solid #292929;background:#0d0d0d;margin:0 0 10px;padding:13px;position:relative}
+.ap-product:hover{border-color:#39ff88}
+.ap-product small{color:#666;font:700 7px monospace;letter-spacing:.12em}
+.ap-product h4{font:900 24px/1 Impact,sans-serif;text-transform:uppercase;margin:6px 0;color:#fff}
+.ap-product p{font:700 10px/1.35 monospace;color:#b4b4bd;margin:0;text-transform:uppercase}
+.ap-product button{margin-top:9px;border:0;background:none;color:#39ff88;padding:0;font:700 8px monospace;cursor:pointer;text-transform:uppercase}
+.ap-product .why{display:none;margin-top:8px;border-top:1px dashed #333;padding-top:8px;color:#facc15;font:700 9px/1.35 monospace;text-transform:uppercase}
+.ap-product .why.show{display:block}
+.ap-legal{color:#555;font:700 7px/1.45 monospace;text-transform:uppercase;padding:7px 2px 20px}
+
+
+@media(max-width:540px){
+ .abs-widget{min-height:112px}
+ .absurd-products-fab{right:10px;bottom:10px;padding:11px;font-size:10px}
+ .ap-drawer{width:96vw;padding:14px}
+}
+
+
+/* FINAL HUB POLISH — ONLY FACTS + PRODUCTS AFTER THE SIX EXPERIENCES */
+#view-hub .fact30{margin-top:30px;margin-bottom:34px}
+#view-hub .fact30:hover{border-color:#60a5fa}
+@media(max-width:640px){#view-hub .fact30{margin-top:22px;margin-bottom:90px}}
 
 </style>
 </head>
@@ -306,8 +312,8 @@
         There is absolutely no reason for you to be here.
       </p>
       
-      <button id="enter-absurd" type="button" onclick="enterAbsurd()" class="brutal-btn w-full min-h-[60px] bg-green-400 hover:bg-yellow-300 text-black font-impact text-3xl py-4 border-4 border-black uppercase cursor-pointer touch-manipulation" aria-label="Enter ABSURD">
-        <span>[ ENTER ABSURD</span><span class="enter-arrow" aria-hidden="true">→ ]</span>
+      <button onclick="enterAbsurd()" class="brutal-btn w-full bg-green-400 hover:bg-yellow-300 text-black font-impact text-3xl py-4 border-4 border-black uppercase tracking-widest cursor-pointer">
+        [ ENTER ABSURD → ]
       </button>
 
       <p class="text-[10px] text-zinc-500 mt-6 uppercase tracking-widest">
@@ -376,14 +382,10 @@
     </article>
   </div>
 
-  <div class="mt-7 grid grid-cols-3 gap-2 sm:gap-3">
-    <div class="hub-stat"><span>USEFUL THINGS</span><b>0</b></div>
-    <div class="hub-stat"><span>REGRETS</span><b>HIGH</b></div>
-    <div class="hub-stat"><span>EXIT STRATEGY</span><b>NONE</b></div>
-  </div>
-</section>
 
-<section id="tool-button" style="display:none;" class="hidden absurd-view w-full max-w-2xl mx-auto px-3 sm:px-5 py-5 sm:py-8 text-center z-10">
+<div class="fact30"><small>ABSURD FACT / UNFORTUNATELY TRUE · <span id="fcount">01/30</span></small><h4 id="ftitle">WOMBATS PRODUCE CUBE-SHAPED DROPPINGS.</h4><p id="fcopy">Actually true. Geometry has entered wildlife.</p><button onclick="nextFact30()">I DON'T BELIEVE YOU. SHOW ME ANOTHER →</button></div></section>
+
+<section id="tool-button" style="display:none;" class="hidden absurd-view w-full max-w-2xl mx-auto px-3 sm:px-5 py-5 sm:py-8 text-center z-10"><div class="p2p"><small>CONCEPT PLACEMENT · NOT SPONSORED</small><strong id="p2-button"></strong><button onclick="rotateP2('button')">ANOTHER COMMERCIAL DECISION →</button></div>
   <div class="bg-zinc-900 brutal-border p-5 sm:p-8">
     <span class="text-[10px] bg-red-600 text-white px-3 py-1 font-bold uppercase border-2 border-black">EXPERIENCE 01</span>
     <h2 class="font-impact text-[clamp(3rem,12vw,6rem)] leading-[.8] text-red-400 my-5">THE USELESS<br>BUTTON</h2>
@@ -405,7 +407,7 @@
   </div>
 </section>
 
-<section id="tool-ask" style="display:none;" class="hidden w-full max-w-4xl mx-auto px-3 sm:px-5 py-4 sm:py-8 z-10">
+<section id="tool-ask" style="display:none;" class="hidden w-full max-w-4xl mx-auto px-3 sm:px-5 py-4 sm:py-8 z-10"><div class="p2p"><small>CONCEPT PLACEMENT · NOT SPONSORED</small><strong id="p2-ask"></strong><button onclick="rotateP2('ask')">ANOTHER COMMERCIAL DECISION →</button></div>
   <div class="bg-zinc-900 brutal-border p-4 sm:p-6 md:p-9 relative overflow-hidden">
     <div class="absolute -right-8 -top-12 font-impact text-[170px] sm:text-[230px] text-blue-500 opacity-10 pointer-events-none rotate-12">AI</div>
 
@@ -466,7 +468,7 @@
   </div>
 </section>
 
-<section id="tool-mood" style="display:none;" class="hidden absurd-view w-full max-w-2xl mx-auto px-3 sm:px-5 py-5 sm:py-8 text-center z-10">
+<section id="tool-mood" style="display:none;" class="hidden absurd-view w-full max-w-2xl mx-auto px-3 sm:px-5 py-5 sm:py-8 text-center z-10"><div class="p2p"><small>CONCEPT PLACEMENT · NOT SPONSORED</small><strong id="p2-mood"></strong><button onclick="rotateP2('mood')">ANOTHER COMMERCIAL DECISION →</button></div>
   <div class="bg-zinc-900 brutal-border p-5 sm:p-8">
     <span class="text-[10px] bg-pink-600 text-white font-bold px-3 py-1 uppercase border-2 border-black">EXPERIENCE 03</span>
     <h2 class="font-impact text-[clamp(3rem,12vw,6rem)] leading-[.8] text-pink-500 my-5">MOOD<br>MACHINE</h2>
@@ -492,7 +494,7 @@
   </div>
 </section>
 
-<section id="tool-absurdity" style="display:none;" class="hidden w-full max-w-4xl mx-auto px-3 sm:px-5 py-4 sm:py-8 z-10">
+<section id="tool-absurdity" style="display:none;" class="hidden w-full max-w-4xl mx-auto px-3 sm:px-5 py-4 sm:py-8 z-10"><div class="p2p"><small>CONCEPT PLACEMENT · NOT SPONSORED</small><strong id="p2-news"></strong><button onclick="rotateP2('news')">ANOTHER COMMERCIAL DECISION →</button></div>
   <div class="bg-zinc-900 brutal-border p-4 sm:p-7 md:p-9 relative overflow-hidden">
     <div class="absolute -left-10 -bottom-20 font-impact text-[220px] text-purple-500 opacity-5 pointer-events-none">NEWS</div>
 
@@ -565,7 +567,7 @@
   </div>
 </section>
 
-<section id="tool-dad" style="display:none;" class="hidden w-full max-w-3xl mx-auto px-3 sm:px-5 py-4 sm:py-8 z-10">
+<section id="tool-dad" style="display:none;" class="hidden w-full max-w-3xl mx-auto px-3 sm:px-5 py-4 sm:py-8 z-10"><div class="p2p"><small>CONCEPT PLACEMENT · NOT SPONSORED</small><strong id="p2-dad"></strong><button onclick="rotateP2('dad')">ANOTHER COMMERCIAL DECISION →</button></div>
   <div class="bg-zinc-900 brutal-border-yellow p-4 sm:p-7 md:p-10 text-center relative overflow-hidden">
 
     <!-- Decorative nonsense -->
@@ -641,7 +643,7 @@
   </div>
 </section>
 
-<section id="tool-veg" style="display:none;" class="hidden absurd-view w-full max-w-2xl mx-auto px-3 sm:px-5 py-5 sm:py-8 z-10">
+<section id="tool-veg" style="display:none;" class="hidden absurd-view w-full max-w-2xl mx-auto px-3 sm:px-5 py-5 sm:py-8 z-10"><div class="p2p"><small>CONCEPT PLACEMENT · NOT SPONSORED</small><strong id="p2-veg"></strong><button onclick="rotateP2('veg')">ANOTHER COMMERCIAL DECISION →</button></div>
   <div class="bg-zinc-900 brutal-border p-5 sm:p-8 text-center">
     <span class="text-[10px] bg-green-400 text-black font-bold px-3 py-1 uppercase border-2 border-black">EXPERIENCE 06</span>
     <h2 class="font-impact text-[clamp(3rem,12vw,6rem)] leading-[.8] text-green-300 my-5">VEGETABLE<br>DATING</h2>
@@ -787,12 +789,6 @@
       }, 1000);
     }
 
-    function scrollToTop() {
-      // `instant` is not a valid value in older mobile browsers. Using the
-      // two-argument form avoids a WebKit exception during view changes.
-      window.scrollTo(0, 0);
-    }
-
     // View Switcher
     function switchView(viewId) {
       const aliases = { landing:'view-landing', home:'view-hub', hub:'view-hub', report:'view-report' };
@@ -835,17 +831,38 @@
       if (ticker) { ticker.classList.toggle('hidden', !inside); ticker.style.display = inside ? 'block' : 'none'; }
 
       if (targetId === 'view-report') populateReport();
-      scrollToTop();
+      window.scrollTo({top:0, behavior:'instant'});
     }
 
     // Landing Page Entry
     function enterAbsurd() {
-      // Use the shared view switcher so touch and mouse entry follow exactly
-      // the same visibility and navigation path.
-      switchView('view-hub');
+      const landing = document.getElementById('view-landing');
+      const hub = document.getElementById('view-hub');
+      const topBar = document.getElementById('top-bar');
+      const ticker = document.getElementById('ticker');
+
+      if (landing) {
+        landing.style.display = 'none';
+        landing.classList.add('hidden');
+      }
+      if (topBar) {
+        topBar.classList.remove('hidden');
+        topBar.style.display = 'flex';
+      }
+      if (ticker) {
+        ticker.classList.remove('hidden');
+        ticker.style.display = 'block';
+      }
+      if (hub) {
+        hub.classList.remove('hidden');
+        hub.style.display = 'block';
+        hub.style.visibility = 'visible';
+        hub.style.opacity = '1';
+      }
+
       startTimer();
       rotateAbsurdFeed();
-      scrollToTop();
+      window.scrollTo({top: 0, behavior: 'instant'});
     }
 
     function rotateAbsurdFeed() {
@@ -879,7 +896,56 @@
   ["What do you call a dinosaur that crashes his car?", "Tyrannosaurus wrecks."],
   ["What do you call a duck that gets all A's?", "A wise quacker."],
   ["What do you call a man who lies on his doorstep?", "Matt."],
-  ["What kind of geese can't fly?", "Portuguese."]
+  ["What kind of geese can't fly?", "Portuguese."],
+  ["Why did the scarecrow win an award?", "Because he was outstanding in his field."],
+  ["I'm afraid for the calendar.", "Its days are numbered."],
+  ["I don't trust stairs.", "They're always up to something."],
+  ["I'm reading a book about anti-gravity.", "It's impossible to put down."],
+  ["What do you call cheese that isn't yours?", "Nacho cheese."],
+  ["Why did the bicycle fall over?", "It was two tired."],
+  ["What do you call a fake noodle?", "An impasta."],
+  ["Why don't skeletons fight each other?", "They don't have the guts."],
+  ["What do you call a belt made of watches?", "A waist of time."],
+  ["Why did the math book look sad?", "It had too many problems."],
+  ["What do you call a boomerang that doesn't come back?", "A stick."],
+  ["Why did the coffee file a police report?", "It got mugged."],
+  ["What do you call an alligator in a vest?", "An investigator."],
+  ["Why did the tomato blush?", "It saw the salad dressing."],
+  ["What do you call a pile of cats?", "A meowtain."],
+  ["Why can't your nose be 12 inches long?", "Because then it would be a foot."],
+  ["What do you call a cow during an earthquake?", "A milkshake."],
+  ["Why are elevator jokes so good?", "They work on many levels."],
+  ["What do you call a can opener that doesn't work?", "A can't opener."],
+  ["Why did the golfer bring two pairs of pants?", "In case he got a hole in one."],
+  ["What did one wall say to the other wall?", "I'll meet you at the corner."],
+  ["What do you call a sleeping dinosaur?", "A dino-snore."],
+  ["Why don't eggs tell jokes?", "They'd crack each other up."],
+  ["What do you call a bee that can't make up its mind?", "A maybe."],
+  ["Why did the computer go to the doctor?", "It had a virus."],
+  ["What do you call a line of rabbits hopping backwards?", "A receding hareline."],
+  ["Why was six afraid of seven?", "Because seven eight nine."],
+  ["What do you call a snowman with a six-pack?", "An abdominal snowman."],
+  ["Why did the stadium get hot after the game?", "All the fans left."],
+  ["What do you call a pony with a sore throat?", "A little hoarse."],
+  ["Why did the cookie go to the hospital?", "Because it felt crummy."],
+  ["What do you call a magician who lost his magic?", "Ian."],
+  ["Why couldn't the leopard play hide-and-seek?", "Because he was always spotted."],
+  ["What do you call a fish with no eyes?", "Fsh."],
+  ["Why did the picture go to jail?", "Because it was framed."],
+  ["What did the ocean say to the beach?", "Nothing. It just waved."],
+  ["Why are frogs so happy?", "They eat whatever bugs them."],
+  ["What do you call a nervous javelin thrower?", "Shakespeare."],
+  ["What kind of shoes do ninjas wear?", "Sneakers."],
+  ["Why did the orange stop halfway up the hill?", "It ran out of juice."],
+  ["What do you call a lazy kangaroo?", "A pouch potato."],
+  ["Why did the invisible man turn down the job?", "He couldn't see himself doing it."],
+  ["What did the janitor say when he jumped out of the closet?", "Supplies!"],
+  ["Why did the mushroom get invited to every party?", "Because he was a fungi."],
+  ["What do you call a bear caught in the rain?", "A drizzly bear."],
+  ["What do you call a potato wearing glasses?", "A spec-tater."],
+  ["Why did the melon jump into the lake?", "It wanted to be a watermelon."],
+  ["What do you call a very small valentine?", "A valen-tiny."],
+  ["Why did the music teacher need a ladder?", "To reach the high notes."]
 ];
 
 function dadButtonState(button, enabled) {
@@ -1352,6 +1418,71 @@ function triggerStupidThinking(customMessage) {
       }, 700);
     }
 
+    const facts30=[
+["WOMBATS PRODUCE CUBE-SHAPED DROPPINGS.","Their intestines shape the feces into cubes."],["OCTOPUSES HAVE THREE HEARTS.","Two pump to the gills; one pumps around the body."],["A DAY ON VENUS IS LONGER THAN A YEAR ON VENUS.","Venus rotates extraordinarily slowly."],["BANANAS ARE BERRIES. STRAWBERRIES AREN'T.","Botany has rejected common sense."],["SHARKS EXISTED BEFORE TREES.","Shark ancestors predate the first known trees."],["THE EIFFEL TOWER GETS TALLER IN HOT WEATHER.","Thermal expansion adds several centimetres."],["SOME TURTLES BREATHE THROUGH THEIR REAR END.","Certain species use cloacal respiration."],["SEA OTTERS SOMETIMES HOLD HANDS WHILE SLEEPING.","It can help keep their raft together."],["A GROUP OF FLAMINGOS IS A FLAMBOYANCE.","English saw flamingos and chose accuracy."],["CROWS CAN RECOGNISE HUMAN FACES.","They can remember particular people for years."],["BUTTERFLIES TASTE WITH THEIR FEET.","Their feet contain taste receptors."],["SNAILS CAN HAVE THOUSANDS OF TINY TEETH.","Their radula carries rows of microscopic teeth."],["KOALA FINGERPRINTS LOOK REMARKABLY HUMAN.","Their ridge patterns are unusually similar to ours."],["RAVENS CAN MIMIC HUMAN SPEECH.","Some captive ravens imitate words and sounds."],["AXOLOTLS CAN REGENERATE LIMBS.","They can regrow complex tissues."],["ONE JELLYFISH CAN REVERT TO AN EARLIER LIFE STAGE.","Turritopsis dohrnii can reverse its life cycle."],["POLAR BEAR SKIN IS BLACK.","The fur looks white; the skin underneath is dark."],["SLOTHS CAN HOLD THEIR BREATH FOR ABOUT 40 MINUTES.","They slow their heart rate while submerged."],["GOATS HAVE RECTANGULAR PUPILS.","The shape gives a broad horizontal field of view."],["SOME FROGS CAN FREEZE AND SURVIVE.","Wood frogs tolerate much of their body water freezing."],["HONEY CAN LAST AN EXTRAORDINARILY LONG TIME.","Low moisture and acidity inhibit many microbes."],["THE HUMAN BODY GLOWS VERY FAINTLY.","Humans emit ultraweak visible photons."],["LIGHTNING CAN BE HOTTER THAN THE SUN'S SURFACE.","A lightning channel can briefly reach around 30,000 K."],["THERE ARE LAKES BENEATH ANTARCTICA'S ICE.","Hundreds of subglacial lakes exist there."],["SOME BAMBOO CAN GROW NEARLY A METRE A DAY.","Certain species are among Earth's fastest-growing plants."],["MALE SEAHORSES CARRY THE PREGNANCY.","Embryos develop in the male's brood pouch."],["A SHRIMP'S HEART IS IN ITS HEAD REGION.","It sits in the cephalothorax."],["THE MOON HAS MOONQUAKES.","Apollo seismometers detected lunar seismic activity."],["WOODPECKERS WRAP THEIR TONGUES AROUND THEIR SKULLS.","Their tongue apparatus extends around the skull."],["CATS CANNOT TASTE SWEETNESS.","They lack a functional sweet-taste receptor." ]];
+    let f30=0; function nextFact30(){f30=(f30+1)%facts30.length;document.getElementById('ftitle').innerText=facts30[f30][0];document.getElementById('fcopy').innerText=facts30[f30][1];document.getElementById('fcount').innerText=String(f30+1).padStart(2,'0')+'/30';}
+    const p2={
+button:[["KITKAT","YOU HAVEN'T PRESSED IT YET. HAVE A BREAK BEFORE THE BREAKDOWN."],["FEVICOL","YOU'RE ALREADY STUCK HERE."],["BLINKIT","SOMETHING USEFUL COULD ARRIVE BEFORE THIS BUTTON DOES ANYTHING."],["CRED","ZERO CLICKS. ZERO REWARDS."],["DECATHLON","WARM UP YOUR INDEX FINGER."],["GOOGLE PAY","TAP RESPONSIBLY. THERE IS NO CASHBACK."],["MAGGI","IF THIS TAKES MORE THAN TWO MINUTES, THAT'S ON YOU."],["boAt","THIS BUTTON MAKES NO SOUND. BUSINESS OPPORTUNITY."],["AMUL","UTTERLY BUTTONLY POINTLESS."],["ZEPTO","YOU COULD ORDER A SNACK. YOU CHOSE THIS."]],
+ask:[["RED BULL","ASK ANYTHING. SURVIVING THE ANSWER MAY REQUIRE WINGS."],["SWIGGY","ASK WHAT TO EAT. WE KNOW WHERE THIS IS GOING."],["BLINKIT","QUESTIONS INSTANT. ANSWERS QUESTIONABLE."],["SPOTIFY","ASK ABOUT YOUR EX. YOUR PLAYLIST ALREADY DID."],["NETFLIX","ASK IF YOU SHOULD SLEEP. CONFLICT OF INTEREST."],["GOOGLE MAPS","ASK WHERE YOUR LIFE IS GOING. RECALCULATING."],["IKEA","ASK HOW TO FIX IT. ALLEN KEY NOT INCLUDED."],["CRED","ASK ABOUT MONEY. TERRIBLE FINANCIAL DECISION."],["DUOLINGO","ASK IN ANY LANGUAGE. THE OWL IS LISTENING."],["AMAZON","ASK WHAT YOU NEED. ALSO BOUGHT: 14 OTHER THINGS."]],
+mood:[["SPOTIFY","MOOD DETECTED. PLAYLIST INCOMING."],["CADBURY DAIRY MILK","CURRENT MOOD: COULD BE BRIBED WITH CHOCOLATE."],["SWIGGY","IF THE MOOD IS HUNGRY, THIS SPONSORSHIP WRITES ITSELF."],["NETFLIX","FEELING NUMB? WE HAVE 9 SEASONS FOR THAT."],["RED BULL","TIRED IS NOW A MARKET SEGMENT."],["BLINKIT","EMOTIONAL STABILITY UNAVAILABLE. SNACKS AVAILABLE."],["MAGGI","YOUR MOOD NEEDS TWO MINUTES AND A SAUCEPAN."],["AMUL","BUTTER MOOD. BETTER MOOD."],["boAt","PRESCRIPTION: HEADPHONES AND SELECTIVE HEARING."],["MCDONALD'S","SAD? FRIES HAVE ENTERED THE DIAGNOSTIC PROCESS."]],
+news:[["GOOGLE","WE SEARCHED FOR CONTEXT. CONTEXT DECLINED TO COMMENT."],["SWIGGY","BREAKING: LOCAL PERSON ORDERS FOOD INSTEAD OF DEVELOPING PERSONALITY."],["BLINKIT","BREAKING NEWS. YOUR EGGS MAY ARRIVE FIRST."],["RED BULL","DEVELOPING STORY HAS DEVELOPED WINGS."],["AMAZON","PEOPLE WHO READ THIS ALSO READ SEVEN UNRELATED HEADLINES."],["SPOTIFY","THIS STORY IS NOW A DEPRESSING PLAYLIST."],["CRED","BREAKING: MAN PAYS BILL ON TIME. NATION SHOCKED."],["NETFLIX","THIS STORY HAS BEEN RENEWED."],["MAGGI","DEVELOPING STORY. READY IN TWO MINUTES."],["FEVICOL","THE DETAILS ARE STUCK TOGETHER."]],
+dad:[["FEVICOL","THIS TERRIBLE JOKE WAS BROUGHT TO YOU BY FEVICOL. APPARENTLY IT STUCK."],["KITKAT","HAVE A BREAK. SPECIFICALLY FROM THIS JOKE."],["IKEA","SOME ASSEMBLY REQUIRED. ONE PUNCHLINE MAY BE MISSING."],["SPOTIFY","ADDED TO YOUR PLEASE-NEVER-PLAY-AGAIN PLAYLIST."],["APPLE","iJOKE. SAME PUNCHLINE. NEW CONNECTOR."],["GOOGLE MAPS","THE PUNCHLINE TOOK A WRONG TURN. RECALCULATING."],["DUOLINGO","THIS JOKE IS BAD IN MULTIPLE LANGUAGES."],["DURACELL","IT KEEPS GOING AFTER EVERYONE WANTS IT TO STOP."],["ASIAN PAINTS","THIS JOKE NEEDS TWO COATS AND A DIFFERENT WALL."],["MAGGI","TWO-MINUTE JOKE. THREE-DAY REGRET."]],
+veg:[["TOIT","FIRST DATE ENERGY. ONE DRINK HAS BECOME THREE."],["KOSHY'S","FOR VEGETABLES WHO SAY SOMEWHERE CLASSIC."],["WINDMILLS","BROCCOLI REQUESTED JAZZ. THIS IS SERIOUS."],["KARAVALLI","AUBERGINE SAID SOMEWHERE NICE. ESCALATION."],["BURMA BURMA","THE VEGETABLES ORDERED TEA. COMMITMENT IMMINENT."],["BYG BREWSKI","CORN ASKED FOR SOMETHING SUBTLE."],["BLR BREWING CO.","CHILLI SAID ONE QUICK DRINK. HISTORY DISAGREES."],["PIZZA 4P'S","TOMATO HAS FOUND PROFESSIONAL APPRECIATION."],["OLIVE BEACH","LETTUCE CHOSE OLIVE BEACH. SUSPICIOUS."],["NARU NOODLE BAR","MUSHROOM HAS BOOKED THE DATE EMOTIONALLY."]]};
+    const p2i={button:0,ask:0,mood:0,news:0,dad:0,veg:0}; function renderP2(k){let x=p2[k][p2i[k]%p2[k].length],e=document.getElementById('p2-'+k);if(e)e.innerHTML='<b>'+x[0]+'</b> — '+x[1];} function rotateP2(k){p2i[k]=(p2i[k]+1)%p2[k].length;renderP2(k);} document.addEventListener('DOMContentLoaded',()=>Object.keys(p2).forEach(renderP2));
+
+
+    // ===== ABSURD PRODUCTS + WIDGETS =====
+    const absurdProducts = [
+      ["RED BULL","FOR WHEN SLEEP HAS BECOME A DIFFERENCE OF OPINION.","WHY? BECAUSE YOUR 4:00 PM MEETING HAS BECOME A BOSS BATTLE."],
+      ["KITKAT","EMERGENCY BREAK. OPEN IN CASE OF MONDAY.","WHY? BECAUSE YOU HAVE BEEN 'QUICKLY FINISHING THIS' FOR 93 MINUTES."],
+      ["FEVICOL","FOR RELATIONSHIPS WITH STRUCTURAL ISSUES.","WHY? BECAUSE 'WE NEED TO TALK' IS NOT A REPAIR MANUAL."],
+      ["MAGGI","DINNER FOR PEOPLE WHO REMEMBERED DINNER TWO MINUTES AGO.","WHY? BECAUSE PLANNING IS JUST PANIC WITH A CALENDAR."],
+      ["CROCS","YOU HAVE GIVEN UP. COMFORTABLY.","WHY? BECAUSE FASHION EVENTUALLY LOSES TO AIRFLOW."],
+      ["IKEA","THE OFFICIAL TOOL OF 'I CAN DO THIS MYSELF.'","WHY? BECAUSE CONFIDENCE IS FREE. THE MISSING SCREW IS NOT."],
+      ["boAt","PEOPLE STILL EXIST. YOU JUST CAN'T HEAR THEM.","WHY? BECAUSE NOISE CANCELLATION IS CHEAPER THAN MOVING COUNTRIES."],
+      ["BLINKIT","FOR THINGS YOU DIDN'T NEED UNTIL EIGHT MINUTES AGO.","WHY? BECAUSE URGENCY IS SOMETIMES JUST CHIPS."],
+      ["AMUL","APPLY GENEROUSLY TO BAD DECISIONS.","WHY? BECAUSE SOME PROBLEMS ARE BETTER WITH BUTTER."],
+      ["CRED","PAY YOUR CREDIT CARD BILL. THEN RETURN TO MAKING POORER DECISIONS.","WHY? BECAUSE RESPONSIBILITY DESERVES A VERY SHORT CAMEO."]
+    ];
+    function renderAbsurdProducts(){
+      const list=document.getElementById('ap-list'); if(!list) return;
+      list.innerHTML=absurdProducts.map((p,i)=>`
+        <div class="ap-product">
+          <small>PRODUCT #${String(i+1).padStart(2,'0')} · CONCEPT PLACEMENT</small>
+          <h4>${p[0]}</h4><p>${p[1]}</p>
+          <button onclick="toggleProductWhy(${i})">WHY WOULD I NEED THIS? →</button>
+          <div class="why" id="ap-why-${i}">${p[2]}</div>
+        </div>`).join('');
+    }
+    function openAbsurdProducts(){renderAbsurdProducts();document.getElementById('ap-backdrop')?.classList.add('open');document.body.style.overflow='hidden';}
+    function closeAbsurdProducts(){document.getElementById('ap-backdrop')?.classList.remove('open');document.body.style.overflow='';}
+    function closeProductsFromBackdrop(e){if(e.target && e.target.id==='ap-backdrop')closeAbsurdProducts();}
+    function toggleProductWhy(i){document.getElementById('ap-why-'+i)?.classList.toggle('show');}
+
+    let widgetFactIndex=1, pollYes=14, pollNo=86, widgetProductIndex=0;
+    function updateAbsurdClock(){
+      const el=document.getElementById('widget-clock'); if(!el)return;
+      const d=new Date(); el.innerText=[d.getHours(),d.getMinutes(),d.getSeconds()].map(x=>String(x).padStart(2,'0')).join(':');
+    }
+    function widgetNextFact(){
+      if(typeof absurdFacts==='undefined') return;
+      widgetFactIndex=(widgetFactIndex+1)%absurdFacts.length;
+      const el=document.getElementById('widget-fact'); if(el) el.innerText=absurdFacts[widgetFactIndex][0];
+    }
+    function voteAbsurd(v){
+      if(v==='yes') pollYes++; else pollNo++;
+      const total=pollYes+pollNo, y=Math.round(pollYes/total*100), n=100-y;
+      document.getElementById('poll-yes').innerText=y+'%';document.getElementById('poll-no').innerText=n+'%';
+    }
+    function rotateWidgetProduct(){
+      widgetProductIndex=(widgetProductIndex+1)%absurdProducts.length;
+      const p=absurdProducts[widgetProductIndex];
+      const a=document.getElementById('widget-product'),b=document.getElementById('widget-product-copy');
+      if(a)a.innerText=p[0];if(b)b.innerText=p[1];
+    }
+    document.addEventListener('DOMContentLoaded',()=>{
+    });
+
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && document.activeElement && document.activeElement.id === 'ask-input') {
         e.preventDefault();
@@ -1404,7 +1535,35 @@ function vegDecision(choice) {
         ['🌽','CORN','Too much confidence. Somehow still attractive.'],
         ['🍅','TOMATO','Technically a fruit. Refuses to discuss it.'],
         ['🥒','CUCUMBER','Chill. Almost suspiciously chill.'],
-        ['🧅','ONION','Will make you cry. Claims it is your fault.']
+        ['🧅','ONION','Will make you cry. Claims it is your fault.'],
+        ['🫑','BELL PEPPER','Colourful personality. Zero spice under pressure.'],
+        ['🌶️','CHILLI','Red flag. Somehow that is the appeal.'],
+        ['🧄','GARLIC','Strong personality. Stronger breath.'],
+        ['🍄','MUSHROOM','Fun guy. Has heard that joke 9,000 times.'],
+        ['🥬','LETTUCE','Wants something casual. Mostly salad.'],
+        ['🫛','PEAS','Comes from a close family. Extremely close.'],
+        ['🍠','SWEET POTATO','Potato, but went to therapy.'],
+        ['🥑','AVOCADO','Emotionally expensive. Photographs beautifully.'],
+        ['🫘','BEAN','Small. Ambitious. Full of unexplained energy.'],
+        ['🫚','GINGER','Spicy, complicated, in every family remedy.'],
+        ['🫜','BEETROOT','Turns everything red and calls it chemistry.'],
+        ['🥗','RADISH','Sharp personality. Tiny anger issues.'],
+        ['🥔','TURNIP','Has never been anyone’s first choice. Ready to change that.'],
+        ['🎃','PUMPKIN','Peaked in October. Still talks about it.'],
+        ['🥒','BOTTLE GOURD','Healthy. Sensible. Absolutely terrible at flirting.'],
+        ['🥒','BITTER GOURD','Says personality matters more than looks. Convenient.'],
+        ['🌿','OKRA','A little clingy. Literally.'],
+        ['🥦','CAULIFLOWER','Broccoli’s pale cousin. Wants its own identity.'],
+        ['🥬','CABBAGE','Layered personality. Mostly defensive.'],
+        ['🌿','SPINACH','Strong on paper. Wilts under pressure.'],
+        ['🌱','CELERY','Mostly water. Somehow has standards.'],
+        ['🌱','LEEK','Looks like spring onion with a mortgage.'],
+        ['🧅','SPRING ONION','Young, fresh, already emotionally unavailable.'],
+        ['🥒','ZUCCHINI','Keeps being mistaken for cucumber. Has trust issues.'],
+        ['🌿','ARTICHOKE','Difficult to get close to. Claims it is worth the effort.'],
+        ['🌱','ASPARAGUS','Tall. Elegant. Changes the atmosphere immediately.'],
+        ['🍠','YAM','Sweet potato keeps stealing the spotlight. Bitter about it.'],
+        ['🌿','DRUMSTICK','Long-distance relationship specialist. Excellent in sambar.']
       ];
       const v = vegs[Math.floor(Math.random()*vegs.length)];
       const score = 54 + Math.floor(Math.random()*46);
@@ -1492,5 +1651,18 @@ function vegDecision(choice) {
     }
     drawCursorTrail();
   </script>
+
+<button class="absurd-products-fab" onclick="openAbsurdProducts()">🛒 ABSURD PRODUCTS <span class="ap-count">10</span></button>
+<div id="ap-backdrop" class="ap-backdrop" onclick="closeProductsFromBackdrop(event)">
+  <aside class="ap-drawer" aria-label="Absurd Products">
+    <div class="ap-top">
+      <div><small>PHASE 2 / REAL PRODUCT PLACEMENT PROTOTYPE</small><h3>ABSURD<br>PRODUCTS.</h3></div>
+      <button class="ap-close" onclick="closeAbsurdProducts()">×</button>
+    </div>
+    <div id="ap-list"></div>
+    <div class="ap-legal">CONCEPT PLACEMENTS FOR INTERNAL / INVESTOR PROTOTYPE ONLY. BRAND NAMES ARE USED AS EXAMPLES; NO SPONSORSHIP OR ENDORSEMENT IS IMPLIED.</div>
+  </aside>
+</div>
+
 </body>
 </html>
