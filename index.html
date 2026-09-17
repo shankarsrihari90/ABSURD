@@ -60,37 +60,6 @@
       box-shadow: 2px 2px 0px #ff0055;
     }
 
-    /* Keep the landing CTA as one unit on every screen width. */
-    #enter-absurd {
-      align-items: center;
-      justify-content: center;
-      gap: .3em;
-      white-space: nowrap;
-      font-size: clamp(1.15rem, 6.4vw, 1.875rem);
-      letter-spacing: .06em;
-      line-height: 1;
-    }
-    #enter-absurd .enter-label,
-    #enter-absurd .enter-arrow {
-      display: block;
-      white-space: nowrap;
-    }
-    #enter-absurd .enter-arrow {
-      animation: absurd-arrow-bounce 1s steps(2, end) infinite;
-      text-shadow: 0 0 10px rgba(0, 255, 102, .9);
-    }
-    @keyframes absurd-arrow-bounce {
-      50% { transform: translateX(.18em); filter: brightness(1.3); }
-    }
-    @media (max-width: 360px) {
-      #view-landing { padding: .75rem; }
-      #view-landing > div { padding: 1.25rem; }
-      #enter-absurd { font-size: 1.1rem; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      #enter-absurd .enter-arrow { animation: none; }
-    }
-
     @keyframes jitter {
       0% { transform: translate(0, 0) rotate(0deg); }
       20% { transform: translate(-2px, 2px) rotate(-0.5deg); }
@@ -254,10 +223,10 @@
     }
 
 
-/* PHASE2_NATIVE_V2 */
+/* _NATIVE_V2 */
 .p2p{display:none!important;margin:10px 0 16px;border:1px solid #333;background:#090909;padding:10px 12px;text-align:left}.p2p small{display:block;color:#666;font:700 7px monospace;letter-spacing:.12em;margin-bottom:5px}.p2p strong{font:700 10px/1.35 monospace;color:#eee}.p2p b{color:#39ff88}.p2p button{border:0;background:none;color:#666;padding:7px 0 0;font:700 7px monospace;cursor:pointer}.fact30{margin:26px 0 8px;border:2px solid #292929;background:#090909;padding:18px}.fact30 small{color:#60a5fa;font:700 8px monospace;letter-spacing:.13em}.fact30 h4{font:900 clamp(2.2rem,5vw,4rem)/.88 Impact,sans-serif;margin:10px 0;text-transform:uppercase;max-width:18ch}.fact30 p{color:#aaa;font:10px/1.4 monospace;max-width:64ch}.fact30 button{border:0;background:none;color:#60a5fa;padding:10px 0 0;font:700 9px monospace;cursor:pointer}
 
-/* ===== PHASE 2 V3 — ABSURD PRODUCTS + LIVING WIDGETS ===== */
+/* ===== V3 — ABSURD PRODUCTS + LIVING WIDGETS ===== */
 .absurd-products-fab{
   position:fixed;right:18px;bottom:18px;z-index:9000;border:3px solid #000;
   background:#39ff88;color:#000;box-shadow:5px 5px 0 #ff006e;
@@ -295,6 +264,113 @@
 #view-hub .fact30{margin-top:30px;margin-bottom:34px}
 #view-hub .fact30:hover{border-color:#60a5fa}
 @media(max-width:640px){#view-hub .fact30{margin-top:22px;margin-bottom:90px}}
+
+
+/* HOME ORDER */
+#view-hub .fact30{margin:0 0 28px}
+@media(max-width:640px){#view-hub .fact30{margin:0 0 20px}}
+
+/* ABSURD PRODUCTS — FULL FEATURE EXPERIENCE */
+.ap-backdrop{
+  display:none;position:fixed;inset:0;z-index:9001;background:#050505;
+  overflow-y:auto;overflow-x:hidden
+}
+.ap-backdrop.open{display:block}
+.ap-drawer{
+  position:relative;right:auto;top:auto;height:auto;min-height:100vh;
+  width:100%;max-width:none;background:#050505;border:0;overflow:visible;
+  padding:0 0 70px
+}
+.ap-feature-shell{width:min(1180px,calc(100% - 36px));margin:0 auto}
+.ap-feature-nav{
+  position:sticky;top:0;z-index:5;background:rgba(5,5,5,.96);
+  border-bottom:2px solid #27272a;padding:14px 0;
+  display:flex;align-items:center;justify-content:space-between;gap:16px
+}
+.ap-back{
+  border:2px solid #3f3f46;background:#090909;color:#fff;
+  min-height:44px;padding:0 14px;font:800 10px monospace;
+  text-transform:uppercase;cursor:pointer
+}
+.ap-back:hover{border-color:#39ff88;color:#39ff88}
+.ap-feature-nav small{font:700 8px monospace;color:#71717a;letter-spacing:.14em;text-transform:uppercase}
+.ap-hero{padding:44px 0 28px;border-bottom:2px solid #27272a}
+.ap-hero .eyebrow{color:#39ff88;font:800 9px monospace;letter-spacing:.16em;text-transform:uppercase}
+.ap-hero h3{
+  font:900 clamp(4.2rem,11vw,9rem)/.76 Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif;
+  text-transform:uppercase;margin:13px 0 22px;color:#00ef73;max-width:8ch
+}
+.ap-hero p{
+  margin:0;max-width:760px;color:#c4c4cc;
+  font:400 clamp(13px,1.6vw,17px)/1.55 monospace
+}
+.ap-section-head{
+  display:flex;justify-content:space-between;gap:16px;align-items:end;
+  padding:28px 0 12px
+}
+.ap-section-head strong{font:900 26px/1 Impact,sans-serif;text-transform:uppercase}
+.ap-section-head span{color:#71717a;font:700 8px monospace;text-transform:uppercase}
+#ap-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.ap-product{
+  border:2px solid #303036;background:#0a0a0a;margin:0;padding:20px;
+  min-height:210px;display:flex;flex-direction:column;align-items:flex-start;
+  overflow:hidden;transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease
+}
+.ap-product:hover{border-color:#39ff88;transform:translate(-3px,-3px);box-shadow:6px 6px 0 #ff006e}
+.ap-product small{color:#71717a;font:700 8px/1.4 monospace;letter-spacing:.12em}
+.ap-product h4{
+  font:900 clamp(2.3rem,4vw,3.8rem)/.9 Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif;
+  text-transform:uppercase;margin:14px 0 10px;color:#fff
+}
+.ap-product p{
+  font:700 12px/1.5 monospace;color:#d4d4d8;margin:0;
+  text-transform:uppercase;max-width:50ch
+}
+.ap-product button{
+  margin-top:auto;padding-top:18px;border:0;background:none;color:#39ff88;
+  font:800 9px monospace;cursor:pointer;text-transform:uppercase;text-align:left
+}
+.ap-product .ap-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:auto;padding-top:18px}
+.ap-product .ap-actions button{margin:0;padding:0}
+.ap-product .ap-regret{color:#ff006e}
+.ap-product .ap-regret-note{display:none;width:100%;margin-top:12px;border:1px solid #ff006e;padding:9px;color:#ff9ac7;font:800 9px/1.4 monospace;text-transform:uppercase}
+.ap-product.regretted .ap-regret-note{display:block;animation:regret-stamp .28s steps(2,end)}
+.ap-product.regretted{border-color:#ff006e}
+.ap-product.regretted .ap-regret{color:#facc15}
+@keyframes regret-stamp{0%{transform:scale(.7) rotate(-3deg);opacity:0}100%{transform:scale(1) rotate(0);opacity:1}}
+.ap-product .why{
+  display:none;width:100%;margin-top:12px;border-top:1px dashed #3f3f46;
+  padding-top:12px;color:#facc15;font:700 11px/1.5 monospace;text-transform:uppercase
+}
+.ap-product .why.show{display:block}
+.ap-legal{
+  color:#71717a;font:700 8px/1.6 monospace;text-transform:uppercase;
+  border-top:2px solid #27272a;margin-top:28px;padding:18px 0
+}
+
+/* Vegetable Dating should read like the latest disastrous match, not a footnote. */
+#veg-bio{
+  min-height:3.2em;display:flex;align-items:center;justify-content:center;
+  padding:10px 12px;border:1px dashed #39ff88;background:#07140e;
+  color:#f4f4f5;font:700 clamp(.9rem,3.6vw,1.05rem)/1.4 monospace;text-align:center
+}
+#veg-bio.veg-bio-enter{animation:veg-bio-enter .48s steps(3,end)}
+#veg-name.veg-name-enter,#veg-emoji.veg-emoji-enter{animation:veg-match-pop .42s steps(3,end)}
+@keyframes veg-bio-enter{0%{opacity:0;transform:translateY(12px);filter:blur(3px)}55%{opacity:1;transform:translateY(-2px);filter:blur(0)}100%{transform:translateY(0)}}
+@keyframes veg-match-pop{0%{opacity:0;transform:scale(.55) rotate(-8deg)}70%{opacity:1;transform:scale(1.12) rotate(3deg)}100%{transform:scale(1) rotate(0)}}
+@media (prefers-reduced-motion:reduce){
+  .ap-product,.ap-product:hover{transition:none;transform:none}
+  #veg-bio.veg-bio-enter,#veg-name.veg-name-enter,#veg-emoji.veg-emoji-enter,.ap-product.regretted .ap-regret-note{animation:none}
+}
+@media(max-width:720px){
+  .ap-feature-shell{width:min(100% - 24px,1180px)}
+  .ap-hero{padding:30px 0 22px}
+  .ap-hero h3{font-size:clamp(4rem,22vw,6.6rem);margin-bottom:18px}
+  #ap-list{grid-template-columns:1fr}
+  .ap-product{min-height:185px;padding:17px}
+  .ap-product p{font-size:11px}
+  .ap-feature-nav small{display:none}
+}
 
 </style>
 </head>
@@ -343,8 +419,8 @@
         There is absolutely no reason for you to be here.
       </p>
       
-      <button id="enter-absurd" onclick="enterAbsurd()" class="brutal-btn w-full bg-green-400 hover:bg-yellow-300 text-black font-impact py-4 px-3 border-4 border-black uppercase cursor-pointer flex">
-        <span class="enter-label">[ ENTER ABSURD</span><span class="enter-arrow" aria-hidden="true">→ ]</span>
+      <button onclick="enterAbsurd()" class="brutal-btn w-full bg-green-400 hover:bg-yellow-300 text-black font-impact text-3xl py-4 border-4 border-black uppercase tracking-widest cursor-pointer">
+        [ ENTER ABSURD → ]
       </button>
 
       <p class="text-[10px] text-zinc-500 mt-6 uppercase tracking-widest">
@@ -363,11 +439,13 @@
         <span class="bg-pink-600 text-white px-2.5 py-1 text-[10px] font-bold border-2 border-black">LIVE</span>
       </div>
       <h2 class="font-impact text-[clamp(4rem,12vw,8rem)] leading-[.75] uppercase">WELCOME<br><span class="text-pink-600">TO ABSURD.</span></h2>
-      <p class="font-vt text-lg sm:text-2xl md:text-3xl max-w-3xl mt-5 leading-tight">Six completely unnecessary experiences. Pick one. Waste some time. Question your decisions.</p>
+      <p class="font-vt text-lg sm:text-2xl md:text-3xl max-w-3xl mt-5 leading-tight">Unnecessary experiences. Pick one. Waste some time. Question your decisions.</p>
     </div>
   </div>
 
-  <div class="flex items-end justify-between gap-4 mb-4 border-b-2 border-green-400 pb-3">
+  <div class="fact30"><small>ABSURD FACT / UNFORTUNATELY TRUE · <span id="fcount">01/30</span></small><h4 id="ftitle">WOMBATS PRODUCE CUBE-SHAPED DROPPINGS.</h4><p id="fcopy">Actually true. Geometry has entered wildlife.</p><button onclick="nextFact30()">I DON'T BELIEVE YOU. SHOW ME ANOTHER →</button></div>
+
+<div class="flex items-end justify-between gap-4 mb-4 border-b-2 border-green-400 pb-3">
     <div>
       <p class="text-green-400 text-[10px] font-bold uppercase tracking-[.3em]">THE COLLECTION</p>
       <h3 class="font-impact text-4xl sm:text-5xl md:text-6xl text-white uppercase leading-none">CHOOSE YOUR PROBLEM.</h3>
@@ -394,10 +472,10 @@
       <div class="hub-cta">DIAGNOSE ME →</div>
     </article>
 
-    <article onclick="switchView('tool-absurdity')" class="hub-card hub-purple">
+    <article onclick="openAbsurdProducts()" class="hub-card hub-purple">
       <div class="hub-card-top"><span class="hub-number">#04</span><span class="hub-arrow">↗</span></div>
-      <div><h3>ABSURDITY<br>NEWS</h3><p>Manufacture breaking news from absolutely nothing.</p></div>
-      <div class="hub-cta">BREAK THE INTERNET →</div>
+      <div><h3>ABSURD<br>PRODUCTS</h3><p>Real products. Completely unnecessary reasons to buy them.</p></div>
+      <div class="hub-cta">SHOP BAD DECISIONS →</div>
     </article>
 
     <article onclick="switchView('tool-dad')" class="hub-card hub-orange">
@@ -414,9 +492,9 @@
   </div>
 
 
-<div class="fact30"><small>ABSURD FACT / UNFORTUNATELY TRUE · <span id="fcount">01/30</span></small><h4 id="ftitle">WOMBATS PRODUCE CUBE-SHAPED DROPPINGS.</h4><p id="fcopy">Actually true. Geometry has entered wildlife.</p><button onclick="nextFact30()">I DON'T BELIEVE YOU. SHOW ME ANOTHER →</button></div></section>
+</section>
 
-<section id="tool-button" style="display:none;" class="hidden absurd-view w-full max-w-2xl mx-auto px-3 sm:px-5 py-5 sm:py-8 text-center z-10"><div class="p2p"><small>CONCEPT PLACEMENT · NOT SPONSORED</small><strong id="p2-button"></strong><button onclick="rotateP2('button')">ANOTHER COMMERCIAL DECISION →</button></div>
+<section id="tool-button" style="display:none;" class="hidden absurd-view w-full max-w-2xl mx-auto px-3 sm:px-5 py-5 sm:py-8 text-center z-10"><div class="p2p"><small>ABSURD PRODUCT PLACEMENT</small><strong id="p2-button"></strong><button onclick="rotateP2('button')">ANOTHER COMMERCIAL DECISION →</button></div>
   <div class="bg-zinc-900 brutal-border p-5 sm:p-8">
     <span class="text-[10px] bg-red-600 text-white px-3 py-1 font-bold uppercase border-2 border-black">EXPERIENCE 01</span>
     <h2 class="font-impact text-[clamp(3rem,12vw,6rem)] leading-[.8] text-red-400 my-5">THE USELESS<br>BUTTON</h2>
@@ -438,7 +516,7 @@
   </div>
 </section>
 
-<section id="tool-ask" style="display:none;" class="hidden w-full max-w-4xl mx-auto px-3 sm:px-5 py-4 sm:py-8 z-10"><div class="p2p"><small>CONCEPT PLACEMENT · NOT SPONSORED</small><strong id="p2-ask"></strong><button onclick="rotateP2('ask')">ANOTHER COMMERCIAL DECISION →</button></div>
+<section id="tool-ask" style="display:none;" class="hidden w-full max-w-4xl mx-auto px-3 sm:px-5 py-4 sm:py-8 z-10"><div class="p2p"><small>ABSURD PRODUCT PLACEMENT</small><strong id="p2-ask"></strong><button onclick="rotateP2('ask')">ANOTHER COMMERCIAL DECISION →</button></div>
   <div class="bg-zinc-900 brutal-border p-4 sm:p-6 md:p-9 relative overflow-hidden">
     <div class="absolute -right-8 -top-12 font-impact text-[170px] sm:text-[230px] text-blue-500 opacity-10 pointer-events-none rotate-12">AI</div>
 
@@ -499,7 +577,7 @@
   </div>
 </section>
 
-<section id="tool-mood" style="display:none;" class="hidden absurd-view w-full max-w-2xl mx-auto px-3 sm:px-5 py-5 sm:py-8 text-center z-10"><div class="p2p"><small>CONCEPT PLACEMENT · NOT SPONSORED</small><strong id="p2-mood"></strong><button onclick="rotateP2('mood')">ANOTHER COMMERCIAL DECISION →</button></div>
+<section id="tool-mood" style="display:none;" class="hidden absurd-view w-full max-w-2xl mx-auto px-3 sm:px-5 py-5 sm:py-8 text-center z-10"><div class="p2p"><small>ABSURD PRODUCT PLACEMENT</small><strong id="p2-mood"></strong><button onclick="rotateP2('mood')">ANOTHER COMMERCIAL DECISION →</button></div>
   <div class="bg-zinc-900 brutal-border p-5 sm:p-8">
     <span class="text-[10px] bg-pink-600 text-white font-bold px-3 py-1 uppercase border-2 border-black">EXPERIENCE 03</span>
     <h2 class="font-impact text-[clamp(3rem,12vw,6rem)] leading-[.8] text-pink-500 my-5">MOOD<br>MACHINE</h2>
@@ -525,80 +603,9 @@
   </div>
 </section>
 
-<section id="tool-absurdity" style="display:none;" class="hidden w-full max-w-4xl mx-auto px-3 sm:px-5 py-4 sm:py-8 z-10"><div class="p2p"><small>CONCEPT PLACEMENT · NOT SPONSORED</small><strong id="p2-news"></strong><button onclick="rotateP2('news')">ANOTHER COMMERCIAL DECISION →</button></div>
-  <div class="bg-zinc-900 brutal-border p-4 sm:p-7 md:p-9 relative overflow-hidden">
-    <div class="absolute -left-10 -bottom-20 font-impact text-[220px] text-purple-500 opacity-5 pointer-events-none">NEWS</div>
 
-    <div class="relative z-10">
-      <div class="flex flex-wrap items-center gap-2 mb-4">
-        <span class="text-[10px] sm:text-xs bg-purple-600 text-white font-bold px-2.5 py-1 uppercase border-2 border-black">EXPERIENCE 04</span>
-        <span class="text-[10px] sm:text-xs bg-red-600 text-white font-bold px-2.5 py-1 uppercase border-2 border-black">BREAKING</span>
-      </div>
 
-      <h2 class="font-impact text-[clamp(3rem,12vw,6.5rem)] leading-[.8] text-purple-400 uppercase my-4">ABSURDITY<br>NEWS.</h2>
-      <p class="text-xs sm:text-sm text-zinc-400 mb-6 uppercase max-w-2xl">
-        Manufacture a completely unnecessary breaking-news event. No journalism degree required. No facts permitted.
-      </p>
-
-      <div class="bg-black border-4 border-purple-500 p-4 sm:p-6">
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono text-xs">
-          <div>
-            <label class="block text-zinc-400 mb-1 uppercase">WHO</label>
-            <select id="abs-person" class="w-full min-h-[48px] bg-zinc-950 border-2 border-zinc-700 p-2 text-white">
-              <option>Grandmother</option><option>Tech CEO</option><option>Stray Cat</option><option>Local Politician</option><option>Alien Visitor</option><option>You</option><option>A Man Named Ramesh</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-zinc-400 mb-1 uppercase">WHAT</label>
-            <select id="abs-object" class="w-full min-h-[48px] bg-zinc-950 border-2 border-zinc-700 p-2 text-white">
-              <option>Banana</option><option>Folding Chair</option><option>Used Toothbrush</option><option>₹2 Coin</option><option>Traffic Cone</option><option>Vintage Microwave</option><option>One Extremely Suspicious Potato</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-zinc-400 mb-1 uppercase">WHY</label>
-            <select id="abs-action" class="w-full min-h-[48px] bg-zinc-950 border-2 border-zinc-700 p-2 text-white">
-              <option>runs for president</option><option>launches a ₹800 Cr startup</option><option>gets married to</option><option>opens a five-star restaurant for</option><option>becomes an underground DJ</option><option>declares war on</option><option>files a complaint against</option>
-            </select>
-          </div>
-        </div>
-
-        <button onclick="generateAbsurdityNews()" class="brutal-btn w-full mt-4 bg-purple-600 hover:bg-purple-500 text-white font-impact text-2xl sm:text-3xl py-4 border-4 border-black uppercase tracking-wider touch-manipulation">
-          BREAK THE INTERNET →
-        </button>
-      </div>
-
-      <div id="news-card" class="hidden mt-5 bg-yellow-100 text-black p-4 sm:p-7 border-4 border-black font-mono relative shadow-2xl">
-        <div class="flex justify-between items-start gap-3 border-b-4 border-black pb-3 mb-4">
-          <div>
-            <p class="font-impact text-3xl sm:text-5xl leading-none">THE DAILY ABSURD</p>
-            <p class="text-[9px] font-bold mt-1 uppercase">NO FACTS • NO CORRECTIONS • NO REFUNDS</p>
-          </div>
-          <div class="text-right text-[9px] font-bold uppercase whitespace-nowrap">LIVE<br>RIGHT NOW</div>
-        </div>
-        <div class="flex items-center gap-2 mb-3">
-          <span class="bg-red-600 text-white px-2 py-1 text-[9px] font-bold uppercase">BREAKING</span>
-          <span id="news-time" class="text-[9px] uppercase">JUST NOW</span>
-        </div>
-        <h3 id="news-headline" class="font-impact text-[clamp(2rem,8vw,4rem)] leading-[.9] uppercase mb-4"></h3>
-        <p id="news-subhead" class="text-sm sm:text-base font-bold border-t-2 border-black pt-3"></p>
-        <div class="grid grid-cols-2 gap-3 mt-5 text-[9px] uppercase font-bold">
-          <div class="border-2 border-black p-2">SOURCE: <span class="font-normal">A GUY WHO WAS THERE</span></div>
-          <div class="border-2 border-black p-2">CONFIDENCE: <span id="news-confidence">100%</span></div>
-        </div>
-        <div class="mt-4 flex flex-col sm:flex-row gap-2">
-          <button onclick="copyNewsText()" class="flex-1 bg-pink-600 text-white min-h-[48px] px-3 py-2 border-2 border-black font-bold text-xs uppercase">COPY THIS NONSENSE</button>
-          <button onclick="generateAbsurdityNews()" class="flex-1 bg-black text-white min-h-[48px] px-3 py-2 border-2 border-black font-bold text-xs uppercase">MAKE IT WORSE →</button>
-        </div>
-      </div>
-
-      <div class="text-center mt-6">
-        <button onclick="switchView('view-hub')" class="min-h-[44px] px-3 text-xs text-zinc-500 hover:text-white underline uppercase touch-manipulation">← BACK TO ABSURD HUB</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="tool-dad" style="display:none;" class="hidden w-full max-w-3xl mx-auto px-3 sm:px-5 py-4 sm:py-8 z-10"><div class="p2p"><small>CONCEPT PLACEMENT · NOT SPONSORED</small><strong id="p2-dad"></strong><button onclick="rotateP2('dad')">ANOTHER COMMERCIAL DECISION →</button></div>
+<section id="tool-dad" style="display:none;" class="hidden w-full max-w-3xl mx-auto px-3 sm:px-5 py-4 sm:py-8 z-10"><div class="p2p"><small>ABSURD PRODUCT PLACEMENT</small><strong id="p2-dad"></strong><button onclick="rotateP2('dad')">ANOTHER COMMERCIAL DECISION →</button></div>
   <div class="bg-zinc-900 brutal-border-yellow p-4 sm:p-7 md:p-10 text-center relative overflow-hidden">
 
     <!-- Decorative nonsense -->
@@ -674,7 +681,7 @@
   </div>
 </section>
 
-<section id="tool-veg" style="display:none;" class="hidden absurd-view w-full max-w-2xl mx-auto px-3 sm:px-5 py-5 sm:py-8 z-10"><div class="p2p"><small>CONCEPT PLACEMENT · NOT SPONSORED</small><strong id="p2-veg"></strong><button onclick="rotateP2('veg')">ANOTHER COMMERCIAL DECISION →</button></div>
+<section id="tool-veg" style="display:none;" class="hidden absurd-view w-full max-w-2xl mx-auto px-3 sm:px-5 py-5 sm:py-8 z-10"><div class="p2p"><small>ABSURD PRODUCT PLACEMENT</small><strong id="p2-veg"></strong><button onclick="rotateP2('veg')">ANOTHER COMMERCIAL DECISION →</button></div>
   <div class="bg-zinc-900 brutal-border p-5 sm:p-8 text-center">
     <span class="text-[10px] bg-green-400 text-black font-bold px-3 py-1 uppercase border-2 border-black">EXPERIENCE 06</span>
     <h2 class="font-impact text-[clamp(3rem,12vw,6rem)] leading-[.8] text-green-300 my-5">VEGETABLE<br>DATING</h2>
@@ -684,7 +691,7 @@
       <div class="text-7xl sm:text-8xl mb-4" id="veg-emoji">🥔</div>
       <p class="text-[9px] text-zinc-500 uppercase">YOUR MATCH</p>
       <p id="veg-name" class="font-impact text-4xl sm:text-5xl text-green-300 mt-2">POTATO</p>
-      <p id="veg-bio" class="font-mono text-xs text-zinc-300 mt-3">Emotionally available. Slightly starchy.</p>
+      <p id="veg-bio" class="mt-3">Emotionally available. Slightly starchy.</p>
       <div class="mt-5"><span id="veg-score" class="bg-pink-600 text-white px-3 py-1 font-bold text-xs">COMPATIBILITY: 0%</span></div>
     </div>
 
@@ -1475,20 +1482,39 @@ veg:[["TOIT","FIRST DATE ENERGY. ONE DRINK HAS BECOME THREE."],["KOSHY'S","FOR V
       ["AMUL","APPLY GENEROUSLY TO BAD DECISIONS.","WHY? BECAUSE SOME PROBLEMS ARE BETTER WITH BUTTER."],
       ["CRED","PAY YOUR CREDIT CARD BILL. THEN RETURN TO MAKING POORER DECISIONS.","WHY? BECAUSE RESPONSIBILITY DESERVES A VERY SHORT CAMEO."]
     ];
+    let regretCount=0;
+    const regretMessages=[
+      'ADDED. YOUR BUDGET HAS FILED A MISSING-PERSON REPORT.',
+      'SAVED FOR LATER. LATER HAS NOT CONSENTED.',
+      'EXCELLENT. THIS WILL LOOK GREAT IN A DRAWER.',
+      'PURCHASE INTENT DETECTED. COMMON SENSE HAS LEFT THE CHAT.',
+      'RESERVED. YOUR FUTURE SELF IS DRAFTING AN EMAIL.'
+    ];
     function renderAbsurdProducts(){
       const list=document.getElementById('ap-list'); if(!list) return;
       list.innerHTML=absurdProducts.map((p,i)=>`
-        <div class="ap-product">
-          <small>PRODUCT #${String(i+1).padStart(2,'0')} · CONCEPT PLACEMENT</small>
+        <div class="ap-product" id="ap-product-${i}">
+          <small>PRODUCT #${String(i+1).padStart(2,'0')} · ABSURD PLACEMENT</small>
           <h4>${p[0]}</h4><p>${p[1]}</p>
-          <button onclick="toggleProductWhy(${i})">WHY WOULD I NEED THIS? →</button>
+          <div class="ap-actions">
+            <button onclick="toggleProductWhy(${i})">WHY WOULD I NEED THIS? →</button>
+            <button class="ap-regret" onclick="addToRegretCart(${i})">ADD TO BAD DECISIONS +</button>
+          </div>
           <div class="why" id="ap-why-${i}">${p[2]}</div>
+          <div class="ap-regret-note" id="ap-regret-${i}"></div>
         </div>`).join('');
     }
-    function openAbsurdProducts(){renderAbsurdProducts();document.getElementById('ap-backdrop')?.classList.add('open');document.body.style.overflow='hidden';}
+    function openAbsurdProducts(){renderAbsurdProducts();const x=document.getElementById('ap-backdrop');if(x){x.scrollTop=0;x.classList.add('open');}document.body.style.overflow='hidden';}
     function closeAbsurdProducts(){document.getElementById('ap-backdrop')?.classList.remove('open');document.body.style.overflow='';}
     function closeProductsFromBackdrop(e){if(e.target && e.target.id==='ap-backdrop')closeAbsurdProducts();}
     function toggleProductWhy(i){document.getElementById('ap-why-'+i)?.classList.toggle('show');}
+    function addToRegretCart(i){
+      regretCount++;
+      const product=document.getElementById('ap-product-'+i),note=document.getElementById('ap-regret-'+i),counter=document.getElementById('ap-regret-count');
+      if(product){product.classList.remove('regretted');void product.offsetWidth;product.classList.add('regretted');}
+      if(note)note.innerText=regretMessages[(regretCount+i-1)%regretMessages.length];
+      if(counter)counter.innerText=`REGRET CART: ${String(regretCount).padStart(2,'0')}`;
+    }
 
     let widgetFactIndex=1, pollYes=14, pollNo=86, widgetProductIndex=0;
     function updateAbsurdClock(){
@@ -1512,6 +1538,8 @@ veg:[["TOIT","FIRST DATE ENERGY. ONE DRINK HAS BECOME THREE."],["KOSHY'S","FOR V
       if(a)a.innerText=p[0];if(b)b.innerText=p[1];
     }
     document.addEventListener('DOMContentLoaded',()=>{
+      
+      
     });
 
     document.addEventListener('keydown', (e) => {
@@ -1604,6 +1632,11 @@ function vegDecision(choice) {
       document.getElementById('veg-name').innerText=v[1];
       document.getElementById('veg-bio').innerText=v[2];
       document.getElementById('veg-score').innerText=`COMPATIBILITY: ${score}%`;
+      ['veg-emoji','veg-name','veg-bio'].forEach((id)=>{
+        const el=document.getElementById(id);if(!el)return;
+        const animationClass=id==='veg-bio'?'veg-bio-enter':id+'-enter';
+        el.classList.remove(animationClass);void el.offsetWidth;el.classList.add(animationClass);
+      });
       document.getElementById('veg-result').innerText = choice === 'YES'
         ? `MATCH ACCEPTED. ${v[1]} HAS NOTIFIED ITS FRIENDS.`
         : `MATCH REJECTED. ${v[1]} WILL BE THINKING ABOUT THIS IN THE PRODUCE AISLE.`;
@@ -1682,17 +1715,30 @@ function vegDecision(choice) {
     }
     drawCursorTrail();
   </script>
+<div id="ap-backdrop" class="ap-backdrop">
+  <section class="ap-drawer" aria-label="Absurd Products">
+    <div class="ap-feature-shell">
+      <div class="ap-feature-nav">
+        <button class="ap-back" onclick="closeAbsurdProducts()">← BACK TO ABSURD</button>
+        <small>REAL PRODUCTS / UNNECESSARY REASONS</small>
+      </div>
 
-<button class="absurd-products-fab" onclick="openAbsurdProducts()">🛒 ABSURD PRODUCTS <span class="ap-count">10</span></button>
-<div id="ap-backdrop" class="ap-backdrop" onclick="closeProductsFromBackdrop(event)">
-  <aside class="ap-drawer" aria-label="Absurd Products">
-    <div class="ap-top">
-      <div><small>PHASE 2 / REAL PRODUCT PLACEMENT PROTOTYPE</small><h3>ABSURD<br>PRODUCTS.</h3></div>
-      <button class="ap-close" onclick="closeAbsurdProducts()">×</button>
+      <header class="ap-hero">
+        <div class="eyebrow">ABSURD PRODUCT DEPARTMENT</div>
+        <h3>ABSURD<br>PRODUCTS.</h3>
+        <p>For now this is a place holder and it will continue to be so until no further notice</p>
+      </header>
+
+      <div class="ap-section-head">
+        <strong>THE SHELF.</strong>
+        <span id="ap-regret-count">REGRET CART: 00</span>
+      </div>
+
+      <div id="ap-list"></div>
+
+      <div class="ap-legal">REAL PRODUCTS. ABSURD REASONS. BRAND NAMES ARE SHOWN AS CREATIVE PLACEMENT EXAMPLES; NO SPONSORSHIP OR ENDORSEMENT IS IMPLIED.</div>
     </div>
-    <div id="ap-list"></div>
-    <div class="ap-legal">CONCEPT PLACEMENTS FOR INTERNAL / INVESTOR PROTOTYPE ONLY. BRAND NAMES ARE USED AS EXAMPLES; NO SPONSORSHIP OR ENDORSEMENT IS IMPLIED.</div>
-  </aside>
+  </section>
 </div>
 
 </body>
