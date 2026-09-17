@@ -82,19 +82,20 @@
     }
     @media(prefers-reduced-motion:reduce){#enter-absurd .enter-arrow{animation:none}}
 
-    /* A permanent escape hatch for every individual experience. */
+    /* A quiet, always-available way out of every individual experience. */
     #feature-back {
       display:none;position:fixed;z-index:80;
-      top:calc(64px + env(safe-area-inset-top));left:calc(12px + env(safe-area-inset-left));
-      min-height:44px;padding:0 14px;border:2px solid #71717a;background:#090909;color:#fff;
-      font:800 10px monospace;text-transform:uppercase;cursor:pointer;
-      box-shadow:4px 4px 0 #ff006e;
+      top:calc(62px + env(safe-area-inset-top));left:calc(10px + env(safe-area-inset-left));
+      min-height:32px;padding:0 10px;border:1px solid rgba(212,212,216,.32);border-radius:999px;
+      background:rgba(9,9,9,.76);backdrop-filter:blur(8px);color:#d4d4d8;
+      font:800 8px/1 monospace;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;
+      opacity:.8;transition:opacity .16s ease,border-color .16s ease,color .16s ease,background .16s ease,transform .16s ease;
     }
     #feature-back.show{display:block}
-    #feature-back:hover{border-color:#39ff88;color:#39ff88;transform:translate(-2px,-2px)}
-    #feature-back:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #ff006e}
+    #feature-back:hover{opacity:1;border-color:#39ff88;background:rgba(7,20,14,.92);color:#39ff88;transform:translateY(-1px)}
+    #feature-back:active{transform:scale(.96)}
     @media(max-width:640px){
-      #feature-back{top:calc(58px + env(safe-area-inset-top));left:calc(8px + env(safe-area-inset-left));font-size:9px;padding:0 11px}
+      #feature-back{top:calc(56px + env(safe-area-inset-top));left:calc(8px + env(safe-area-inset-left));min-height:30px;padding:0 9px;font-size:8px}
     }
 
     @keyframes jitter {
@@ -325,11 +326,11 @@
   display:flex;align-items:center;justify-content:space-between;gap:16px
 }
 .ap-back{
-  border:2px solid #3f3f46;background:#090909;color:#fff;
-  min-height:44px;padding:0 14px;font:800 10px monospace;
-  text-transform:uppercase;cursor:pointer
+  border:1px solid #3f3f46;border-radius:999px;background:rgba(9,9,9,.76);color:#d4d4d8;
+  min-height:32px;padding:0 10px;font:800 8px monospace;letter-spacing:.08em;
+  text-transform:uppercase;cursor:pointer;opacity:.82;transition:opacity .16s ease,border-color .16s ease,color .16s ease
 }
-.ap-back:hover{border-color:#39ff88;color:#39ff88}
+.ap-back:hover{opacity:1;border-color:#39ff88;color:#39ff88}
 .ap-feature-nav small{font:700 8px monospace;color:#71717a;letter-spacing:.14em;text-transform:uppercase}
 .ap-hero{padding:44px 0 28px;border-bottom:2px solid #27272a}
 .ap-hero .eyebrow{color:#39ff88;font:800 9px monospace;letter-spacing:.16em;text-transform:uppercase}
@@ -409,6 +410,30 @@
   .ap-feature-nav small{display:none}
 }
 
+/* The site's tiny, endlessly retreating footer. */
+#absurd-footer{
+  height:50px;overflow:hidden;border-top:2px solid #27272a;background:#070707;
+  display:flex;align-items:center;position:relative;z-index:12
+}
+#absurd-footer::before{
+  content:'THESE FEET HAVE SOMEWHERE BETTER TO BE';position:absolute;left:12px;z-index:2;
+  color:rgba(255,255,255,.36);font:700 7px monospace;letter-spacing:.13em;
+  pointer-events:none;text-shadow:0 1px 5px #000
+}
+.feet-marquee{display:flex;width:max-content;will-change:transform;animation:absurd-feet-walk 18s linear infinite}
+.feet-group{display:flex;align-items:center;gap:19px;min-width:max-content;padding-left:232px;padding-right:19px}
+.absurd-foot{width:19px;height:25px;flex:0 0 auto;fill:#ff006e;filter:drop-shadow(0 0 4px rgba(255,0,110,.55));opacity:.9}
+.absurd-foot:nth-child(even){fill:#39ff88;transform:translateY(5px) rotate(-12deg)}
+.absurd-foot:nth-child(odd){transform:translateY(-3px) rotate(10deg)}
+@keyframes absurd-feet-walk{to{transform:translateX(-50%)}}
+@media(max-width:640px){
+  #absurd-footer{height:44px}
+  #absurd-footer::before{font-size:6px;left:8px;letter-spacing:.08em}
+  .feet-group{padding-left:186px;gap:15px}
+  .absurd-foot{width:16px;height:21px}
+}
+@media(prefers-reduced-motion:reduce){.feet-marquee{animation:none}}
+
 </style>
 </head>
 <body class="min-h-screen relative flex flex-col justify-between selection:bg-pink-600 selection:text-white">
@@ -443,7 +468,7 @@
     </div>
   </div>
 
-  <button id="feature-back" type="button" onclick="switchView('view-hub')">← BACK TO ABSURD</button>
+  <button id="feature-back" type="button" aria-label="Back to ABSURD" onclick="switchView('view-hub')">← BACK</button>
 
   <!-- ==================== LANDING PAGE ==================== -->
   <section id="view-landing" style="display:flex;" class="min-h-screen flex flex-col items-center justify-center p-6 text-center z-10 relative">
@@ -1760,11 +1785,29 @@ function vegDecision(choice) {
     }
     drawCursorTrail();
   </script>
+<footer id="absurd-footer" aria-label="ABSURD footer">
+  <svg aria-hidden="true" width="0" height="0" focusable="false">
+    <symbol id="absurd-footprint" viewBox="0 0 24 32">
+      <ellipse cx="10" cy="21" rx="6.2" ry="10.4" transform="rotate(18 10 21)"></ellipse>
+      <circle cx="16.8" cy="8.8" r="2.8"></circle><circle cx="20" cy="13.4" r="2.35"></circle>
+      <circle cx="20.7" cy="18.1" r="1.95"></circle><circle cx="19.3" cy="22.3" r="1.55"></circle>
+    </symbol>
+  </svg>
+  <div class="feet-marquee" aria-hidden="true">
+    <div class="feet-group">
+      <svg class="absurd-foot"><use href="#absurd-footprint"></use></svg><svg class="absurd-foot"><use href="#absurd-footprint"></use></svg><svg class="absurd-foot"><use href="#absurd-footprint"></use></svg><svg class="absurd-foot"><use href="#absurd-footprint"></use></svg><svg class="absurd-foot"><use href="#absurd-footprint"></use></svg><svg class="absurd-foot"><use href="#absurd-footprint"></use></svg><svg class="absurd-foot"><use href="#absurd-footprint"></use></svg><svg class="absurd-foot"><use href="#absurd-footprint"></use></svg>
+    </div>
+    <div class="feet-group">
+      <svg class="absurd-foot"><use href="#absurd-footprint"></use></svg><svg class="absurd-foot"><use href="#absurd-footprint"></use></svg><svg class="absurd-foot"><use href="#absurd-footprint"></use></svg><svg class="absurd-foot"><use href="#absurd-footprint"></use></svg><svg class="absurd-foot"><use href="#absurd-footprint"></use></svg><svg class="absurd-foot"><use href="#absurd-footprint"></use></svg><svg class="absurd-foot"><use href="#absurd-footprint"></use></svg><svg class="absurd-foot"><use href="#absurd-footprint"></use></svg>
+    </div>
+  </div>
+</footer>
+
 <div id="ap-backdrop" class="ap-backdrop">
   <section class="ap-drawer" aria-label="Absurd Products">
     <div class="ap-feature-shell">
       <div class="ap-feature-nav">
-        <button class="ap-back" onclick="closeAbsurdProducts()">← BACK TO ABSURD</button>
+        <button class="ap-back" aria-label="Back to ABSURD" onclick="closeAbsurdProducts()">← BACK</button>
         <small>REAL PRODUCTS / UNNECESSARY REASONS</small>
       </div>
 
