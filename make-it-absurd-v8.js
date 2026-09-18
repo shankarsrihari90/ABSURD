@@ -99,7 +99,7 @@ function posterCanvas(){
  fitText(x,resultName(),65,727,950,190,90,'Impact, sans-serif',pal[1]);
  x.strokeStyle=pal[1];x.lineWidth=5;x.beginPath();x.moveTo(65,944);x.lineTo(1015,944);x.stroke();
  fitText(x,posterCopy(),65,978,950,238,32,'monospace',pal[1]);
- fitText(x,'I MADE THIS WORSE. YOUR TURN.',65,1260,950,32,21,'monospace',pal[1]);return c;
+ return c;
 }
 function finish(){finalCanvas=posterCanvas();$('mia3-work').classList.add('complete');$('mia3-scene').innerHTML='<img class="final-poster-image" alt="'+escapeHtml(resultName()+'. '+posterCopy())+'" src="'+finalCanvas.toDataURL('image/png')+'">';$('mia3-status').textContent='';show('mia3-finish',true);$('mia3').scrollTop=0}
 function blobFromCanvas(c){return new Promise((resolve,reject)=>c.toBlob(b=>b?resolve(b):reject(new Error('PNG generation failed')),'image/png'))}
@@ -107,7 +107,7 @@ async function share(){
  if(!finalCanvas||shareBusy)return;
  const token=epoch,canvas=finalCanvas;shareBusy=true;$('mia6-share').disabled=true;const note=text=>{if(token===epoch)$('mia6-share-note').textContent=text};
  try{note('Preparing your poster…');const blob=await blobFromCanvas(canvas);if(token!==epoch)return;const file=new File([blob],'absurd-'+mode+'.png',{type:'image/png'});
- if(navigator.share&&navigator.canShare?.({files:[file]})){try{note('Choose where to share your poster.');await navigator.share({files:[file],title:'MAKE IT ABSURD',text:'I made this worse. Your turn.'});note('Shared. Send them back with something worse.');return}catch(e){if(e.name==='AbortError'){note('Share cancelled. Your poster is still here.');return}}}
+ if(navigator.share&&navigator.canShare?.({files:[file]})){try{note('Choose where to share your poster.');await navigator.share({files:[file],title:'MAKE IT ABSURD',text:'I made this worse. Your turn. Think you can make something more absurd? https://absurd-five.vercel.app/'});note('Shared. Send them back with something worse.');return}catch(e){if(e.name==='AbortError'){note('Share cancelled. Your poster is still here.');return}}}
  if(token!==epoch)return;
  const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=file.name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);note('Download requested. You can also save the poster image above.');
  }catch(e){note('Could not export. Please try again.')}finally{shareBusy=false;$('mia6-share').disabled=false}
