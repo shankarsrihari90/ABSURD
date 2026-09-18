@@ -1,7 +1,8 @@
-window.ABSURD_RELEASE = Object.freeze({ version: '0.0.8', channel: 'local' });
+var absurdReleaseChannel = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? 'local' : 'live';
+window.ABSURD_RELEASE = Object.freeze({ version: '0.0.9', channel: absurdReleaseChannel });
 document.addEventListener('DOMContentLoaded', function () {
   var label = document.getElementById('release-version');
   if (label) label.textContent = 'V' + window.ABSURD_RELEASE.version + '-' + window.ABSURD_RELEASE.channel.toUpperCase();
   var footerLabel = document.getElementById('footer-release');
-  if (footerLabel) footerLabel.textContent = 'V' + window.ABSURD_RELEASE.version + ' · ' + window.ABSURD_RELEASE.channel.toUpperCase() + ' REVIEW';
+  if (footerLabel) footerLabel.textContent = 'V' + window.ABSURD_RELEASE.version + ' · ' + (window.ABSURD_RELEASE.channel === 'live' ? 'LIVE' : 'LOCAL REVIEW');
 });

@@ -35,11 +35,12 @@ manifest.version = [major, minor, patch].join('.');
 manifest.channel = 'local';
 manifest.updatedAt = new Date().toISOString();
 fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
-fs.writeFileSync(clientPath, "window.ABSURD_RELEASE = Object.freeze({ version: '" + manifest.version + "', channel: 'local' });\n" +
+fs.writeFileSync(clientPath, "var absurdReleaseChannel = /^(localhost|127\\.0\\.0\\.1)$/.test(location.hostname) ? 'local' : 'live';\n" +
+  "window.ABSURD_RELEASE = Object.freeze({ version: '" + manifest.version + "', channel: absurdReleaseChannel });\n" +
   "document.addEventListener('DOMContentLoaded', function () {\n" +
   "  var label = document.getElementById('release-version');\n" +
   "  if (label) label.textContent = 'V' + window.ABSURD_RELEASE.version + '-' + window.ABSURD_RELEASE.channel.toUpperCase();\n" +
   "  var footerLabel = document.getElementById('footer-release');\n" +
-  "  if (footerLabel) footerLabel.textContent = 'V' + window.ABSURD_RELEASE.version + ' · ' + window.ABSURD_RELEASE.channel.toUpperCase() + ' REVIEW';\n" +
+  "  if (footerLabel) footerLabel.textContent = 'V' + window.ABSURD_RELEASE.version + ' · ' + (window.ABSURD_RELEASE.channel === 'live' ? 'LIVE' : 'LOCAL REVIEW');\n" +
   "});\n");
 console.log('ABSURD release ' + manifest.version + ' is ready to commit.');
