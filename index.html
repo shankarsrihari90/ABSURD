@@ -4,8 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ABSURD — Nobody asked for this.</title>
-  <link rel="stylesheet" href="/calm-game.css" />
-  <script defer src="/calm-game.js"></script>
   <link rel="stylesheet" href="/make-it-absurd.css" />
   <script defer src="/make-it-absurd.js"></script>
   <script defer src="/absurd-version.js"></script>
@@ -42,7 +40,7 @@
     }
 
     /* Absurd Chaos Stylings */
-    .font-impact { font-family: 'Impact', sans-serif; }
+    .font-impact { font-family: var(--font-display); }
     .font-vt { font-family: 'VT323', monospace; }
 
     .brutal-border {
@@ -238,14 +236,14 @@
     .back-home:hover{color:#fff}
     @media(max-width:900px){.hub-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.hub-card{min-height:230px;}}
     @media(max-width:640px){
-      /* On phones the collection becomes a swipeable deck. The exposed edge of
-         the following card is intentional: it quietly tells people to keep swiping. */
-      .hub-grid{display:flex;gap:12px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-left:2px;padding:2px 16vw 14px 2px;margin-right:-.75rem;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
-      .hub-grid::-webkit-scrollbar{display:none;}
-      .hub-card{flex:0 0 min(82vw,360px);scroll-snap-align:start;min-height:190px;padding:18px;box-shadow:5px 5px 0 #ff006e;}
-      .hub-card:hover{transform:none;box-shadow:5px 5px 0 #ff006e;}
-      .hub-card h3{font-size:clamp(2.4rem,12vw,4rem);margin:13px 0 9px;}
-      .hub-card p{font-size:12px;}
+      /* Five compact, always-visible controls are clearer than a carousel. */
+      .hub-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;overflow:visible;padding:0;margin:0;}
+      .hub-card{min-width:0;min-height:142px!important;padding:13px;box-shadow:4px 4px 0 #ff006e;}
+      .hub-card:hover{transform:none;box-shadow:4px 4px 0 #ff006e;}
+      .hub-card h3{font-size:clamp(1.85rem,9vw,2.7rem);margin:10px 0 7px;line-height:.86;}
+      .hub-card p{display:none;}
+      .hub-card:last-child{grid-column:1/-1;min-height:126px;}
+      .hub-number{font-size:8px;padding:3px 6px}.hub-arrow{font-size:15px}.hub-cta{font-size:8px;margin-top:8px;}
       .hub-intro{padding:18px !important;}
       .hub-stat{padding:9px 7px;display:block}.hub-stat b{display:block;margin-top:4px;}
     }
@@ -290,6 +288,7 @@
 .ap-top small{display:block;color:#39ff88;font:700 8px monospace;letter-spacing:.15em}
 .ap-top h3{font:900 clamp(2.7rem,8vw,4.8rem)/.78 Impact,sans-serif;text-transform:uppercase;margin:7px 0 0}
 .ap-close{border:2px solid #444;background:#111;color:#fff;width:42px;height:42px;font:900 20px monospace;cursor:pointer}
+.ap-close,.profile-close{font-family:Arial,Helvetica,sans-serif;font-weight:900}
 .ap-product{border:2px solid #292929;background:#0d0d0d;margin:0 0 10px;padding:13px;position:relative}
 .ap-product:hover{border-color:#39ff88}
 .ap-product small{color:#666;font:700 7px monospace;letter-spacing:.12em}
@@ -444,6 +443,18 @@
 }
 @media(prefers-reduced-motion:reduce){.feet-marquee{animation:none}}
 
+/* Mobile containment pass: every experience owns the available screen width,
+   while the persistent dock receives the last safe 96px of vertical space. */
+*,*::before,*::after{box-sizing:border-box}
+@media(max-width:640px){
+  html,body{width:100%;max-width:100%;overflow-x:hidden}
+  #view-hub,.absurd-view,#view-report,.mia3-shell{min-width:0;max-width:100%}
+  #view-hub>*,.absurd-view>*,#view-report>*,.ap-feature-shell>*{min-width:0;max-width:100%}
+  .brutal-border,.brutal-border-yellow{box-shadow:4px 4px 0 #ff0055}
+  #thinking-modal{padding:12px 12px 104px}
+  #feature-back{z-index:2147483590}
+}
+
 </style>
 </head>
 <body class="min-h-screen relative flex flex-col justify-between selection:bg-pink-600 selection:text-white">
@@ -513,7 +524,7 @@
         <span class="bg-pink-600 text-white px-2.5 py-1 text-[10px] font-bold border-2 border-black">LIVE</span>
       </div>
       <h2 class="font-impact text-[clamp(4rem,12vw,8rem)] leading-[.75] uppercase">WELCOME<br><span class="text-pink-600">TO ABSURD.</span></h2>
-      <p class="font-vt text-lg sm:text-2xl md:text-3xl max-w-3xl mt-5 leading-tight">Unnecessary experiences. Pick one. Waste some time. Question your decisions.</p>
+      <p class="font-mono text-lg sm:text-2xl md:text-3xl max-w-3xl mt-5 leading-tight">Unnecessary experiences. Pick one. Waste some time. Question your decisions.</p>
     </div>
   </div>
 
@@ -556,20 +567,14 @@
       <div class="hub-cta">DIAGNOSE ME →</div>
     </article>
 
-    <article onclick="openAbsurdProducts()" class="hub-card hub-purple">
-      <div class="hub-card-top"><span class="hub-number">#04</span><span class="hub-arrow">↗</span></div>
-      <div><h3>ABSURD<br>PRODUCTS</h3><p>Real products. Completely unnecessary reasons to buy them.</p></div>
-      <div class="hub-cta">SHOP BAD DECISIONS →</div>
-    </article>
-
     <article onclick="switchView('tool-dad')" class="hub-card hub-orange">
-      <div class="hub-card-top"><span class="hub-number">#05</span><span class="hub-arrow">↗</span></div>
+      <div class="hub-card-top"><span class="hub-number">#04</span><span class="hub-arrow">↗</span></div>
       <div><h3>DAD<br>JOKES</h3><p>Setup. Anticipation. Punchline. Regret.</p></div>
       <div class="hub-cta">DAMAGE MY HUMOUR →</div>
     </article>
 
     <article onclick="switchView('tool-veg')" class="hub-card hub-green">
-      <div class="hub-card-top"><span class="hub-number">#06</span><span class="hub-arrow">↗</span></div>
+      <div class="hub-card-top"><span class="hub-number">#05</span><span class="hub-arrow">↗</span></div>
       <div><h3>VEGETABLE<br>DATING</h3><p>Find your produce soulmate. Swipe is apparently too normal.</p></div>
       <div class="hub-cta">FIND LOVE →</div>
     </article>
@@ -952,7 +957,7 @@
     function switchView(viewId) {
       const aliases = { landing:'view-landing', home:'view-hub', hub:'view-hub', report:'view-report' };
       const targetId = aliases[viewId] || viewId;
-      const views = ['view-landing','view-hub','tool-game','tool-button','tool-ask','tool-mood','tool-absurdity','tool-dad','tool-veg','tool-end','view-report'];
+      const views = ['view-landing','view-hub','tool-button','tool-ask','tool-mood','tool-absurdity','tool-dad','tool-veg','tool-end','view-report'];
 
       views.forEach(id => {
         const el = document.getElementById(id);
@@ -1898,32 +1903,6 @@ function vegDecision(choice) {
       </div>
     </section>
   </div>
-</div>
-
-<div id="ap-backdrop" class="ap-backdrop">
-  <section class="ap-drawer" aria-label="Absurd Products">
-    <div class="ap-feature-shell">
-      <div class="ap-feature-nav">
-        <button class="ap-back" aria-label="Back to ABSURD" onclick="closeAbsurdProducts()">← BACK</button>
-        <small>REAL PRODUCTS / UNNECESSARY REASONS</small>
-      </div>
-
-      <header class="ap-hero">
-        <div class="eyebrow">ABSURD PRODUCT DEPARTMENT</div>
-        <h3>ABSURD<br>PRODUCTS.</h3>
-        <p>For now this is a place holder and it will continue to be so until no further notice</p>
-      </header>
-
-      <div class="ap-section-head">
-        <strong>THE SHELF.</strong>
-        <span id="ap-regret-count">REGRET CART: 00</span>
-      </div>
-
-      <div id="ap-list"></div>
-
-      <div class="ap-legal">REAL PRODUCTS. ABSURD REASONS. BRAND NAMES ARE SHOWN AS CREATIVE PLACEMENT EXAMPLES; NO SPONSORSHIP OR ENDORSEMENT IS IMPLIED.</div>
-    </div>
-  </section>
 </div>
 
 </body>
