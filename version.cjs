@@ -39,5 +39,7 @@ fs.writeFileSync(clientPath, "window.ABSURD_RELEASE = Object.freeze({ version: '
   "document.addEventListener('DOMContentLoaded', function () {\n" +
   "  var label = document.getElementById('release-version');\n" +
   "  if (label) label.textContent = 'V' + window.ABSURD_RELEASE.version + '-' + window.ABSURD_RELEASE.channel.toUpperCase();\n" +
+  "  var footerLabel = document.getElementById('footer-release');\n" +
+  "  if (footerLabel) footerLabel.textContent = 'V' + window.ABSURD_RELEASE.version + ' · ' + window.ABSURD_RELEASE.channel.toUpperCase() + ' REVIEW';\n" +
   "});\n");
 console.log('ABSURD release ' + manifest.version + ' is ready to commit.');

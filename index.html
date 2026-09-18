@@ -213,10 +213,13 @@
 
     /* ABSURD HUB — CLEAN 3-COLUMN SYSTEM */
     .hub-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;}
-    .hub-card{position:relative;min-height:265px;padding:22px;background:#111;border:3px solid #39ff88;box-shadow:7px 7px 0 #ff006e;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;overflow:hidden;transition:transform .16s ease,box-shadow .16s ease,background .16s ease;}
+    .hub-card{position:relative;min-height:265px;padding:22px;background:#111;border:3px solid #39ff88;box-shadow:7px 7px 0 #ff006e;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;overflow:hidden;transition:transform .16s ease,box-shadow .16s ease,background .16s ease;animation:collection-card-in .42s both;}
     .hub-card:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 4px);pointer-events:none;}
     .hub-card:hover{transform:translate(-3px,-3px);box-shadow:10px 10px 0 #ff006e;background:#151515;}
     .hub-card:active{transform:translate(0,0);box-shadow:4px 4px 0 #ff006e;}
+    .hub-card:active .hub-arrow{transform:translate(5px,-5px) scale(1.18);opacity:1;}
+    .hub-card:nth-child(2){animation-delay:.05s}.hub-card:nth-child(3){animation-delay:.1s}.hub-card:nth-child(4){animation-delay:.15s}.hub-card:nth-child(5){animation-delay:.2s}.hub-card:nth-child(6){animation-delay:.25s}
+    @keyframes collection-card-in{from{opacity:0;transform:translateY(14px) rotate(.4deg)}to{opacity:1;transform:translateY(0) rotate(0)}}
     .hub-card-top{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;}
     .hub-number{display:inline-block;padding:4px 8px;border:1px solid #000;background:#f44;color:#fff;font:700 10px monospace;}
     .hub-arrow{font:700 18px monospace;opacity:.45;transition:transform .16s ease,opacity .16s ease;}
@@ -230,6 +233,11 @@
     .hub-orange .hub-number{background:#f97316;color:#000}.hub-orange h3,.hub-orange .hub-cta{color:#fb923c}
     .hub-green .hub-number{background:#4ade80;color:#000}.hub-green h3,.hub-green .hub-cta{color:#86efac}
     .hub-red h3,.hub-red .hub-cta{color:#ff7b7b}
+    .hub-fact{border-color:#facc15;background:linear-gradient(145deg,#16130a,#111);box-shadow:7px 7px 0 #60a5fa;}
+    .hub-fact .hub-number{background:#facc15;color:#111}.hub-fact h3,.hub-fact .hub-cta{color:#facc15}.hub-fact h3{font-size:clamp(1.85rem,3vw,2.75rem);line-height:.87;overflow-wrap:anywhere}.hub-fact p{color:#d4d4d8}
+    .hub-fact #ftitle{font:900 clamp(1.25rem,2.15vw,1.75rem)/.95 Impact,Arial,sans-serif;color:#fff;margin:10px 0 7px;text-transform:uppercase}.hub-fact #fcopy{font:400 11px/1.35 monospace;color:#b9b9c2;margin:0}
+    .hub-fact.fact-change{animation:fact-mutate .42s steps(3,end);}
+    @keyframes fact-mutate{0%{filter:brightness(2.2) hue-rotate(70deg);transform:translate(-4px,3px)}45%{filter:contrast(1.4);transform:translate(4px,-2px)}100%{filter:none;transform:translate(0)}}
     .hub-stat{border:2px solid #27272a;background:#080808;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px}
     .hub-stat span{font:700 8px monospace;color:#52525b}.hub-stat b{font:900 18px Impact, sans-serif;color:#f4f4f5}
     .back-home{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:10px 14px;margin-top:22px;color:#71717a;text-decoration:underline;text-transform:uppercase;font:700 10px monospace;background:transparent;border:0;cursor:pointer;touch-action:manipulation}
@@ -242,7 +250,8 @@
       .hub-card:hover{transform:none;box-shadow:4px 4px 0 #ff006e;}
       .hub-card h3{font-size:clamp(1.85rem,9vw,2.7rem);margin:10px 0 7px;line-height:.86;}
       .hub-card p{display:none;}
-      .hub-card:last-child{grid-column:1/-1;min-height:126px;}
+      .hub-fact h3{font-size:clamp(1.42rem,7.3vw,2.1rem);line-height:.9;}
+      .hub-fact p{display:block;}.hub-fact #ftitle{font-size:clamp(1.05rem,5.6vw,1.42rem);margin:7px 0 5px}.hub-fact #fcopy{font-size:8px;line-height:1.25}
       .hub-number{font-size:8px;padding:3px 6px}.hub-arrow{font-size:15px}.hub-cta{font-size:8px;margin-top:8px;}
       .hub-intro{padding:18px !important;}
       .hub-stat{padding:9px 7px;display:block}.hub-stat b{display:block;margin-top:4px;}
@@ -253,6 +262,7 @@
     .brutal-btn:hover{filter:brightness(1.06);}
     .brutal-btn:active{transform:translateY(3px) scale(.99);}
     @media(max-width:640px){button{touch-action:manipulation;}}
+    @media(prefers-reduced-motion:reduce){.hub-card,.hub-fact.fact-change{animation:none}}
 
 
     #ask-answer{max-width:100%;overflow-wrap:anywhere;hyphens:none;}
@@ -429,6 +439,7 @@
   color:rgba(255,255,255,.36);font:700 7px monospace;letter-spacing:.13em;
   pointer-events:none;text-shadow:0 1px 5px #000
 }
+#footer-release{position:absolute;right:12px;z-index:3;color:rgba(255,255,255,.72);font:700 8px monospace;letter-spacing:.12em;text-transform:uppercase;text-shadow:0 1px 5px #000}
 .feet-marquee{display:flex;width:max-content;will-change:transform;animation:absurd-feet-walk 18s linear infinite}
 .feet-group{display:flex;align-items:center;gap:19px;min-width:max-content;padding-left:232px;padding-right:19px}
 .absurd-foot{width:19px;height:25px;flex:0 0 auto;fill:#ff006e;filter:drop-shadow(0 0 4px rgba(255,0,110,.55));opacity:.9}
@@ -438,6 +449,7 @@
 @media(max-width:640px){
   #absurd-footer{height:44px}
   #absurd-footer::before{font-size:6px;left:8px;letter-spacing:.08em}
+  #footer-release{right:8px;font-size:6px;letter-spacing:.08em}
   .feet-group{padding-left:186px;gap:15px}
   .absurd-foot{width:16px;height:21px}
 }
@@ -538,8 +550,6 @@
     </div>
   </section>
 
-  <div class="fact30"><small>ABSURD FACT / UNFORTUNATELY TRUE · <span id="fcount">01/30</span></small><h4 id="ftitle">WOMBATS PRODUCE CUBE-SHAPED DROPPINGS.</h4><p id="fcopy">Actually true. Geometry has entered wildlife.</p><button onclick="nextFact30()">I DON'T BELIEVE YOU. SHOW ME ANOTHER →</button></div>
-
 <div class="flex items-end justify-between gap-4 mb-4 border-b-2 border-green-400 pb-3">
     <div>
       <p class="text-green-400 text-[10px] font-bold uppercase tracking-[.3em]">THE COLLECTION</p>
@@ -555,26 +565,32 @@
       <div class="hub-cta">PRESS IT →</div>
     </article>
 
+    <article onclick="nextFact30()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nextFact30()}" class="hub-card hub-fact" role="button" tabindex="0" aria-label="Show another absurd fact">
+      <div class="hub-card-top"><span class="hub-number">#02</span><span id="fcount" class="hub-arrow">01/30</span></div>
+      <div><h3>ABSURD<br>FACTS.</h3><p id="ftitle">WOMBATS MAKE CUBES.</p><p id="fcopy">Actually true. Geometry has entered wildlife.</p></div>
+      <div class="hub-cta" id="fact-cta">TAP FOR ANOTHER FACT →</div>
+    </article>
+
     <article onclick="switchView('tool-ask')" class="hub-card hub-blue">
-      <div class="hub-card-top"><span class="hub-number">#02</span><span class="hub-arrow">↗</span></div>
+      <div class="hub-card-top"><span class="hub-number">#03</span><span class="hub-arrow">↗</span></div>
       <div><h3>ASK ME<br>ANYTHING</h3><p>Ask a normal question. Receive an aggressively confident nonsense answer.</p></div>
       <div class="hub-cta">ASK ABSURD AI →</div>
     </article>
 
     <article onclick="switchView('tool-mood')" class="hub-card hub-pink">
-      <div class="hub-card-top"><span class="hub-number">#03</span><span class="hub-arrow">↗</span></div>
+      <div class="hub-card-top"><span class="hub-number">#04</span><span class="hub-arrow">↗</span></div>
       <div><h3>MOOD<br>MACHINE</h3><p>Tell the machine how you feel. It will immediately make it worse.</p></div>
       <div class="hub-cta">DIAGNOSE ME →</div>
     </article>
 
     <article onclick="switchView('tool-dad')" class="hub-card hub-orange">
-      <div class="hub-card-top"><span class="hub-number">#04</span><span class="hub-arrow">↗</span></div>
+      <div class="hub-card-top"><span class="hub-number">#05</span><span class="hub-arrow">↗</span></div>
       <div><h3>DAD<br>JOKES</h3><p>Setup. Anticipation. Punchline. Regret.</p></div>
       <div class="hub-cta">DAMAGE MY HUMOUR →</div>
     </article>
 
     <article onclick="switchView('tool-veg')" class="hub-card hub-green">
-      <div class="hub-card-top"><span class="hub-number">#05</span><span class="hub-arrow">↗</span></div>
+      <div class="hub-card-top"><span class="hub-number">#06</span><span class="hub-arrow">↗</span></div>
       <div><h3>VEGETABLE<br>DATING</h3><p>Find your produce soulmate. Swipe is apparently too normal.</p></div>
       <div class="hub-cta">FIND LOVE →</div>
     </article>
@@ -1597,7 +1613,16 @@ function triggerStupidThinking(customMessage) {
 
     const facts30=[
 ["WOMBATS PRODUCE CUBE-SHAPED DROPPINGS.","Their intestines shape the feces into cubes."],["OCTOPUSES HAVE THREE HEARTS.","Two pump to the gills; one pumps around the body."],["A DAY ON VENUS IS LONGER THAN A YEAR ON VENUS.","Venus rotates extraordinarily slowly."],["BANANAS ARE BERRIES. STRAWBERRIES AREN'T.","Botany has rejected common sense."],["SHARKS EXISTED BEFORE TREES.","Shark ancestors predate the first known trees."],["THE EIFFEL TOWER GETS TALLER IN HOT WEATHER.","Thermal expansion adds several centimetres."],["SOME TURTLES BREATHE THROUGH THEIR REAR END.","Certain species use cloacal respiration."],["SEA OTTERS SOMETIMES HOLD HANDS WHILE SLEEPING.","It can help keep their raft together."],["A GROUP OF FLAMINGOS IS A FLAMBOYANCE.","English saw flamingos and chose accuracy."],["CROWS CAN RECOGNISE HUMAN FACES.","They can remember particular people for years."],["BUTTERFLIES TASTE WITH THEIR FEET.","Their feet contain taste receptors."],["SNAILS CAN HAVE THOUSANDS OF TINY TEETH.","Their radula carries rows of microscopic teeth."],["KOALA FINGERPRINTS LOOK REMARKABLY HUMAN.","Their ridge patterns are unusually similar to ours."],["RAVENS CAN MIMIC HUMAN SPEECH.","Some captive ravens imitate words and sounds."],["AXOLOTLS CAN REGENERATE LIMBS.","They can regrow complex tissues."],["ONE JELLYFISH CAN REVERT TO AN EARLIER LIFE STAGE.","Turritopsis dohrnii can reverse its life cycle."],["POLAR BEAR SKIN IS BLACK.","The fur looks white; the skin underneath is dark."],["SLOTHS CAN HOLD THEIR BREATH FOR ABOUT 40 MINUTES.","They slow their heart rate while submerged."],["GOATS HAVE RECTANGULAR PUPILS.","The shape gives a broad horizontal field of view."],["SOME FROGS CAN FREEZE AND SURVIVE.","Wood frogs tolerate much of their body water freezing."],["HONEY CAN LAST AN EXTRAORDINARILY LONG TIME.","Low moisture and acidity inhibit many microbes."],["THE HUMAN BODY GLOWS VERY FAINTLY.","Humans emit ultraweak visible photons."],["LIGHTNING CAN BE HOTTER THAN THE SUN'S SURFACE.","A lightning channel can briefly reach around 30,000 K."],["THERE ARE LAKES BENEATH ANTARCTICA'S ICE.","Hundreds of subglacial lakes exist there."],["SOME BAMBOO CAN GROW NEARLY A METRE A DAY.","Certain species are among Earth's fastest-growing plants."],["MALE SEAHORSES CARRY THE PREGNANCY.","Embryos develop in the male's brood pouch."],["A SHRIMP'S HEART IS IN ITS HEAD REGION.","It sits in the cephalothorax."],["THE MOON HAS MOONQUAKES.","Apollo seismometers detected lunar seismic activity."],["WOODPECKERS WRAP THEIR TONGUES AROUND THEIR SKULLS.","Their tongue apparatus extends around the skull."],["CATS CANNOT TASTE SWEETNESS.","They lack a functional sweet-taste receptor." ]];
-    let f30=0; function nextFact30(){f30=(f30+1)%facts30.length;document.getElementById('ftitle').innerText=facts30[f30][0];document.getElementById('fcopy').innerText=facts30[f30][1];document.getElementById('fcount').innerText=String(f30+1).padStart(2,'0')+'/30';}
+    let f30=0; function nextFact30(){
+      f30=(f30+1)%facts30.length;
+      const card=document.querySelector('.hub-fact');
+      if(card){card.classList.remove('fact-change');void card.offsetWidth;card.classList.add('fact-change');}
+      document.getElementById('ftitle').innerText=facts30[f30][0];
+      document.getElementById('fcopy').innerText=facts30[f30][1];
+      document.getElementById('fcount').innerText=String(f30+1).padStart(2,'0')+'/30';
+      const cta=document.getElementById('fact-cta');
+      if(cta)cta.innerText=['THAT CANNOT BE TRUE →','SHOW ME ANOTHER →','WHY DO I KNOW THIS NOW? →','ANOTHER UNNECESSARY FACT →'][f30%4];
+    }
     const p2={
 button:[["KITKAT","YOU HAVEN'T PRESSED IT YET. HAVE A BREAK BEFORE THE BREAKDOWN."],["FEVICOL","YOU'RE ALREADY STUCK HERE."],["BLINKIT","SOMETHING USEFUL COULD ARRIVE BEFORE THIS BUTTON DOES ANYTHING."],["CRED","ZERO CLICKS. ZERO REWARDS."],["DECATHLON","WARM UP YOUR INDEX FINGER."],["GOOGLE PAY","TAP RESPONSIBLY. THERE IS NO CASHBACK."],["MAGGI","IF THIS TAKES MORE THAN TWO MINUTES, THAT'S ON YOU."],["boAt","THIS BUTTON MAKES NO SOUND. BUSINESS OPPORTUNITY."],["AMUL","UTTERLY BUTTONLY POINTLESS."],["ZEPTO","YOU COULD ORDER A SNACK. YOU CHOSE THIS."]],
 ask:[["RED BULL","ASK ANYTHING. SURVIVING THE ANSWER MAY REQUIRE WINGS."],["SWIGGY","ASK WHAT TO EAT. WE KNOW WHERE THIS IS GOING."],["BLINKIT","QUESTIONS INSTANT. ANSWERS QUESTIONABLE."],["SPOTIFY","ASK ABOUT YOUR EX. YOUR PLAYLIST ALREADY DID."],["NETFLIX","ASK IF YOU SHOULD SLEEP. CONFLICT OF INTEREST."],["GOOGLE MAPS","ASK WHERE YOUR LIFE IS GOING. RECALCULATING."],["IKEA","ASK HOW TO FIX IT. ALLEN KEY NOT INCLUDED."],["CRED","ASK ABOUT MONEY. TERRIBLE FINANCIAL DECISION."],["DUOLINGO","ASK IN ANY LANGUAGE. THE OWL IS LISTENING."],["AMAZON","ASK WHAT YOU NEED. ALSO BOUGHT: 14 OTHER THINGS."]],
@@ -1855,6 +1880,7 @@ function vegDecision(choice) {
     drawCursorTrail();
   </script>
 <footer id="absurd-footer" aria-label="ABSURD footer">
+  <span id="footer-release">V0.0.2 · LOCAL REVIEW</span>
   <svg aria-hidden="true" width="0" height="0" focusable="false">
     <symbol id="absurd-footprint" viewBox="0 0 24 32">
       <ellipse cx="10" cy="21" rx="6.2" ry="10.4" transform="rotate(18 10 21)"></ellipse>

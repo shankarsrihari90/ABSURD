@@ -18,7 +18,8 @@
     screen.classList.add('open'); document.getElementById('profile-close').addEventListener('click', function () { screen.classList.remove('open'); });
   }
   window.openAbsurdProfile = renderProfile;
-  function sync() { var inside = !document.getElementById('top-bar').classList.contains('hidden'), dock = document.getElementById('absurd-dock'); dock.classList.toggle('is-visible', inside); document.body.classList.toggle('dock-visible', inside); }
+  /* The profile stays in the top bar; the bottom command dock is parked for this build. */
+  function sync() { document.body.classList.remove('dock-visible'); }
   function mount() {
     var dock = document.createElement('nav'); dock.id = 'absurd-dock'; dock.className = 'absurd-dock'; dock.setAttribute('aria-label', 'Quick navigation');
     dock.innerHTML = '<div class="dock-frame"><button class="dock-expand" type="button" data-action="features" aria-expanded="false">5 THINGS ↑</button><div class="dock-launcher" id="dock-launcher"></div><div class="dock-main"><button type="button" data-action="home"><span class="dock-icon">⌂</span>Home</button><button type="button" class="dock-random" data-action="random"><span class="dock-icon">?</span>Random</button><button type="button" class="dock-profile" data-action="profile"><span class="dock-icon">▣</span>Profile</button></div></div>';
