@@ -107,7 +107,7 @@ async function share(){
  if(!finalCanvas||shareBusy)return;
  const token=epoch,canvas=finalCanvas;shareBusy=true;$('mia6-share').disabled=true;const note=text=>{if(token===epoch)$('mia6-share-note').textContent=text};
  try{note('Preparing your poster…');const blob=await blobFromCanvas(canvas);if(token!==epoch)return;const file=new File([blob],'absurd-'+mode+'.png',{type:'image/png'});
- if(navigator.share&&navigator.canShare?.({files:[file]})){try{note('Choose where to share your poster.');await navigator.share({files:[file],title:'MAKE IT ABSURD',text:'I made this worse. Your turn. Think you can make something more absurd? https://absurd-five.vercel.app/'});note('Shared. Send them back with something worse.');return}catch(e){if(e.name==='AbortError'){note('Share cancelled. Your poster is still here.');return}}}
+ if(navigator.share&&navigator.canShare?.({files:[file]})){try{note('Choose where to share your poster.');await navigator.share({files:[file],title:'MAKE IT ABSURD',text:'Think you can make something more absurd? https://absurd-five.vercel.app/'});note('Shared. Send them back with something worse.');return}catch(e){if(e.name==='AbortError'){note('Share cancelled. Your poster is still here.');return}}}
  if(token!==epoch)return;
  const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=file.name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);note('Download requested. You can also save the poster image above.');
  }catch(e){note('Could not export. Please try again.')}finally{shareBusy=false;$('mia6-share').disabled=false}
