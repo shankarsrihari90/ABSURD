@@ -61,9 +61,16 @@
  #mia3 .mia3-sh{font-size:17px;min-height:0;margin-bottom:12px}
  #mia3 .mia3-opt{min-height:58px;font-size:12px;padding:9px 8px}
  #mia3 .mia3-opts{gap:8px}
- #mia3 .mia3-work.complete .mia3-grid{padding-right:7px}
- #mia3 .mia3-actions{grid-template-columns:1fr}
+#mia3 .mia3-work.complete .mia3-grid{padding-right:7px}
+#mia3 .mia3-actions{grid-template-columns:1fr}
 }
+#mia3 .mia3-home-footer{height:48px;margin-top:24px;position:relative;overflow:hidden;border-top:2px solid #2b2b2b;background:#070707;display:flex;align-items:center}
+#mia3 .mia3-home-footer>span{position:absolute;z-index:2;left:10px;color:rgba(255,255,255,.45);font:700 7px monospace;letter-spacing:.1em;text-shadow:0 1px 4px #000}
+#mia3 .mia3-feet-track{display:flex;width:max-content;animation:absurd-feet-walk 14s linear infinite}
+#mia3 .mia3-feet-group{display:flex;align-items:center;gap:17px;min-width:max-content;padding-left:236px;padding-right:17px}
+#mia3 .mia3-feet-group svg{width:18px;height:24px;fill:#ff006e;filter:drop-shadow(0 0 4px rgba(255,0,110,.55));opacity:.9}
+#mia3 .mia3-feet-group svg:nth-child(even){fill:#39ff88;transform:translateY(5px) rotate(-12deg)}
+#mia3 .mia3-feet-group svg:nth-child(odd){transform:translateY(-3px) rotate(10deg)}
 @media(max-width:620px){
  .mia6-modes{grid-template-columns:minmax(0,1fr)!important}
  .mia6-mode{min-height:190px!important}

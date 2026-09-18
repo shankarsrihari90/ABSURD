@@ -153,26 +153,10 @@
       #dad-new, #dad-reveal { width: 100%; font-size: 1.2rem !important; }
     }
 
-    /* ASK ME ANYTHING + NEWS — MOBILE FIRST */
-    .ask-chip {
-      min-height: 44px;
-      padding: 8px 7px;
-      border: 2px solid #2563eb;
-      background: #050505;
-      color: #60a5fa;
-      font-family: monospace;
-      font-size: 9px;
-      font-weight: 700;
-      text-transform: uppercase;
-      cursor: pointer;
-    }
-    .ask-chip:hover { background: #2563eb; color: white; }
     @media (max-width: 640px) {
-      #tool-ask, #tool-absurdity { padding-left: 8px !important; padding-right: 8px !important; }
-      #tool-ask > div, #tool-absurdity > div { padding: 14px !important; }
-      #ask-input { font-size: 16px !important; } /* prevents iOS zoom */
-      #ask-answer, #news-headline { overflow-wrap: anywhere; }
-      .ask-chip { font-size: 8px; line-height: 1.1; }
+      #tool-absurdity { padding-left: 8px !important; padding-right: 8px !important; }
+      #tool-absurdity > div { padding: 14px !important; }
+      #news-headline { overflow-wrap: anywhere; }
       #news-card { word-break: normal; }
     }
 
@@ -206,8 +190,7 @@
       .hub-card { min-height:190px !important; }
       .brutal-border, .brutal-border-yellow { max-width:100%; }
       #useless-btn { width:min(72vw,270px) !important; height:min(72vw,270px) !important; }
-      #ask-input { font-size:16px !important; }
-      #dad-question, #dad-answer, #ask-answer, #news-headline { overflow-wrap:anywhere; }
+      #dad-question, #dad-answer, #news-headline { overflow-wrap:anywhere; }
     }
 
 
@@ -263,20 +246,6 @@
     .brutal-btn:active{transform:translateY(3px) scale(.99);}
     @media(max-width:640px){button{touch-action:manipulation;}}
     @media(prefers-reduced-motion:reduce){.hub-card,.hub-fact.fact-change{animation:none}}
-
-
-    #ask-answer{max-width:100%;overflow-wrap:anywhere;hyphens:none;}
-    #ask-footnote{overflow-wrap:anywhere;}
-    @media(max-width:640px){#ask-answer{font-size:clamp(1.9rem,9vw,3.8rem)!important;line-height:.92!important;}}
-
-
-    #ask-answer-box{transition:transform .18s ease,opacity .18s ease;}
-    #ask-answer-box:hover{transform:translateY(-2px);}
-    #ask-answer{overflow-wrap:anywhere;}
-    @media(max-width:640px){
-      #ask-answer{font-size:clamp(2rem,9vw,4rem)!important;line-height:.9!important;}
-      #ask-footnote{font-size:8px!important;line-height:1.35!important;}
-    }
 
 
 /* _NATIVE_V2 */
@@ -455,6 +424,22 @@
 }
 @media(prefers-reduced-motion:reduce){.feet-marquee{animation:none}}
 
+/* HOME EXPERIMENT: the hub should feel alive before users pick an experience. */
+#hub-intro{--mx:50%;--my:50%;isolation:isolate;transition:transform .18s ease,filter .18s ease;}
+#hub-intro:after{content:"";position:absolute;inset:-35%;z-index:0;pointer-events:none;background:radial-gradient(circle at var(--mx) var(--my),rgba(255,0,110,.38),transparent 25%);mix-blend-mode:multiply;transition:background .12s ease}
+#hub-intro>div.relative{position:relative;z-index:1}.hub-intro:hover{transform:rotate(-.25deg) translate(-2px,-2px);filter:saturate(1.12)}
+.hub-live{display:inline-flex;align-items:center;gap:8px;padding:7px 10px;border:2px solid #000;background:#ff006e;color:#fff;font:900 10px/1 monospace;letter-spacing:.12em;box-shadow:3px 3px 0 #000;animation:live-shift 2.4s steps(1,end) infinite}.hub-live i{width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px #000;animation:live-blink .8s steps(2,end) infinite}@keyframes live-shift{0%,100%{background:#ff006e;color:#fff}25%{background:#00d8e8;color:#111}50%{background:#39ff88;color:#111}75%{background:#facc15;color:#111}}@keyframes live-blink{50%{transform:scale(.2);opacity:.25}}
+.hub-intro-orbit{position:absolute;z-index:2;font:900 clamp(3rem,8vw,7rem)/1 Impact,sans-serif;color:#ff006e;pointer-events:none;animation:hub-orbit 2.8s steps(2,end) infinite}.hub-intro-orbit-a{right:14%;bottom:8%}.hub-intro-orbit-b{right:6%;top:8%;color:#000;animation-delay:.6s}@keyframes hub-orbit{50%{transform:translate(-11px,8px) rotate(14deg)}100%{transform:translate(0) rotate(-5deg)}}
+.hub-intro.is-booming{animation:hub-boom .34s steps(2,end)}@keyframes hub-boom{50%{transform:translate(5px,-3px) scale(1.012);filter:hue-rotate(70deg) contrast(1.25)}}
+
+.mia3-card--charged{position:relative;isolation:isolate;cursor:pointer;transition:transform .16s ease,box-shadow .16s ease,filter .16s ease}.mia3-card--charged:before,.mia3-card--charged:after{content:"";position:absolute;pointer-events:none;z-index:-1}.mia3-card--charged:before{inset:-10px;background:conic-gradient(from var(--charge-turn,0deg),#ff006e,#facc15,#39ff88,#00d8e8,#ff006e);filter:blur(12px);opacity:.45;animation:charge-spin 3s linear infinite}.mia3-card--charged:after{width:7px;height:7px;right:5%;top:40%;background:#fff;box-shadow:25px -36px #ff006e,-47px 34px #39ff88,69px 60px #facc15,-98px -39px #00d8e8;animation:charge-sparks 1s steps(2,end) infinite}@keyframes charge-spin{to{--charge-turn:360deg}}@property --charge-turn{syntax:'<angle>';initial-value:0deg;inherits:false}@keyframes charge-sparks{50%{transform:translate(8px,-7px) scale(1.5);opacity:.25}}
+.mia3-card--charged:hover{transform:translate(-4px,-4px) rotate(-.2deg);box-shadow:13px 13px 0 #ff006e;filter:saturate(1.3)}.mia3-card--charged .body{position:relative;overflow:hidden}.mia3-card--charged h3{max-width:12ch;text-shadow:3px 3px 0 #1976d2}.mia3-charge{display:flex;align-items:center;gap:10px;width:min(520px,100%);margin:18px 0 15px;font:900 9px monospace;letter-spacing:.08em}.mia3-charge span{height:9px;flex:1;border:2px solid #fff;background:repeating-linear-gradient(90deg,#39ff88 0 10px,#facc15 10px 16px,#ff006e 16px 24px);background-size:48px 100%;animation:charge-meter .65s linear infinite}.mia3-charge b{color:#facc15;white-space:nowrap}.mia3-charge i{font-style:normal;font-size:21px;animation:charge-sparks .6s steps(2,end) infinite}@keyframes charge-meter{to{background-position:48px 0}}.mia3-open{position:relative;overflow:hidden;font-size:11px}.mia3-open:after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 20%,rgba(255,255,255,.82) 47%,transparent 72%);transform:translateX(-120%);animation:button-sweep 2.1s ease-in-out infinite}@keyframes button-sweep{45%,100%{transform:translateX(120%)}}.mia3-dare{display:block;margin-top:13px;color:#39ff88;font:700 8px monospace;letter-spacing:.12em}
+
+.hub-grid{grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-flow:dense}.hub-card{grid-column:span 4}.hub-card-button{grid-column:span 5;border-color:#ff6b6b}.hub-card-facts{grid-column:span 4}.hub-card-mood{grid-column:span 3;border-color:#ff4d93}.hub-card-dad{grid-column:span 5;border-color:#fb923c}.hub-card-veg{grid-column:span 7;border-color:#86efac}.hub-card-button:after,.hub-card-dad:after,.hub-card-veg:after{position:absolute;z-index:0;right:14px;bottom:-17px;font:900 7rem/1 Impact,sans-serif;opacity:.12;pointer-events:none}.hub-card-button:after{content:"!";color:#ff6b6b;animation:card-pop .9s steps(2,end) infinite}.hub-card-dad:after{content:"HA";color:#fb923c;animation:dad-wobble 1.6s ease-in-out infinite}.hub-card-veg:after{content:"♥";color:#86efac;animation:leaf-float 2s ease-in-out infinite}.hub-card-facts:after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(250,204,21,.16),transparent 66%);transform:translateX(-130%);animation:fact-sweep 3s ease-in-out infinite}.hub-card-mood:after{content:"";position:absolute;width:110px;height:110px;right:12px;bottom:16px;border:5px solid #ff4d93;border-radius:50%;box-shadow:0 0 0 14px rgba(255,77,147,.1);animation:mood-heartbeat 1.4s ease-in-out infinite}@keyframes card-pop{50%{transform:scale(1.23) rotate(-8deg);opacity:.22}}@keyframes dad-wobble{50%{transform:rotate(8deg) translateY(-8px)}}@keyframes leaf-float{50%{transform:translate(-10px,-11px) rotate(11deg);opacity:.24}}@keyframes fact-sweep{55%,100%{transform:translateX(130%)}}@keyframes mood-heartbeat{50%{transform:scale(1.12);opacity:.48}}.hub-card-spark,.hub-card-pulse,.hub-card-dadmark,.hub-card-leaf{display:inline-block;margin-left:6px;animation:card-pop .9s steps(2,end) infinite}.hub-card-pulse{animation:mood-heartbeat 1.2s infinite}.hub-card-dadmark{animation:dad-wobble 1.5s ease-in-out infinite}.hub-card-leaf{animation:leaf-float 1.6s ease-in-out infinite}.hub-card:hover{filter:brightness(1.16) saturate(1.2)}
+@media(max-width:900px){.hub-card,.hub-card-button,.hub-card-facts,.hub-card-mood,.hub-card-dad,.hub-card-veg{grid-column:span 6}.hub-card-veg{grid-column:span 12}}
+@media(max-width:640px){.hub-card,.hub-card-button,.hub-card-facts,.hub-card-mood,.hub-card-dad,.hub-card-veg{grid-column:span 6}.hub-card-veg{grid-column:span 12}.hub-card-veg h3{font-size:clamp(2.2rem,10vw,3rem)}.mia3-charge b{font-size:7px}.mia3-card--charged h3{max-width:11ch}.hub-intro-orbit{display:none}}
+@media(prefers-reduced-motion:reduce){#hub-intro,.mia3-card--charged,.mia3-card--charged:before,.mia3-card--charged:after,.mia3-charge span,.mia3-charge i,.mia3-open:after,.hub-card:after,.hub-card-spark,.hub-card-pulse,.hub-card-dadmark,.hub-card-leaf,.hub-live,.hub-live i{animation:none!important;transition:none!important}}
+
 /* Mobile containment pass: every experience owns the available screen width,
    while the persistent dock receives the last safe 96px of vertical space. */
 *,*::before,*::after{box-sizing:border-box}
@@ -528,25 +513,27 @@
 
   <!-- ==================== MAIN HUB (COLLECTION) ==================== -->
   <section id="view-hub" style="display:none;" class="hidden absurd-view w-full max-w-[1180px] mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-8 z-10">
-  <div class="hub-intro brutal-border-yellow bg-yellow-300 text-black p-5 sm:p-7 md:p-9 mb-7 relative overflow-hidden">
+  <div class="hub-intro brutal-border-yellow bg-yellow-300 text-black p-5 sm:p-7 md:p-9 mb-7 relative overflow-hidden" id="hub-intro">
     <div class="absolute right-[-20px] top-[-55px] font-impact text-[150px] sm:text-[220px] opacity-10 pointer-events-none">?</div>
+    <span class="hub-intro-orbit hub-intro-orbit-a" aria-hidden="true">!</span><span class="hub-intro-orbit hub-intro-orbit-b" aria-hidden="true">?</span>
     <div class="relative z-10">
-      <div class="flex flex-wrap gap-2 items-center mb-4">
-        <span class="bg-black text-yellow-300 px-2.5 py-1 text-[10px] font-bold border-2 border-black">ABSURD V2.0</span>
-        <span class="bg-pink-600 text-white px-2.5 py-1 text-[10px] font-bold border-2 border-black">LIVE</span>
+      <div class="flex items-center mb-4">
+        <span class="hub-live" aria-label="Live">LIVE <i aria-hidden="true"></i></span>
       </div>
       <h2 class="font-impact text-[clamp(4rem,12vw,8rem)] leading-[.75] uppercase">WELCOME<br><span class="text-pink-600">TO ABSURD.</span></h2>
       <p class="font-mono text-lg sm:text-2xl md:text-3xl max-w-3xl mt-5 leading-tight">Unnecessary experiences. Pick one. Waste some time. Question your decisions.</p>
     </div>
   </div>
 
-  <section class="mia3-card" aria-labelledby="mia3-card-title">
+  <section class="mia3-card mia3-card--charged" id="mia3-card" aria-labelledby="mia3-card-title">
     <div class="bar"><span><b>MAKE IT ABSURD</b> · CREATION LAB</span><span>TAKE NORMAL. ADD BAD DECISIONS.</span></div>
     <div class="body">
       <div class="mia3-k">ABSURDIFICATION ENGINE</div>
       <h3 id="mia3-card-title">MAKE SOMETHING ABSURD.</h3>
       <p>You don't need to be creative. We give you the ingredients. You make the terrible decisions.</p>
-      <button class="mia3-open" id="mia3-open" type="button">ENTER THE CREATION LAB →</button>
+      <div class="mia3-charge" aria-hidden="true"><span></span><b>CHAOS LEVEL: UNNECESSARILY HIGH</b><i>⚡</i></div>
+      <button class="mia3-open" id="mia3-open" type="button">ENTER THE CREATION LAB <span aria-hidden="true">→</span></button>
+      <small class="mia3-dare">CLICK BEFORE IT BECOMES SENSIBLE.</small>
     </div>
   </section>
 
@@ -559,40 +546,34 @@
   </div>
 
   <div class="hub-grid">
-    <article onclick="switchView('tool-button')" class="hub-card hub-red">
+    <article onclick="switchView('tool-button')" class="hub-card hub-red hub-card-button">
       <div class="hub-card-top"><span class="hub-number">#01</span><span class="hub-arrow">↗</span></div>
       <div><h3>THE USELESS<br>BUTTON</h3><p>Press a button that does nothing. Then make it personal.</p></div>
-      <div class="hub-cta">PRESS IT →</div>
+      <div class="hub-cta">PRESS IT → <span class="hub-card-spark" aria-hidden="true">●</span></div>
     </article>
 
-    <article onclick="nextFact30()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nextFact30()}" class="hub-card hub-fact" role="button" tabindex="0" aria-label="Show another absurd fact">
+    <article onclick="nextFact30()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nextFact30()}" class="hub-card hub-fact hub-card-facts" role="button" tabindex="0" aria-label="Show another absurd fact">
       <div class="hub-card-top"><span class="hub-number">#02</span><span id="fcount" class="hub-arrow">01/30</span></div>
       <div><h3>ABSURD<br>FACTS.</h3><p id="ftitle">WOMBATS MAKE CUBES.</p><p id="fcopy">Actually true. Geometry has entered wildlife.</p></div>
       <div class="hub-cta" id="fact-cta">TAP FOR ANOTHER FACT →</div>
     </article>
 
-    <article onclick="switchView('tool-ask')" class="hub-card hub-blue">
+    <article onclick="switchView('tool-mood')" class="hub-card hub-pink hub-card-mood">
       <div class="hub-card-top"><span class="hub-number">#03</span><span class="hub-arrow">↗</span></div>
-      <div><h3>ASK ME<br>ANYTHING</h3><p>Ask a normal question. Receive an aggressively confident nonsense answer.</p></div>
-      <div class="hub-cta">ASK ABSURD AI →</div>
-    </article>
-
-    <article onclick="switchView('tool-mood')" class="hub-card hub-pink">
-      <div class="hub-card-top"><span class="hub-number">#04</span><span class="hub-arrow">↗</span></div>
       <div><h3>MOOD<br>MACHINE</h3><p>Tell the machine how you feel. It will immediately make it worse.</p></div>
-      <div class="hub-cta">DIAGNOSE ME →</div>
+      <div class="hub-cta">DIAGNOSE ME → <span class="hub-card-pulse" aria-hidden="true">♥</span></div>
     </article>
 
-    <article onclick="switchView('tool-dad')" class="hub-card hub-orange">
-      <div class="hub-card-top"><span class="hub-number">#05</span><span class="hub-arrow">↗</span></div>
+    <article onclick="switchView('tool-dad')" class="hub-card hub-orange hub-card-dad">
+      <div class="hub-card-top"><span class="hub-number">#04</span><span class="hub-arrow">↗</span></div>
       <div><h3>DAD<br>JOKES</h3><p>Setup. Anticipation. Punchline. Regret.</p></div>
-      <div class="hub-cta">DAMAGE MY HUMOUR →</div>
+      <div class="hub-cta">DAMAGE MY HUMOUR → <span class="hub-card-dadmark" aria-hidden="true">☻</span></div>
     </article>
 
-    <article onclick="switchView('tool-veg')" class="hub-card hub-green">
-      <div class="hub-card-top"><span class="hub-number">#06</span><span class="hub-arrow">↗</span></div>
+    <article onclick="switchView('tool-veg')" class="hub-card hub-green hub-card-veg">
+      <div class="hub-card-top"><span class="hub-number">#05</span><span class="hub-arrow">↗</span></div>
       <div><h3>VEGETABLE<br>DATING</h3><p>Find your produce soulmate. Swipe is apparently too normal.</p></div>
-      <div class="hub-cta">FIND LOVE →</div>
+      <div class="hub-cta">FIND LOVE → <span class="hub-card-leaf" aria-hidden="true">✦</span></div>
     </article>
   </div>
 
@@ -600,7 +581,6 @@
 
 <section id="tool-button" style="display:none;" class="hidden absurd-view w-full max-w-2xl mx-auto px-3 sm:px-5 py-5 sm:py-8 text-center z-10"><div class="p2p"><small>ABSURD PRODUCT PLACEMENT</small><strong id="p2-button"></strong><button onclick="rotateP2('button')">ANOTHER COMMERCIAL DECISION →</button></div>
   <div class="bg-zinc-900 brutal-border p-5 sm:p-8">
-    <span class="text-[10px] bg-red-600 text-white px-3 py-1 font-bold uppercase border-2 border-black">EXPERIENCE 01</span>
     <h2 class="font-impact text-[clamp(3rem,12vw,6rem)] leading-[.8] text-red-400 my-5">THE USELESS<br>BUTTON</h2>
     <p class="text-zinc-400 text-xs sm:text-sm mb-6">This button serves no operational purpose. That will not stop you.</p>
 
@@ -620,70 +600,8 @@
   </div>
 </section>
 
-<section id="tool-ask" style="display:none;" class="hidden w-full max-w-4xl mx-auto px-3 sm:px-5 py-4 sm:py-8 z-10"><div class="p2p"><small>ABSURD PRODUCT PLACEMENT</small><strong id="p2-ask"></strong><button onclick="rotateP2('ask')">ANOTHER COMMERCIAL DECISION →</button></div>
-  <div class="bg-zinc-900 brutal-border p-4 sm:p-6 md:p-9 relative overflow-hidden">
-    <div class="absolute -right-8 -top-12 font-impact text-[170px] sm:text-[230px] text-blue-500 opacity-10 pointer-events-none rotate-12">AI</div>
-
-    <div class="relative z-10">
-      <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
-        <div class="flex gap-2">
-          <span class="text-[10px] sm:text-xs bg-blue-500 text-white font-bold px-2.5 py-1 uppercase border-2 border-black">EXPERIENCE 02</span>
-          <span id="ask-status" class="text-[10px] sm:text-xs bg-green-400 text-black font-bold px-2.5 py-1 uppercase border-2 border-black">AI: CONFIDENT</span>
-        </div>
-        <span class="font-mono text-[9px] text-zinc-600 uppercase">MODEL: ABSURD-7B*</span>
-      </div>
-
-      <h2 class="font-impact text-[clamp(3.5rem,13vw,7rem)] leading-[.78] text-blue-400 uppercase my-4">ASK ME<br>ANYTHING.</h2>
-      <p class="text-xs sm:text-sm text-zinc-400 max-w-2xl mb-6 uppercase">
-        The world's least qualified artificial intelligence. Ask a question. Get an answer that sounds confident for absolutely no reason.
-      </p>
-
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
-        <button onclick="askPreset('Why is my cat staring at the wall?')" class="ask-chip">WHY IS MY CAT STARING?</button>
-        <button onclick="askPreset('Should I quit my job?')" class="ask-chip">SHOULD I QUIT?</button>
-        <button onclick="askPreset('What is the meaning of life?')" class="ask-chip">MEANING OF LIFE?</button>
-        <button onclick="askPreset('Why is Monday so long?')" class="ask-chip">WHY IS MONDAY?</button>
-      </div>
-
-      <div class="bg-black border-4 border-blue-400 p-3 sm:p-4">
-        <label for="ask-input" class="block text-[9px] sm:text-[10px] text-blue-300 uppercase tracking-[.22em] mb-2">YOUR QUESTION</label>
-        <div class="flex flex-col sm:flex-row gap-2">
-          <input id="ask-input" type="text" maxlength="180" autocomplete="off"
-            placeholder="e.g. Why do pigeons walk like that?"
-            class="flex-1 min-h-[58px] bg-zinc-950 border-2 border-zinc-700 px-4 text-white font-mono text-sm sm:text-base focus:outline-none focus:border-blue-400">
-          <button onclick="askAbsurdAI()"
-            class="brutal-btn min-h-[58px] bg-blue-500 text-white font-impact text-xl sm:text-2xl px-6 py-3 border-4 border-black uppercase touch-manipulation">
-            ASK AI →
-          </button>
-        </div>
-      </div>
-
-      <div id="ask-output" class="hidden mt-5">
-        <div class="flex items-center justify-between border-b-2 border-blue-400 pb-2 mb-3">
-          <span class="text-[10px] text-green-400 font-bold uppercase">ABSURD AI HAS SPOKEN</span>
-          <span id="ask-confidence" class="text-[9px] text-zinc-500 uppercase">CONFIDENCE: 104%</span>
-        </div>
-        <div id="ask-thinking" class="hidden bg-black border-2 border-zinc-800 p-4 font-mono text-xs text-green-400">
-          <span class="animate-pulse">▮</span> CONSULTING 14 COMPLETELY UNRELATED SOURCES...
-        </div>
-        <div id="ask-answer-box" class="hidden bg-yellow-300 text-black border-4 border-black p-5 sm:p-7">
-          <p class="text-[9px] font-bold uppercase tracking-[.2em] mb-3">ANSWER</p>
-          <p id="ask-answer" class="font-impact text-[clamp(2rem,8vw,4.5rem)] leading-[.9] uppercase"></p>
-          <p id="ask-footnote" class="font-mono text-[9px] sm:text-[10px] mt-5 pt-3 border-t-2 border-black/30 uppercase"></p>
-        </div>
-      </div>
-
-      <div class="mt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <p class="text-[9px] text-zinc-600 uppercase">*Not trained on facts. Trained primarily on confidence.</p>
-        <button onclick="switchView('view-hub')" class="min-h-[44px] px-3 text-xs text-zinc-500 hover:text-white underline uppercase touch-manipulation">← BACK TO ABSURD HUB</button>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section id="tool-mood" style="display:none;" class="hidden absurd-view w-full max-w-2xl mx-auto px-3 sm:px-5 py-5 sm:py-8 text-center z-10"><div class="p2p"><small>ABSURD PRODUCT PLACEMENT</small><strong id="p2-mood"></strong><button onclick="rotateP2('mood')">ANOTHER COMMERCIAL DECISION →</button></div>
   <div class="bg-zinc-900 brutal-border p-5 sm:p-8">
-    <span class="text-[10px] bg-pink-600 text-white font-bold px-3 py-1 uppercase border-2 border-black">EXPERIENCE 03</span>
     <h2 class="font-impact text-[clamp(3rem,12vw,6rem)] leading-[.8] text-pink-500 my-5">MOOD<br>MACHINE</h2>
     <p class="text-xs text-zinc-400 mb-6 uppercase">Select your current emotional operating system.</p>
 
@@ -718,7 +636,6 @@
 
     <div class="relative z-10">
       <div class="flex flex-wrap justify-center items-center gap-2 mb-4">
-        <span class="text-[10px] sm:text-xs bg-orange-500 text-black font-bold px-2.5 py-1 uppercase border-2 border-black">EXPERIENCE 05</span>
         <span id="dad-round" class="text-[10px] sm:text-xs bg-pink-600 text-white font-bold px-2.5 py-1 uppercase border-2 border-black">JOKE #00</span>
       </div>
 
@@ -787,7 +704,6 @@
 
 <section id="tool-veg" style="display:none;" class="hidden absurd-view w-full max-w-2xl mx-auto px-3 sm:px-5 py-5 sm:py-8 z-10"><div class="p2p"><small>ABSURD PRODUCT PLACEMENT</small><strong id="p2-veg"></strong><button onclick="rotateP2('veg')">ANOTHER COMMERCIAL DECISION →</button></div>
   <div class="bg-zinc-900 brutal-border p-5 sm:p-8 text-center">
-    <span class="text-[10px] bg-green-400 text-black font-bold px-3 py-1 uppercase border-2 border-black">EXPERIENCE 06</span>
     <h2 class="font-impact text-[clamp(3rem,12vw,6rem)] leading-[.8] text-green-300 my-5">VEGETABLE<br>DATING</h2>
     <p class="text-xs text-zinc-400 mb-5 uppercase">Because humans have already complicated dating enough.</p>
 
@@ -811,7 +727,6 @@
 <section id="tool-end" style="display:none;" class="hidden absurd-view w-full max-w-2xl mx-auto px-3 sm:px-5 py-5 sm:py-8 text-center z-10">
   <div class="bg-red-600 text-black brutal-border p-6 sm:p-9 relative overflow-hidden">
     <div class="absolute -right-10 -top-20 font-impact text-[180px] opacity-10 pointer-events-none">END</div>
-    <span class="relative z-10 bg-black text-white px-3 py-1 text-[10px] font-bold uppercase border-2 border-white">EXPERIENCE 06</span>
     <h2 class="relative z-10 font-impact text-[clamp(4rem,15vw,8rem)] leading-[.75] uppercase my-6">YOU WERE<br>WARNED.</h2>
     <div class="relative z-10 bg-black text-green-400 p-4 font-mono text-left text-[10px] sm:text-xs border-2 border-white space-y-2 mb-6">
       <p>> INITIATING SYSTEM DESTRUCTION...</p><p>> DELETING COMMON SENSE... DONE.</p><p>> RESTORING PRODUCTIVITY... FAILED.</p><p>> USER IS STILL HERE.</p>
@@ -973,7 +888,7 @@
     function switchView(viewId) {
       const aliases = { landing:'view-landing', home:'view-hub', hub:'view-hub', report:'view-report' };
       const targetId = aliases[viewId] || viewId;
-      const views = ['view-landing','view-hub','tool-button','tool-ask','tool-mood','tool-absurdity','tool-dad','tool-veg','tool-end','view-report'];
+      const views = ['view-landing','view-hub','tool-button','tool-mood','tool-absurdity','tool-dad','tool-veg','tool-end','view-report'];
 
       views.forEach(id => {
         const el = document.getElementById(id);
@@ -1878,6 +1793,26 @@ function vegDecision(choice) {
       requestAnimationFrame(drawCursorTrail);
     }
     drawCursorTrail();
+
+    /* Home-only motion: every movement says the collection is waiting to be poked. */
+    document.addEventListener('DOMContentLoaded', () => {
+      const intro = document.getElementById('hub-intro');
+      const engine = document.getElementById('mia3-card');
+      if (intro) {
+        intro.addEventListener('pointermove', (event) => {
+          const rect = intro.getBoundingClientRect();
+          intro.style.setProperty('--mx', ((event.clientX - rect.left) / rect.width * 100) + '%');
+          intro.style.setProperty('--my', ((event.clientY - rect.top) / rect.height * 100) + '%');
+        });
+        intro.addEventListener('click', () => {
+          intro.classList.remove('is-booming'); void intro.offsetWidth; intro.classList.add('is-booming');
+        });
+      }
+      if (engine) {
+        const launch = (event) => { if (!event.target.closest('button')) document.getElementById('mia3-open')?.click(); };
+        engine.addEventListener('click', launch);
+      }
+    });
   </script>
 <footer id="absurd-footer" aria-label="ABSURD footer">
   <span id="footer-release">V0.0.2 · LOCAL REVIEW</span>
@@ -1915,6 +1850,10 @@ function vegDecision(choice) {
         <button class="mia3-mode mia6-mode" data-mode="startup" type="button"><i>04 / STARTUP</i><div class="mia6-teaser">📈<em>PRE-REVENUE</em></div><b>A BAD IDEA.</b><span>Turn nonsense into a suspicious valuation.</span></button>
         <button class="mia3-mode mia6-mode" data-mode="job" type="button"><i>05 / JOB</i><div class="mia6-teaser">💼<em>RESPECTABLE</em></div><b>AN ACCOUNTANT.</b><span>Destroy a perfectly respectable job description.</span></button>
         <button class="mia3-mode mia6-mode" data-mode="restaurant" type="button"><i>06 / FOOD</i><div class="mia6-teaser">🥞<em>EDIBLE</em></div><b>A DOSA PLACE.</b><span>Take good food. Give it venture capital.</span></button>
+      </div>
+      <div class="mia3-home-footer" aria-hidden="true">
+        <span>THESE FEET HAVE SOMEWHERE BETTER TO BE</span>
+        <div class="mia3-feet-track"><div class="mia3-feet-group"><svg><use href="#absurd-footprint"></use></svg><svg><use href="#absurd-footprint"></use></svg><svg><use href="#absurd-footprint"></use></svg><svg><use href="#absurd-footprint"></use></svg><svg><use href="#absurd-footprint"></use></svg><svg><use href="#absurd-footprint"></use></svg></div><div class="mia3-feet-group"><svg><use href="#absurd-footprint"></use></svg><svg><use href="#absurd-footprint"></use></svg><svg><use href="#absurd-footprint"></use></svg><svg><use href="#absurd-footprint"></use></svg><svg><use href="#absurd-footprint"></use></svg><svg><use href="#absurd-footprint"></use></svg></div></div>
       </div>
     </section>
     <section class="mia3-work" id="mia3-work">
