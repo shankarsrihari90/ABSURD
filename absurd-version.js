@@ -1,5 +1,5 @@
 var absurdReleaseChannel = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? 'local' : 'live';
-window.ABSURD_RELEASE = Object.freeze({ version: '0.1.2', channel: absurdReleaseChannel });
+window.ABSURD_RELEASE = Object.freeze({ version: '0.1.3', channel: absurdReleaseChannel });
 document.addEventListener('DOMContentLoaded', function () {
   var label = document.getElementById('release-version');
   if (label) label.textContent = 'V' + window.ABSURD_RELEASE.version + '-' + window.ABSURD_RELEASE.channel.toUpperCase();

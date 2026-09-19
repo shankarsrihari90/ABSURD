@@ -1,7 +1,7 @@
 (function () {
   'use strict';
   var KEY = 'absurd.profile.v1', LEGACY_KEY = 'absurd.command-dock.v1';
-  var experiences = [['tool-button','USELESS','BUTTON'],['tool-mood','MOOD','MACHINE'],['tool-dad','DAD','JOKES'],['tool-veg','VEG','DATING']];
+  var experiences = [['tool-button','USELESS','BUTTON'],['tool-mood','MOOD','MACHINE'],['tool-dad','DAD','JOKES'],['tool-veg','VEG','DATING'],['tool-zen','ABSURD','ZEN']];
   function read() { try { return Object.assign({ visits: 0, random: 0, opens: {}, clicks: 0, decisions: 0, secondsWasted: 0 }, JSON.parse(localStorage.getItem(LEGACY_KEY) || '{}'), JSON.parse(localStorage.getItem(KEY) || '{}')); } catch (_) { return { visits: 0, random: 0, opens: {}, clicks: 0, decisions: 0, secondsWasted: 0 }; } }
   function write(data) { try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (_) {} }
   function record(name) { var data = read(); data.opens[name] = (data.opens[name] || 0) + 1; write(data); }

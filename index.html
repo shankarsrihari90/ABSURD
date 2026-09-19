@@ -9,6 +9,7 @@
   <script defer src="/absurd-version.js"></script>
   <link rel="stylesheet" href="/absurd-dock.css" />
   <script defer src="/absurd-dock.js"></script>
+  <script defer src="/absurd-zen.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>.hidden{display:none!important}
     @import url('https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Impact&display=swap');
@@ -435,9 +436,9 @@
 .mia3-card--charged{position:relative;isolation:isolate;cursor:pointer;transition:transform .16s ease,box-shadow .16s ease,filter .16s ease}.mia3-card--charged:before,.mia3-card--charged:after{content:"";position:absolute;pointer-events:none;z-index:-1}.mia3-card--charged:before{inset:-10px;background:conic-gradient(from var(--charge-turn,0deg),#ff006e,#facc15,#39ff88,#00d8e8,#ff006e);filter:blur(12px);opacity:.45;animation:charge-spin 3s linear infinite}.mia3-card--charged:after{width:7px;height:7px;right:5%;top:40%;background:#fff;box-shadow:25px -36px #ff006e,-47px 34px #39ff88,69px 60px #facc15,-98px -39px #00d8e8;animation:charge-sparks 1s steps(2,end) infinite}@keyframes charge-spin{to{--charge-turn:360deg}}@property --charge-turn{syntax:'<angle>';initial-value:0deg;inherits:false}@keyframes charge-sparks{50%{transform:translate(8px,-7px) scale(1.5);opacity:.25}}
 .mia3-card--charged:hover{transform:translate(-4px,-4px) rotate(-.2deg);box-shadow:13px 13px 0 #ff006e;filter:saturate(1.3)}.mia3-card--charged .body{position:relative;overflow:hidden}.mia3-card--charged h3{max-width:12ch;text-shadow:3px 3px 0 #1976d2}.mia3-charge{display:flex;align-items:center;gap:10px;width:min(520px,100%);margin:18px 0 15px;font:900 9px monospace;letter-spacing:.08em}.mia3-charge span{height:9px;flex:1;border:2px solid #fff;background:repeating-linear-gradient(90deg,#39ff88 0 10px,#facc15 10px 16px,#ff006e 16px 24px);background-size:48px 100%;animation:charge-meter .65s linear infinite}.mia3-charge b{color:#facc15;white-space:nowrap}.mia3-charge i{font-style:normal;font-size:21px;animation:charge-sparks .6s steps(2,end) infinite}@keyframes charge-meter{to{background-position:48px 0}}.mia3-open{position:relative;overflow:hidden;font-size:11px}.mia3-open:after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 20%,rgba(255,255,255,.82) 47%,transparent 72%);transform:translateX(-120%);animation:button-sweep 2.1s ease-in-out infinite}@keyframes button-sweep{45%,100%{transform:translateX(120%)}}.mia3-dare{display:block;margin-top:13px;color:#39ff88;font:700 8px monospace;letter-spacing:.12em}
 
-.hub-grid{grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-flow:dense}.hub-card{grid-column:span 4}.hub-card-button{grid-column:span 5;border-color:#ff6b6b}.hub-card-facts{grid-column:span 4}.hub-card-mood{grid-column:span 3;border-color:#ff4d93}.hub-card-dad{grid-column:span 5;border-color:#fb923c}.hub-card-veg{grid-column:span 7;border-color:#86efac}.hub-card-button:after,.hub-card-dad:after,.hub-card-veg:after{position:absolute;z-index:0;right:14px;bottom:-17px;font:900 7rem/1 Impact,sans-serif;opacity:.12;pointer-events:none}.hub-card-button:after{content:"!";color:#ff6b6b;animation:card-pop .9s steps(2,end) infinite}.hub-card-dad:after{content:"HA";color:#fb923c;animation:dad-wobble 1.6s ease-in-out infinite}.hub-card-veg:after{content:"♥";color:#86efac;animation:leaf-float 2s ease-in-out infinite}.hub-card-facts:after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(250,204,21,.16),transparent 66%);transform:translateX(-130%);animation:fact-sweep 3s ease-in-out infinite}.hub-card-mood:after{content:"";position:absolute;width:110px;height:110px;right:12px;bottom:16px;border:5px solid #ff4d93;border-radius:50%;box-shadow:0 0 0 14px rgba(255,77,147,.1);animation:mood-heartbeat 1.4s ease-in-out infinite}@keyframes card-pop{50%{transform:scale(1.23) rotate(-8deg);opacity:.22}}@keyframes dad-wobble{50%{transform:rotate(8deg) translateY(-8px)}}@keyframes leaf-float{50%{transform:translate(-10px,-11px) rotate(11deg);opacity:.24}}@keyframes fact-sweep{55%,100%{transform:translateX(130%)}}@keyframes mood-heartbeat{50%{transform:scale(1.12);opacity:.48}}.hub-card-spark,.hub-card-pulse,.hub-card-dadmark,.hub-card-leaf{display:inline-block;margin-left:6px;animation:card-pop .9s steps(2,end) infinite}.hub-card-pulse{animation:mood-heartbeat 1.2s infinite}.hub-card-dadmark{animation:dad-wobble 1.5s ease-in-out infinite}.hub-card-leaf{animation:leaf-float 1.6s ease-in-out infinite}.hub-card:hover{filter:brightness(1.16) saturate(1.2)}
-@media(max-width:900px){.hub-card,.hub-card-button,.hub-card-facts,.hub-card-mood,.hub-card-dad,.hub-card-veg{grid-column:span 6}.hub-card-veg{grid-column:span 12}}
-@media(max-width:640px){.hub-card,.hub-card-button,.hub-card-facts,.hub-card-mood,.hub-card-dad,.hub-card-veg{grid-column:span 6}.hub-card-veg{grid-column:span 12}.hub-card-veg h3{font-size:clamp(2.2rem,10vw,3rem)}.mia3-charge b{font-size:7px}.mia3-card--charged h3{max-width:11ch}.hub-intro-orbit{display:none}}
+.hub-grid{grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-flow:dense;grid-auto-rows:72px}.hub-card{grid-column:span 4;min-height:0}.hub-card-button{grid-column:span 4;grid-row:span 4;border-color:#ff6b6b}.hub-card-facts{grid-column:span 8;grid-row:span 2;padding:14px 20px}.hub-card-facts h3,.hub-card-dad h3{margin:5px 0 4px}.hub-card-facts h3{font-size:clamp(1.7rem,2.4vw,2.25rem)}.hub-card-facts h3 br,.hub-card-dad h3 br{display:none}.hub-card-facts #ftitle{font-size:clamp(1.05rem,1.5vw,1.3rem);margin:3px 0}.hub-card-facts #fcopy{font-size:9px;line-height:1.2}.hub-card-facts .hub-cta{margin-top:6px}.collection-engine{grid-column:span 8;grid-row:span 4;margin:0!important;min-height:0}.collection-engine .body{padding:clamp(22px,4vw,36px)}.collection-engine h3{max-width:15ch}.hub-card-mood{grid-column:span 4;grid-row:span 3;border-color:#ff4d93}.hub-card-dad{grid-column:span 5;grid-row:span 2;padding:14px 20px;border-color:#fb923c}.hub-card-dad h3{font-size:clamp(2.1rem,3.1vw,2.8rem)}.hub-card-dad p{display:none}.hub-card-dad .hub-cta{margin-top:7px}.hub-card-veg{grid-column:span 3;grid-row:span 4;border-color:#86efac}.hub-card-button:after,.hub-card-dad:after,.hub-card-veg:after{position:absolute;z-index:0;right:14px;bottom:-17px;font:900 7rem/1 Impact,sans-serif;opacity:.12;pointer-events:none}.hub-card-button:after{content:"!";color:#ff6b6b;animation:card-pop .9s steps(2,end) infinite}.hub-card-dad:after{content:"HA";color:#fb923c;animation:dad-wobble 1.6s ease-in-out infinite}.hub-card-veg:after{content:"♥";color:#86efac;animation:leaf-float 2s ease-in-out infinite}.hub-card-facts:after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(250,204,21,.16),transparent 66%);transform:translateX(-130%);animation:fact-sweep 3s ease-in-out infinite}.hub-card-mood:after{content:"";position:absolute;width:110px;height:110px;right:12px;bottom:16px;border:5px solid #ff4d93;border-radius:50%;box-shadow:0 0 0 14px rgba(255,77,147,.1);animation:mood-heartbeat 1.4s ease-in-out infinite}@keyframes card-pop{50%{transform:scale(1.23) rotate(-8deg);opacity:.22}}@keyframes dad-wobble{50%{transform:rotate(8deg) translateY(-8px)}}@keyframes leaf-float{50%{transform:translate(-10px,-11px) rotate(11deg);opacity:.24}}@keyframes fact-sweep{55%,100%{transform:translateX(130%)}}@keyframes mood-heartbeat{50%{transform:scale(1.12);opacity:.48}}.hub-card-spark,.hub-card-pulse,.hub-card-dadmark,.hub-card-leaf{display:inline-block;margin-left:6px;animation:card-pop .9s steps(2,end) infinite}.hub-card-pulse{animation:mood-heartbeat 1.2s infinite}.hub-card-dadmark{animation:dad-wobble 1.5s ease-in-out infinite}.hub-card-leaf{animation:leaf-float 1.6s ease-in-out infinite}.hub-card:hover{filter:brightness(1.16) saturate(1.2)}
+@media(max-width:900px){.hub-card,.hub-card-button,.hub-card-facts,.hub-card-mood,.hub-card-dad,.hub-card-veg{grid-column:span 6}.collection-engine,.hub-card-veg{grid-column:span 12}}
+@media(max-width:640px){.hub-card,.hub-card-button,.hub-card-facts,.hub-card-mood,.hub-card-dad,.hub-card-veg{grid-column:span 6}.collection-engine{grid-column:span 12}.hub-card-veg{grid-column:span 6;grid-row:span 4}.hub-card-veg h3{font-size:clamp(2.2rem,10vw,3rem)}.mia3-charge b{font-size:7px}.mia3-card--charged h3{max-width:11ch}.hub-intro-orbit{display:none}}
 @media(prefers-reduced-motion:reduce){#hub-intro,.mia3-card--charged,.mia3-card--charged:before,.mia3-card--charged:after,.mia3-charge span,.mia3-charge i,.mia3-open:after,.hub-card:after,.hub-card-spark,.hub-card-pulse,.hub-card-dadmark,.hub-card-leaf,.hub-live,.hub-live i{animation:none!important;transition:none!important}}
 
 /* Mobile containment pass: every experience owns the available screen width,
@@ -452,6 +453,33 @@
   #feature-back{z-index:2147483590}
 }
 
+/* Collection close: the final two cards deliberately share one footprint. */
+.hub-card-veg{grid-row:span 3}
+@media(max-width:640px){.hub-card-veg{grid-row:span 3}}
+/* Facts lead the collection: it needs room to change and be read. */
+.hub-card-facts{grid-column:1/span 4;grid-row:1/span 4}
+.hub-card-button{grid-column:5/span 8;grid-row:1/span 2}
+.collection-engine{grid-column:5/span 8;grid-row:3/span 4}
+@media(max-width:900px){.hub-card-facts{grid-column:1/span 6;grid-row:1/span 4}.hub-card-button{grid-column:7/span 6;grid-row:1/span 2}.collection-engine{grid-column:span 12;grid-row:span 4}}
+@media(max-width:640px){.hub-card-facts{grid-column:1/span 6;grid-row:1/span 4}.hub-card-button{grid-column:7/span 6;grid-row:1/span 2}.collection-engine{grid-column:span 12;grid-row:span 4}}
+/* The changing content is the headline; its label stays secondary. */
+.hub-card-facts h3{font-size:clamp(1.35rem,2vw,1.8rem);line-height:.9}
+.hub-card-facts #ftitle{font-size:clamp(1.55rem,2.45vw,2.3rem);line-height:.9;margin:9px 0 7px}
+.hub-card-facts #fcopy{font-size:10px;line-height:1.3}
+/* Keep the action visible and unmistakable, even in the compact companion card. */
+.hub-card-button{padding:18px}.hub-card-button h3{font-size:clamp(2.25rem,3.25vw,3rem);margin:10px 0 7px}.hub-card-button p{font-size:12px}.hub-card-button .hub-cta{display:inline-block;align-self:flex-start;margin-top:12px;padding:8px 10px;background:#ff6b6b;color:#111;box-shadow:3px 3px 0 #fff}
+/* Compact companion: prioritise the actual action over explanatory copy. */
+.hub-card-button h3{font-size:clamp(1.55rem,2.5vw,2.1rem);line-height:.84;margin:4px 0}.hub-card-button p{display:none}.hub-card-button .hub-cta{margin-top:4px;padding:6px 8px;font-size:8px}
+/* A slightly shorter final card keeps the footer from feeling crowded. */
+.hub-card-veg{margin-bottom:18px}
+@media(max-width:900px){.hub-card-veg{grid-column:span 6;grid-row:span 3}}
+.hub-card-zen{grid-column:1/-1;grid-row:span 2;min-height:150px;border-color:#67e8f9;box-shadow:7px 7px 0 #a78bfa;background:linear-gradient(115deg,#07131a,#111 58%,#160d1c)}.hub-card-zen h3,.hub-card-zen .hub-cta{color:#a5f3fc}.hub-card-zen:after{content:"◉";position:absolute;right:22px;bottom:-25px;color:#67e8f9;font:900 10rem/1 Impact,sans-serif;opacity:.16;animation:mood-heartbeat 2.5s ease-in-out infinite}
+.zen-panel,.zen-response{border:3px solid #67e8f9;background:#0b1118;box-shadow:8px 8px 0 #a78bfa;padding:clamp(24px,5vw,52px)}.zen-kicker,.zen-who{font:700 10px monospace;letter-spacing:.15em;color:#67e8f9}.zen-panel h2{font:900 clamp(4rem,11vw,8rem)/.76 Impact,sans-serif;margin:22px 0}.zen-panel h2 span{color:#f472b6}.zen-sub{max-width:55ch;font:clamp(1rem,2vw,1.35rem)/1.5 monospace;color:#d4d4d8}.zen-primary,.zen-action{margin-top:26px;padding:15px 18px;border:3px solid #000;background:#facc15;color:#111;box-shadow:5px 5px 0 #f472b6;font:900 11px monospace;cursor:pointer}.zen-question{margin:0 0 25px;text-align:center;font:900 clamp(2.8rem,8vw,5rem)/.85 Impact,sans-serif;color:#fff}.zen-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.zen-problem{min-height:58px;border:2px solid #52525b;background:#111;color:#fff;font:700 10px monospace;cursor:pointer}.zen-problem:hover,.zen-problem:focus-visible{background:#67e8f9;color:#111;outline:3px solid #f472b6;outline-offset:2px}.zen-thought{margin:18px 0 24px;font:900 clamp(2rem,5vw,4rem)/1.02 Impact,sans-serif;color:#fff}.zen-landing{border-left:4px solid #67e8f9;padding-left:18px;font:clamp(1rem,2vw,1.3rem)/1.5 monospace;color:#d4d4d8}.zen-actions{display:flex;gap:12px;flex-wrap:wrap}.zen-action--secondary{background:#67e8f9;box-shadow:5px 5px 0 #facc15}@media(max-width:640px){.zen-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.zen-panel,.zen-response{padding:22px}.zen-panel h2{font-size:clamp(3.6rem,18vw,5.5rem)}}
+.zen-orb{width:82px;height:82px;margin:0 auto 16px;border:2px solid #67e8f9;border-radius:50%;display:grid;place-items:center;color:#a5f3fc;box-shadow:0 0 0 8px rgba(103,232,249,.08),0 0 32px rgba(167,139,250,.28);animation:zen-float 3.2s ease-in-out infinite}.zen-orb span{font:900 42px/1 Impact,sans-serif}.zen-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.zen-problem{position:relative;min-height:82px;padding:14px 12px;text-align:left;border-color:#3f4a56;font:900 clamp(.7rem,1.3vw,.9rem)/1 Impact,sans-serif;letter-spacing:.04em;transition:transform .15s ease,background .15s ease}.zen-problem:after{content:"↗";position:absolute;right:10px;bottom:8px;color:#67e8f9;font:900 13px monospace}.zen-problem:hover{transform:translate(-3px,-3px);box-shadow:4px 4px 0 #a78bfa}.zen-question{max-width:11ch;margin:0 auto 26px}@keyframes zen-float{50%{transform:translateY(-6px) rotate(5deg)}}@media(max-width:640px){.zen-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.zen-problem{min-height:74px;font-size:.78rem}.zen-orb{width:68px;height:68px;margin-bottom:14px}.zen-orb span{font-size:35px}}
+/* The lab has one non-negotiable: its primary action must never be cropped. */
+.collection-engine{grid-row:span 5}
+@media(max-width:900px){.collection-engine{grid-row:span 5}}
+@media(max-width:640px){.collection-engine{grid-row:span 5}}
 </style>
 </head>
 <body class="min-h-screen relative flex flex-col justify-between selection:bg-pink-600 selection:text-white">
@@ -525,18 +553,6 @@
     </div>
   </div>
 
-  <section class="mia3-card mia3-card--charged" id="mia3-card" aria-labelledby="mia3-card-title">
-    <div class="bar"><span><b>MAKE IT ABSURD</b> · CREATION LAB</span><span>TAKE NORMAL. ADD BAD DECISIONS.</span></div>
-    <div class="body">
-      <div class="mia3-k">ABSURDIFICATION ENGINE</div>
-      <h3 id="mia3-card-title">MAKE SOMETHING ABSURD.</h3>
-      <p>You don't need to be creative. We give you the ingredients. You make the terrible decisions.</p>
-      <div class="mia3-charge" aria-hidden="true"><span></span><b>CHAOS LEVEL: UNNECESSARILY HIGH</b><i>⚡</i></div>
-      <button class="mia3-open" id="mia3-open" type="button">ENTER THE CREATION LAB <span aria-hidden="true">→</span></button>
-      <small class="mia3-dare">CLICK BEFORE IT BECOMES SENSIBLE.</small>
-    </div>
-  </section>
-
 <div class="flex items-end justify-between gap-4 mb-4 border-b-2 border-green-400 pb-3">
     <div>
       <p class="text-green-400 text-[10px] font-bold uppercase tracking-[.3em]">THE COLLECTION</p>
@@ -554,9 +570,21 @@
 
     <article onclick="nextFact30()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nextFact30()}" class="hub-card hub-fact hub-card-facts" role="button" tabindex="0" aria-label="Show another absurd fact">
       <div class="hub-card-top"><span class="hub-number">#02</span><span id="fcount" class="hub-arrow">01/30</span></div>
-      <div><h3>ABSURD<br>FACTS.</h3><p id="ftitle">WOMBATS MAKE CUBES.</p><p id="fcopy">Actually true. Geometry has entered wildlife.</p></div>
+      <div><h3>ABSURD FACTS.</h3><p id="ftitle">WOMBATS MAKE CUBES.</p><p id="fcopy">Actually true. Geometry has entered wildlife.</p></div>
       <div class="hub-cta" id="fact-cta">TAP FOR ANOTHER FACT →</div>
     </article>
+
+    <section class="mia3-card mia3-card--charged collection-engine" id="mia3-card" aria-labelledby="mia3-card-title">
+      <div class="bar"><span><b>MAKE IT ABSURD</b> · CREATION LAB</span><span>TAKE NORMAL. ADD BAD DECISIONS.</span></div>
+      <div class="body">
+        <div class="mia3-k">ABSURDIFICATION ENGINE</div>
+        <h3 id="mia3-card-title">MAKE SOMETHING ABSURD.</h3>
+        <p>You don't need to be creative. We give you the ingredients. You make the terrible decisions.</p>
+        <div class="mia3-charge" aria-hidden="true"><span></span><b>CHAOS LEVEL: UNNECESSARILY HIGH</b><i>⚡</i></div>
+        <button class="mia3-open" id="mia3-open" type="button">ENTER THE CREATION LAB <span aria-hidden="true">→</span></button>
+        <small class="mia3-dare">CLICK BEFORE IT BECOMES SENSIBLE.</small>
+      </div>
+    </section>
 
     <article onclick="switchView('tool-mood')" class="hub-card hub-pink hub-card-mood">
       <div class="hub-card-top"><span class="hub-number">#03</span><span class="hub-arrow">↗</span></div>
@@ -566,7 +594,7 @@
 
     <article onclick="switchView('tool-dad')" class="hub-card hub-orange hub-card-dad">
       <div class="hub-card-top"><span class="hub-number">#04</span><span class="hub-arrow">↗</span></div>
-      <div><h3>DAD<br>JOKES</h3><p>Setup. Anticipation. Punchline. Regret.</p></div>
+      <div><h3>DAD JOKES</h3><p>Setup. Anticipation. Punchline. Regret.</p></div>
       <div class="hub-cta">DAMAGE MY HUMOUR → <span class="hub-card-dadmark" aria-hidden="true">☻</span></div>
     </article>
 
@@ -575,8 +603,21 @@
       <div><h3>VEGETABLE<br>DATING</h3><p>Find your produce soulmate. Swipe is apparently too normal.</p></div>
       <div class="hub-cta">FIND LOVE → <span class="hub-card-leaf" aria-hidden="true">✦</span></div>
     </article>
+    <article onclick="switchView('tool-zen')" class="hub-card hub-card-zen">
+      <div class="hub-card-top"><span class="hub-number bg-cyan-300">#06</span><span class="hub-arrow">↗</span></div>
+      <div><h3>ABSURD ZEN.</h3><p>AN UNLICENSED ATTEMPT AT INNER PEACE.</p></div>
+      <div class="hub-cta">UNDERSTAND NOTHING →</div>
+    </article>
   </div>
 
+</section>
+
+<section id="tool-zen" style="display:none;" class="hidden absurd-view w-full max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-10 z-10" aria-labelledby="zen-title">
+  <div id="zen-intro" class="zen-panel">
+    <p class="zen-kicker">A COMPLETELY UNLICENSED ATTEMPT AT INNER PEACE</p><h2 id="zen-title">ENTER<br><span>ABSURD ZEN.</span></h2><p class="zen-sub">Thousands of years of humans asking impossible questions. You have approximately three minutes.</p><button id="zen-enter" type="button" class="zen-primary">I AM READY TO UNDERSTAND NOTHING →</button>
+  </div>
+  <div id="zen-picker" class="hidden"><div class="zen-orb" aria-hidden="true"><span>◉</span></div><h2 class="zen-question">WHAT IS TROUBLING YOU?</h2><div id="zen-problems" class="zen-grid" aria-label="Human problems"></div></div>
+  <div id="zen-response" class="hidden zen-response" aria-live="polite"></div>
 </section>
 
 <section id="tool-button" style="display:none;" class="hidden absurd-view w-full max-w-2xl mx-auto px-3 sm:px-5 py-5 sm:py-8 text-center z-10"><div class="p2p"><small>ABSURD PRODUCT PLACEMENT</small><strong id="p2-button"></strong><button onclick="rotateP2('button')">ANOTHER COMMERCIAL DECISION →</button></div>
@@ -888,7 +929,7 @@
     function switchView(viewId) {
       const aliases = { landing:'view-landing', home:'view-hub', hub:'view-hub', report:'view-report' };
       const targetId = aliases[viewId] || viewId;
-      const views = ['view-landing','view-hub','tool-button','tool-mood','tool-absurdity','tool-dad','tool-veg','tool-end','view-report'];
+      const views = ['view-landing','view-hub','tool-button','tool-mood','tool-absurdity','tool-dad','tool-veg','tool-zen','tool-end','view-report'];
 
       views.forEach(id => {
         const el = document.getElementById(id);
@@ -930,6 +971,7 @@
       if (featureBack) featureBack.classList.toggle('show', targetId.startsWith('tool-'));
 
       if (targetId === 'view-report') populateReport();
+      if (targetId === 'tool-zen' && window.absurdZenOpen) window.absurdZenOpen();
       window.dispatchEvent(new CustomEvent('absurd:view', {detail:targetId}));
       window.scrollTo({top:0, behavior:'instant'});
     }

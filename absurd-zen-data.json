@@ -1,0 +1,502 @@
+{
+  "JOBS": [
+    [
+      "EPICTETUS",
+      "STOICISM",
+      "Your job can be taken from you. Your ability to choose how you meet this day is harder to take.",
+      "Separate the role from the person playing it."
+    ],
+    [
+      "CONFUCIUS",
+      "CONFUCIAN THOUGHT",
+      "Work is also a practice of character: how you behave in a role shapes the person you become.",
+      "Ask not only “What am I getting?” but “How am I showing up?”"
+    ],
+    [
+      "ARISTOTLE",
+      "VIRTUE ETHICS",
+      "A good working life is not built from one grand decision. It is built from repeated actions that form ability and character.",
+      "Practise the person you want your work to produce."
+    ]
+  ],
+  "MONEY": [
+    [
+      "EPICTETUS",
+      "STOICISM",
+      "Money is useful, but it belongs to the category of things fortune can rearrange.",
+      "Build your life so your peace is not entirely employed by your bank balance."
+    ],
+    [
+      "EPICURUS",
+      "EPICUREANISM",
+      "Desire grows easily. Enough is harder to notice.",
+      "Before asking how to have more, ask which wants actually make life better."
+    ],
+    [
+      "SENECA",
+      "STOICISM",
+      "Wealth cannot remove every fear; sometimes it simply gives fear a larger house.",
+      "Use money. Do not ask it to explain your worth."
+    ]
+  ],
+  "CAREER": [
+    [
+      "ARISTOTLE",
+      "VIRTUE ETHICS",
+      "A career is a long accumulation of practice. Repeated choices become capacities; capacities become character.",
+      "Choose the next practice, not the final title."
+    ],
+    [
+      "NIETZSCHE",
+      "SELF-OVERCOMING",
+      "Do not inherit every measure of success without examining it.",
+      "Make sure the ladder is leaning against a wall you chose."
+    ],
+    [
+      "BHAGAVAD GITA",
+      "KARMA YOGA",
+      "Give yourself fully to the action without demanding that the future obey you.",
+      "Work on the work. Loosen your grip on the applause."
+    ]
+  ],
+  "RELATIONSHIP": [
+    [
+      "CONFUCIUS",
+      "RELATIONAL ETHICS",
+      "A relationship is not only a feeling between two private selves. It is something practised through attention, conduct and reciprocity.",
+      "Love also has verbs."
+    ],
+    [
+      "ZHUANGZI",
+      "DAOIST THOUGHT",
+      "Your view of the other person comes from somewhere. Their view comes from somewhere too.",
+      "Before winning the argument, notice the perspective you are standing inside."
+    ],
+    [
+      "SIMONE DE BEAUVOIR",
+      "EXISTENTIAL ETHICS",
+      "Love becomes difficult when one freedom tries to possess another.",
+      "Stay close without turning another person into property."
+    ]
+  ],
+  "LOVE": [
+    [
+      "ERICH FROMM",
+      "HUMANISTIC PHILOSOPHY",
+      "Love is not only something that happens to you. It can also be understood as a capacity requiring care, knowledge and practice.",
+      "Do not only ask whether you are loved. Ask how you love."
+    ],
+    [
+      "EPICURUS",
+      "EPICUREANISM",
+      "A life made secure by friendship may contain more happiness than a life spent endlessly chasing intensity.",
+      "Do not underestimate peaceful affection."
+    ],
+    [
+      "BEAUVOIR",
+      "EXISTENTIAL ETHICS",
+      "Two people do not become one person. A richer love can make room for two freedoms.",
+      "Together is not the same as owned."
+    ]
+  ],
+  "MARRIAGE": [
+    [
+      "CONFUCIAN TRADITION",
+      "RELATIONAL ETHICS",
+      "Roles do not become humane merely because tradition names them. They have to be lived with reciprocity and care.",
+      "Ask what you owe each other, not only what you expect from each other."
+    ],
+    [
+      "ARISTOTLE",
+      "VIRTUE ETHICS",
+      "Shared life is shaped by repeated conduct more than occasional declarations.",
+      "The ordinary Tuesday is part of the marriage too."
+    ],
+    [
+      "CARE ETHICS",
+      "RELATIONAL ETHICS",
+      "Care means noticing needs, dependence and unequal burdens rather than assuming love automatically distributes them fairly.",
+      "Pay attention to who is carrying what."
+    ]
+  ],
+  "FAMILY": [
+    [
+      "CONFUCIUS",
+      "CONFUCIAN THOUGHT",
+      "We become ourselves inside relationships before we ever imagine ourselves as independent individuals.",
+      "Family can be a place of obligation without being a place where reflection ends."
+    ],
+    [
+      "BUDDHIST THOUGHT",
+      "COMPASSION",
+      "Seeing another person's suffering does not require approving every action that comes from it.",
+      "Compassion and boundaries can occupy the same room."
+    ],
+    [
+      "ZHUANGZI",
+      "DAOIST THOUGHT",
+      "The people closest to us are especially easy to trap inside old descriptions.",
+      "Leave room for someone familiar to become unfamiliar again."
+    ]
+  ],
+  "FRIENDS": [
+    [
+      "EPICURUS",
+      "EPICUREANISM",
+      "Friendship was not decoration in Epicurean life. It was central to security and happiness.",
+      "Invest in the people beside whom you can stop performing."
+    ],
+    [
+      "ARISTOTLE",
+      "PHILOSOPHY OF FRIENDSHIP",
+      "Some friendships are based on usefulness, some on pleasure, and some on mutual appreciation of character.",
+      "Notice what the friendship is actually built from."
+    ],
+    [
+      "CONFUCIAN THOUGHT",
+      "RELATIONAL ETHICS",
+      "Good companions do more than agree with you; relationships can participate in moral cultivation.",
+      "A friend can be kind without always being convenient."
+    ]
+  ],
+  "EDUCATION": [
+    [
+      "SOCRATIC TRADITION",
+      "INQUIRY",
+      "Education begins to deepen when knowing the answer matters less than learning how to examine the question.",
+      "Do not confuse information with understanding."
+    ],
+    [
+      "CONFUCIUS",
+      "LEARNING",
+      "Learning and reflection need one another. Repetition without thought and thought without learning can both go astray.",
+      "Study. Then let the study change how you see."
+    ],
+    [
+      "JOHN DEWEY",
+      "PRAGMATISM",
+      "Learning is not preparation for a distant life detached from the present; experience itself educates.",
+      "Use knowledge somewhere."
+    ]
+  ],
+  "WORK": [
+    [
+      "BHAGAVAD GITA",
+      "KARMA YOGA",
+      "You can commit to action without controlling every consequence of the action.",
+      "Put your attention where your hands are."
+    ],
+    [
+      "MARCUS AURELIUS",
+      "STOICISM",
+      "The task in front of you does not need to become a referendum on your entire life.",
+      "Do the next necessary thing well."
+    ],
+    [
+      "DAOIST THOUGHT",
+      "WU-WEI",
+      "Effort is not always improved by adding more force. Skill sometimes appears as less friction.",
+      "Try alignment before exhaustion."
+    ]
+  ],
+  "HEALTH": [
+    [
+      "STOIC TRADITION",
+      "STOICISM",
+      "The body matters, but complete command over it was never promised to us.",
+      "Care for what you can influence without turning uncertainty into a moral failure."
+    ],
+    [
+      "BUDDHIST THOUGHT",
+      "MINDFUL AWARENESS",
+      "Pain and fear are real experiences; the mind can also add layers of resistance, prediction and identity around them.",
+      "Meet what is here before fighting what might be next."
+    ],
+    [
+      "EPICURUS",
+      "EPICUREANISM",
+      "Freedom from bodily pain and mental disturbance mattered deeply to Epicurus, but so did learning which fears are needless.",
+      "Care for the body. Examine the fear."
+    ]
+  ],
+  "STRESS": [
+    [
+      "EPICTETUS",
+      "STOICISM",
+      "Part of distress comes from treating what is outside our control as though anxiety could control it.",
+      "Find the part that is yours. Work there."
+    ],
+    [
+      "ZEN TRADITION",
+      "ZEN PRACTICE",
+      "The mind can live ten minutes ahead of the body all day.",
+      "Return to the activity actually happening."
+    ],
+    [
+      "DAOIST THOUGHT",
+      "DAOISM",
+      "Not every knot opens by pulling harder.",
+      "Reduce unnecessary force."
+    ]
+  ],
+  "FAILURE": [
+    [
+      "ZHUANGZI",
+      "DAOIST THOUGHT",
+      "A judgment that looks final from one perspective may look different from another.",
+      "Do not confuse this moment's verdict with the whole shape of your life."
+    ],
+    [
+      "MARCUS AURELIUS",
+      "STOICISM",
+      "An obstacle changes the work; it does not automatically end the possibility of worthwhile action.",
+      "Begin again with what remains."
+    ],
+    [
+      "PRAGMATISM",
+      "PRAGMATISM",
+      "An idea that fails in experience has taught you something an untouched idea cannot.",
+      "Use the consequence as information."
+    ]
+  ],
+  "LONELINESS": [
+    [
+      "EPICURUS",
+      "EPICUREANISM",
+      "Friendship belongs near the center of a good life, not at its decorative edge.",
+      "Do not wait for connection to become an emergency."
+    ],
+    [
+      "MARTIN BUBER",
+      "DIALOGICAL PHILOSOPHY",
+      "A person is not merely an object in your world. Genuine encounter changes the relation itself.",
+      "Look for someone you can meet, not merely use or impress."
+    ],
+    [
+      "BUDDHIST THOUGHT",
+      "INTERDEPENDENCE",
+      "The separate self is less self-sufficient than it appears; life is constituted through conditions and relations.",
+      "Isolation is an experience. It need not become your definition."
+    ]
+  ],
+  "CONFIDENCE": [
+    [
+      "SOCRATIC TRADITION",
+      "INQUIRY",
+      "Confidence without examination can become ignorance wearing good posture.",
+      "You do not need certainty to begin."
+    ],
+    [
+      "ARISTOTLE",
+      "VIRTUE ETHICS",
+      "Capability grows through doing. Character is trained in action.",
+      "Let practice manufacture some of the confidence."
+    ],
+    [
+      "EPICTETUS",
+      "STOICISM",
+      "Place confidence in your capacity to choose and respond, not in a guarantee that events will cooperate.",
+      "Trust the part of you that can meet what comes."
+    ]
+  ],
+  "PURPOSE": [
+    [
+      "ALBERT CAMUS",
+      "ABSURDISM",
+      "The universe may not hand you an ultimate explanation. That does not prevent a life from being lived intensely and lucidly.",
+      "Meaning does not have to arrive before living begins."
+    ],
+    [
+      "ARISTOTLE",
+      "EUDAIMONIA",
+      "A flourishing life is understood across a whole pattern of activity, character and relationship, not a single slogan called purpose.",
+      "Build a life worth describing, not merely a mission statement."
+    ],
+    [
+      "EXISTENTIALIST TRADITION",
+      "EXISTENTIALISM",
+      "Meaning can be something enacted through commitments rather than discovered like a hidden object.",
+      "Choose, then take responsibility for the choosing."
+    ]
+  ],
+  "DECISIONS": [
+    [
+      "ZHUANGZI",
+      "DAOIST THOUGHT",
+      "Your present perspective is real, but it is not the only possible perspective.",
+      "Before deciding, move the chair you are thinking from."
+    ],
+    [
+      "ARISTOTLE",
+      "PRACTICAL WISDOM",
+      "Practical decisions cannot always be solved by universal rules; judgment has to meet particulars.",
+      "Ask what this situation requires, not only what the rule says."
+    ],
+    [
+      "EPICTETUS",
+      "STOICISM",
+      "A decision becomes clearer when you separate your choice from the outcome you wish you could guarantee.",
+      "Choose the action. Release the prophecy."
+    ]
+  ],
+  "LOSS": [
+    [
+      "BUDDHIST THOUGHT",
+      "IMPERMANENCE",
+      "What we love is vulnerable to change precisely because it exists in time.",
+      "Grief is not proof that attachment was a mistake."
+    ],
+    [
+      "STOIC TRADITION",
+      "MORTALITY",
+      "Remembering impermanence is not meant to make love smaller. It can make attention more urgent.",
+      "What is temporary can still be precious."
+    ],
+    [
+      "ZHUANGZI",
+      "DAOIST THOUGHT",
+      "Zhuangzi's writings repeatedly unsettle fixed judgments about transformation, life and death.",
+      "Do not demand that change ask permission first."
+    ]
+  ],
+  "ANGER": [
+    [
+      "SENECA",
+      "STOICISM",
+      "Anger often arrives with a judgment that reality has violated what should have happened.",
+      "Examine the judgment before giving the anger the keys."
+    ],
+    [
+      "BUDDHIST ETHICS",
+      "COMPASSION",
+      "Hatred does not become wise simply because the injury was real.",
+      "Protect yourself without letting the wound choose your character."
+    ],
+    [
+      "ARISTOTLE",
+      "VIRTUE ETHICS",
+      "The question is not simply whether anger exists, but toward whom, for what, how much and how it is expressed.",
+      "Emotion also needs judgment."
+    ]
+  ],
+  "FEAR": [
+    [
+      "EPICTETUS",
+      "STOICISM",
+      "Fear often reaches toward an imagined future and treats it as already present.",
+      "Return to what is actually being asked of you now."
+    ],
+    [
+      "EPICURUS",
+      "EPICUREANISM",
+      "Epicurean philosophy spends remarkable energy dismantling unnecessary fears.",
+      "Ask whether the fear protects you or merely occupies you."
+    ],
+    [
+      "KIERKEGAARD",
+      "EXISTENTIAL THOUGHT",
+      "Anxiety can accompany possibility itself: freedom opens more than one future.",
+      "Uncertainty is frightening partly because something remains possible."
+    ]
+  ],
+  "CHANGE": [
+    [
+      "HERACLITEAN TRADITION",
+      "CHANGE",
+      "Reality does not owe us stillness.",
+      "Build balance that can move."
+    ],
+    [
+      "BUDDHIST THOUGHT",
+      "IMPERMANENCE",
+      "Conditions arise, alter and pass. Suffering grows when the mind demands permanence from them.",
+      "Let change be information before making it an enemy."
+    ],
+    [
+      "DAOIST THOUGHT",
+      "DAOISM",
+      "A rigid thing can break where something responsive bends.",
+      "Adaptation is not always surrender."
+    ]
+  ],
+  "PARENTS": [
+    [
+      "CONFUCIAN THOUGHT",
+      "FILIAL RELATIONSHIP",
+      "Respect for parents is important in Confucian traditions, but the tradition also contains ideas of remonstrance rather than blind obedience.",
+      "Respect does not require the disappearance of judgment."
+    ],
+    [
+      "CARE ETHICS",
+      "RELATIONAL ETHICS",
+      "Family obligations are real, but care must notice vulnerability, burden and context rather than rely on a single abstract rule.",
+      "Ask what care requires here, from everyone involved."
+    ],
+    [
+      "BUDDHIST THOUGHT",
+      "COMPASSION",
+      "Seeing your parents as conditioned human beings can soften an impossible expectation: that they should have been perfect.",
+      "Understanding is not the same as excusing."
+    ]
+  ],
+  "CHILDREN": [
+    [
+      "CONFUCIAN THOUGHT",
+      "RELATIONAL ETHICS",
+      "Education of character happens through example and relationship, not instruction alone.",
+      "They are also learning from how you live."
+    ],
+    [
+      "ARISTOTELIAN ETHICS",
+      "HABIT",
+      "Habits formed early shape dispositions, but flourishing also requires judgment rather than mechanical obedience.",
+      "Teach practices that can eventually survive without you."
+    ],
+    [
+      "CARE ETHICS",
+      "CARE",
+      "A child is dependent and becoming independent at the same time.",
+      "Care for who they are while making room for who they are becoming."
+    ]
+  ],
+  "TIME": [
+    [
+      "SENECA",
+      "STOICISM",
+      "We guard possessions carefully while allowing time to disappear almost unnoticed.",
+      "Treat attention as part of your life, because it is."
+    ],
+    [
+      "MARCUS AURELIUS",
+      "STOICISM",
+      "The present is the only portion of time in which action can occur.",
+      "Do not spend the whole day negotiating with later."
+    ],
+    [
+      "ZEN TRADITION",
+      "ZEN PRACTICE",
+      "A life can be missed while the mind repeatedly rehearses another moment.",
+      "Come back to this one."
+    ]
+  ],
+  "FUTURE": [
+    [
+      "EPICTETUS",
+      "STOICISM",
+      "The future contains many things that are not yours to command.",
+      "Prepare where you can. Do not demand certainty as the price of moving."
+    ],
+    [
+      "CAMUS",
+      "ABSURDISM",
+      "An ultimate guarantee of meaning is unavailable; living does not therefore have to stop.",
+      "A future without guarantees is still a future you can enter."
+    ],
+    [
+      "ZHUANGZI",
+      "DAOIST THOUGHT",
+      "Our present categories are not large enough to contain every transformation ahead.",
+      "Leave the future some room to surprise your current self."
+    ]
+  ]
+}

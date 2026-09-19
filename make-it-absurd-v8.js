@@ -117,5 +117,5 @@ $('mia3-open').addEventListener('click',open);$('mia3-back').addEventListener('c
 document.querySelectorAll('.mia3-mode').forEach(b=>b.addEventListener('click',()=>start(b.dataset.mode)));
 $('mia3-steps').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.hasAttribute('data-undo'))undo();else if(b.dataset.v)select(step,b.dataset.v)});
 $('mia3-worse').addEventListener('click',worse);$('mia3-another').addEventListener('click',home);$('mia6-share').addEventListener('click',()=>share());
-window.__MIA3__={open,start,select,worse,undo,get:()=>({mode,step,picks:picks.slice(),busy}),canvas:()=>finalCanvas};
+window.__MIA3__={open,close,start,select,worse,undo,get:()=>({mode,step,picks:picks.slice(),busy}),canvas:()=>finalCanvas};
 })();

@@ -12,7 +12,7 @@ http.createServer((request, response) => {
   }
 
   const pathname = new URL(request.url, 'http://localhost').pathname;
-  const routes = {'/':'index.html','/index.html':'index.html','/calm-game.css':'calm-game.css','/calm-game.js':'calm-game.js','/make-it-absurd.css':'make-it-absurd.css','/make-it-absurd.js':'make-it-absurd.js','/make-it-absurd-v8.css':'make-it-absurd-v8.css','/make-it-absurd-v8.js':'make-it-absurd-v8.js','/absurd-version.js':'absurd-version.js','/absurd-dock.css':'absurd-dock.css','/absurd-dock.js':'absurd-dock.js'};
+  const routes = {'/':'index.html','/index.html':'index.html','/calm-game.css':'calm-game.css','/calm-game.js':'calm-game.js','/make-it-absurd.css':'make-it-absurd.css','/make-it-absurd.js':'make-it-absurd.js','/make-it-absurd-v8.css':'make-it-absurd-v8.css','/make-it-absurd-v8.js':'make-it-absurd-v8.js','/absurd-version.js':'absurd-version.js','/absurd-dock.css':'absurd-dock.css','/absurd-dock.js':'absurd-dock.js','/absurd-zen.js':'absurd-zen.js','/absurd-zen-data.json':'absurd-zen-data.json'};
   if (!Object.hasOwn(routes, pathname)) {
     response.writeHead(404);
     return response.end('Not found');
