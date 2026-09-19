@@ -205,7 +205,7 @@
     .hub-card:nth-child(2){animation-delay:.05s}.hub-card:nth-child(3){animation-delay:.1s}.hub-card:nth-child(4){animation-delay:.15s}.hub-card:nth-child(5){animation-delay:.2s}.hub-card:nth-child(6){animation-delay:.25s}
     @keyframes collection-card-in{from{opacity:0;transform:translateY(14px) rotate(.4deg)}to{opacity:1;transform:translateY(0) rotate(0)}}
     .hub-card-top{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;}
-    .hub-number{display:inline-block;padding:4px 8px;border:1px solid #000;background:#f44;color:#fff;font:700 10px monospace;}
+    .hub-number{width:20px;height:20px;display:grid;place-items:center;padding:0;border:1px solid #000;border-radius:50%;background:#f44;color:#fff;font:900 9px/1 monospace;box-shadow:2px 2px 0 #fff;}
     .hub-arrow{font:700 18px monospace;opacity:.45;transition:transform .16s ease,opacity .16s ease;}
     .hub-card:hover .hub-arrow{transform:translate(3px,-3px);opacity:1;}
     .hub-card h3{font-family:Impact, Haettenschweiler, "Arial Narrow Bold",sans-serif;font-size:clamp(2.3rem,4vw,3.4rem);line-height:.83;letter-spacing:-.02em;margin:20px 0 12px;position:relative;z-index:1;}
@@ -236,7 +236,7 @@
       .hub-card p{display:none;}
       .hub-fact h3{font-size:clamp(1.42rem,7.3vw,2.1rem);line-height:.9;}
       .hub-fact p{display:block;}.hub-fact #ftitle{font-size:clamp(1.05rem,5.6vw,1.42rem);margin:7px 0 5px}.hub-fact #fcopy{font-size:8px;line-height:1.25}
-      .hub-number{font-size:8px;padding:3px 6px}.hub-arrow{font-size:15px}.hub-cta{font-size:8px;margin-top:8px;}
+      .hub-number{width:17px;height:17px;font-size:7px;padding:0}.hub-arrow{font-size:15px}.hub-cta{font-size:8px;margin-top:8px;}
       .hub-intro{padding:18px !important;}
       .hub-stat{padding:9px 7px;display:block}.hub-stat b{display:block;margin-top:4px;}
     }
@@ -480,6 +480,9 @@
 .collection-engine{grid-row:span 5}
 @media(max-width:900px){.collection-engine{grid-row:span 5}}
 @media(max-width:640px){.collection-engine{grid-row:span 5}}
+.hub-card-zen .hub-number{background:#67e8f9;color:#111}.hub-card-veg h3{font-size:clamp(1.45rem,6.2vw,2.2rem);letter-spacing:-.045em}
+/* Wide screens use a complete final row: no orphaned desktop column. */
+@media(min-width:901px){.hub-card-dad{grid-column:span 5;grid-row:span 3}.hub-card-veg{grid-column:span 3;grid-row:span 3;margin-bottom:0}.hub-card-zen{grid-column:span 4;grid-row:span 3;min-height:0}}
 </style>
 </head>
 <body class="min-h-screen relative flex flex-col justify-between selection:bg-pink-600 selection:text-white">
@@ -563,14 +566,14 @@
 
   <div class="hub-grid">
     <article onclick="switchView('tool-button')" class="hub-card hub-red hub-card-button">
-      <div class="hub-card-top"><span class="hub-number">#01</span><span class="hub-arrow">↗</span></div>
+      <div class="hub-card-top"><span class="hub-number" aria-hidden="true">●</span><span class="hub-arrow">↗</span></div>
       <div><h3>THE USELESS<br>BUTTON</h3><p>Press a button that does nothing. Then make it personal.</p></div>
       <div class="hub-cta">PRESS IT → <span class="hub-card-spark" aria-hidden="true">●</span></div>
     </article>
 
     <article onclick="nextFact30()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nextFact30()}" class="hub-card hub-fact hub-card-facts" role="button" tabindex="0" aria-label="Show another absurd fact">
-      <div class="hub-card-top"><span class="hub-number">#02</span><span id="fcount" class="hub-arrow">01/30</span></div>
-      <div><h3>ABSURD FACTS.</h3><p id="ftitle">WOMBATS MAKE CUBES.</p><p id="fcopy">Actually true. Geometry has entered wildlife.</p></div>
+      <div class="hub-card-top"><span class="hub-number" aria-hidden="true">●</span><span id="fcount" class="hub-arrow">01/30</span></div>
+      <div><h3>ABSURD FACTS.</h3><p id="ftitle">SHARKS EXISTED ON EARTH BEFORE TREES.</p><p id="fcopy"></p></div>
       <div class="hub-cta" id="fact-cta">TAP FOR ANOTHER FACT →</div>
     </article>
 
@@ -587,24 +590,24 @@
     </section>
 
     <article onclick="switchView('tool-mood')" class="hub-card hub-pink hub-card-mood">
-      <div class="hub-card-top"><span class="hub-number">#03</span><span class="hub-arrow">↗</span></div>
+      <div class="hub-card-top"><span class="hub-number" aria-hidden="true">●</span><span class="hub-arrow">↗</span></div>
       <div><h3>MOOD<br>MACHINE</h3><p>Tell the machine how you feel. It will immediately make it worse.</p></div>
       <div class="hub-cta">DIAGNOSE ME → <span class="hub-card-pulse" aria-hidden="true">♥</span></div>
     </article>
 
     <article onclick="switchView('tool-dad')" class="hub-card hub-orange hub-card-dad">
-      <div class="hub-card-top"><span class="hub-number">#04</span><span class="hub-arrow">↗</span></div>
+      <div class="hub-card-top"><span class="hub-number" aria-hidden="true">●</span><span class="hub-arrow">↗</span></div>
       <div><h3>DAD JOKES</h3><p>Setup. Anticipation. Punchline. Regret.</p></div>
       <div class="hub-cta">DAMAGE MY HUMOUR → <span class="hub-card-dadmark" aria-hidden="true">☻</span></div>
     </article>
 
     <article onclick="switchView('tool-veg')" class="hub-card hub-green hub-card-veg">
-      <div class="hub-card-top"><span class="hub-number">#05</span><span class="hub-arrow">↗</span></div>
+      <div class="hub-card-top"><span class="hub-number" aria-hidden="true">●</span><span class="hub-arrow">↗</span></div>
       <div><h3>VEGETABLE<br>DATING</h3><p>Find your produce soulmate. Swipe is apparently too normal.</p></div>
       <div class="hub-cta">FIND LOVE → <span class="hub-card-leaf" aria-hidden="true">✦</span></div>
     </article>
     <article onclick="switchView('tool-zen')" class="hub-card hub-card-zen">
-      <div class="hub-card-top"><span class="hub-number bg-cyan-300">#06</span><span class="hub-arrow">↗</span></div>
+      <div class="hub-card-top"><span class="hub-number" aria-hidden="true">●</span><span class="hub-arrow">↗</span></div>
       <div><h3>ABSURD ZEN.</h3><p>AN UNLICENSED ATTEMPT AT INNER PEACE.</p></div>
       <div class="hub-cta">UNDERSTAND NOTHING →</div>
     </article>
@@ -1569,7 +1572,7 @@ function triggerStupidThinking(customMessage) {
     }
 
     const facts30=[
-["WOMBATS PRODUCE CUBE-SHAPED DROPPINGS.","Their intestines shape the feces into cubes."],["OCTOPUSES HAVE THREE HEARTS.","Two pump to the gills; one pumps around the body."],["A DAY ON VENUS IS LONGER THAN A YEAR ON VENUS.","Venus rotates extraordinarily slowly."],["BANANAS ARE BERRIES. STRAWBERRIES AREN'T.","Botany has rejected common sense."],["SHARKS EXISTED BEFORE TREES.","Shark ancestors predate the first known trees."],["THE EIFFEL TOWER GETS TALLER IN HOT WEATHER.","Thermal expansion adds several centimetres."],["SOME TURTLES BREATHE THROUGH THEIR REAR END.","Certain species use cloacal respiration."],["SEA OTTERS SOMETIMES HOLD HANDS WHILE SLEEPING.","It can help keep their raft together."],["A GROUP OF FLAMINGOS IS A FLAMBOYANCE.","English saw flamingos and chose accuracy."],["CROWS CAN RECOGNISE HUMAN FACES.","They can remember particular people for years."],["BUTTERFLIES TASTE WITH THEIR FEET.","Their feet contain taste receptors."],["SNAILS CAN HAVE THOUSANDS OF TINY TEETH.","Their radula carries rows of microscopic teeth."],["KOALA FINGERPRINTS LOOK REMARKABLY HUMAN.","Their ridge patterns are unusually similar to ours."],["RAVENS CAN MIMIC HUMAN SPEECH.","Some captive ravens imitate words and sounds."],["AXOLOTLS CAN REGENERATE LIMBS.","They can regrow complex tissues."],["ONE JELLYFISH CAN REVERT TO AN EARLIER LIFE STAGE.","Turritopsis dohrnii can reverse its life cycle."],["POLAR BEAR SKIN IS BLACK.","The fur looks white; the skin underneath is dark."],["SLOTHS CAN HOLD THEIR BREATH FOR ABOUT 40 MINUTES.","They slow their heart rate while submerged."],["GOATS HAVE RECTANGULAR PUPILS.","The shape gives a broad horizontal field of view."],["SOME FROGS CAN FREEZE AND SURVIVE.","Wood frogs tolerate much of their body water freezing."],["HONEY CAN LAST AN EXTRAORDINARILY LONG TIME.","Low moisture and acidity inhibit many microbes."],["THE HUMAN BODY GLOWS VERY FAINTLY.","Humans emit ultraweak visible photons."],["LIGHTNING CAN BE HOTTER THAN THE SUN'S SURFACE.","A lightning channel can briefly reach around 30,000 K."],["THERE ARE LAKES BENEATH ANTARCTICA'S ICE.","Hundreds of subglacial lakes exist there."],["SOME BAMBOO CAN GROW NEARLY A METRE A DAY.","Certain species are among Earth's fastest-growing plants."],["MALE SEAHORSES CARRY THE PREGNANCY.","Embryos develop in the male's brood pouch."],["A SHRIMP'S HEART IS IN ITS HEAD REGION.","It sits in the cephalothorax."],["THE MOON HAS MOONQUAKES.","Apollo seismometers detected lunar seismic activity."],["WOODPECKERS WRAP THEIR TONGUES AROUND THEIR SKULLS.","Their tongue apparatus extends around the skull."],["CATS CANNOT TASTE SWEETNESS.","They lack a functional sweet-taste receptor." ]];
+["SHARKS EXISTED ON EARTH ROUGHLY 50 MILLION YEARS BEFORE TREES DID.",""],["A DAY ON VENUS IS LONGER THAN A WHOLE YEAR ON VENUS.",""],["HONEY NEVER SPOILS; EDIBLE HONEY HAS BEEN FOUND IN 3,000-YEAR-OLD EGYPTIAN TOMBS.",""],["PLATYPUSES SWEAT MILK OUT OF THEIR SKIN FOR THEIR BABIES TO DRINK.",""],["BANANAS, LEMONS, AND PUMPKINS ARE TECHNICALLY BERRIES; STRAWBERRIES ARE NOT.",""],["SHARKS ARE OLDER THAN SATURN'S RINGS.",""],["SCOTLAND HAS 421 WORDS FOR SNOW.",""],["AN OSTRICH'S EYE IS BIGGER THAN ITS ENTIRE BRAIN.",""],["FRANCE PERFORMED ITS FINAL GUILLOTINE EXECUTION IN 1977.",""],["WOMBAT POOP IS UNIQUELY CUBE-SHAPED.",""],["THE SHORTEST WAR IN HISTORY LASTED ONLY 38 MINUTES.",""],["SEA OTTERS HOLD HANDS WHILE THEY SLEEP SO THEY DO NOT FLOAT AWAY.",""],["TURTLES CAN BREATHE THROUGH THEIR REAR ENDS.",""],["CLEOPATRA LIVED CLOSER TO APOLLO 11 THAN TO THE BUILDING OF THE GREAT PYRAMID.",""],["FINLAND HAS MORE SAUNAS THAN CARS.",""],["COW BEST FRIENDS GET STRESSED WHEN THEY ARE SEPARATED.",""],["YOUR LEFT AND RIGHT NOSTRILS TAKE TURNS DOING THE HEAVY LIFTING.",""],["NINTENDO WAS FOUNDED IN 1889, ORIGINALLY MAKING PLAYING CARDS.",""],["COWS HAVE ACCENTS.",""],["A CLOUD TYPICALLY WEIGHS AROUND A MILLION TONNES.",""],["ANDREW JACKSON'S PET PARROT WAS REMOVED FROM HIS FUNERAL FOR SWEARING.",""],["MARS IS SHAPED MORE LIKE A LOPSIDED RUGBY BALL THAN A PERFECT SPHERE.",""],["GLASS BALLS CAN BOUNCE HIGHER THAN RUBBER BALLS.",""],["THE NATIONAL ANIMAL OF SCOTLAND IS THE MYTHICAL UNICORN.",""],["CATS CANNOT TASTE SWEETNESS.",""],["LIGHTNING IS ROUGHLY FIVE TIMES HOTTER THAN THE SURFACE OF THE SUN.",""],["ALL CLOWNFISH ARE BORN MALE AND CAN CHANGE TO FEMALE.",""],["ALL OF EARTH'S CONTINENTS COULD FIT INSIDE THE PACIFIC OCEAN.",""],["A CHICKEN NAMED MIKE LIVED FOR 18 MONTHS WITHOUT A HEAD.",""],["SLOTHS CAN HOLD THEIR BREATH FOR UP TO 40 MINUTES.",""]];
     let f30=0; function nextFact30(){
       f30=(f30+1)%facts30.length;
       const card=document.querySelector('.hub-fact');
@@ -1883,7 +1886,7 @@ function vegDecision(choice) {
     </div>
     <section class="mia3-home" id="mia3-home">
       <div class="mia3-k">WHAT ARE WE MAKING ABSURD TODAY?</div>
-      <div class="mia3-h">PICK SOMETHING NORMAL.<br>WE’LL HELP YOU RUIN IT.</div>
+      <div class="mia3-h">PICK SOMETHING NORMAL.<br>WE’LL HELP YOU MAKE IT ABSURD.</div>
       <p class="mia3-copy">Every path starts normal. Every choice physically makes it worse.</p>
       <div class="mia3-modes mia6-modes">
         <button class="mia3-mode mia6-mode" data-mode="product" type="button"><i>01 / PRODUCT</i><div class="mia6-teaser">🍞<em>FUNCTIONAL</em></div><b>A TOASTER.</b><span>Breakfast technology + emotional damage.</span></button>
