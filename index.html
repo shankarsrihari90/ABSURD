@@ -429,6 +429,7 @@
 #hub-intro{--mx:50%;--my:50%;isolation:isolate;transition:transform .18s ease,filter .18s ease;}
 #hub-intro:after{content:"";position:absolute;inset:-35%;z-index:0;pointer-events:none;background:radial-gradient(circle at var(--mx) var(--my),rgba(255,0,110,.38),transparent 25%);mix-blend-mode:multiply;transition:background .12s ease}
 #hub-intro>div.relative{position:relative;z-index:1}.hub-intro:hover{transform:rotate(-.25deg) translate(-2px,-2px);filter:saturate(1.12)}
+.hub-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.hub-actions button{padding:11px 13px;border:3px solid #111;box-shadow:4px 4px 0 #111;font:900 10px monospace;letter-spacing:.04em;cursor:pointer;transition:transform .14s ease,box-shadow .14s ease}.hub-actions button:hover,.hub-actions button:focus-visible{transform:translate(-3px,-3px);box-shadow:7px 7px 0 #111;outline:2px solid #ff006e;outline-offset:3px}.hub-random{background:#39ff88;color:#111}.hub-create{background:#ff006e;color:#fff}@media(max-width:640px){.hub-actions{margin-top:15px;gap:8px}.hub-actions button{padding:9px 10px;font-size:8px;box-shadow:3px 3px 0 #111}}
 .hub-live{display:inline-flex;align-items:center;gap:8px;padding:7px 10px;border:2px solid #000;background:#ff006e;color:#fff;font:900 10px/1 monospace;letter-spacing:.12em;box-shadow:3px 3px 0 #000;animation:live-shift 2.4s steps(1,end) infinite}.hub-live i{width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px #000;animation:live-blink .8s steps(2,end) infinite}@keyframes live-shift{0%,100%{background:#ff006e;color:#fff}25%{background:#00d8e8;color:#111}50%{background:#39ff88;color:#111}75%{background:#facc15;color:#111}}@keyframes live-blink{50%{transform:scale(.2);opacity:.25}}
 .hub-intro-orbit{position:absolute;z-index:2;font:900 clamp(3rem,8vw,7rem)/1 Impact,sans-serif;color:#ff006e;pointer-events:none;animation:hub-orbit 2.8s steps(2,end) infinite}.hub-intro-orbit-a{right:14%;bottom:8%}.hub-intro-orbit-b{right:6%;top:8%;color:#000;animation-delay:.6s}@keyframes hub-orbit{50%{transform:translate(-11px,8px) rotate(14deg)}100%{transform:translate(0) rotate(-5deg)}}
 .hub-intro.is-booming{animation:hub-boom .34s steps(2,end)}@keyframes hub-boom{50%{transform:translate(5px,-3px) scale(1.012);filter:hue-rotate(70deg) contrast(1.25)}}
@@ -559,8 +560,9 @@
       <div class="flex items-center mb-4">
         <span class="hub-live" aria-label="Live">LIVE <i aria-hidden="true"></i></span>
       </div>
-      <h2 class="font-impact text-[clamp(4rem,12vw,8rem)] leading-[.75] uppercase">WELCOME<br><span class="text-pink-600">TO ABSURD.</span></h2>
-      <p class="font-mono text-lg sm:text-2xl md:text-3xl max-w-3xl mt-5 leading-tight">Unnecessary experiences. Pick one. Waste some time. Question your decisions.</p>
+      <h2 class="font-impact text-[clamp(3.7rem,10vw,7rem)] leading-[.75] uppercase">NOT EVERYTHING<br>HAS TO BE <span class="text-pink-600">USEFUL.</span></h2>
+      <p class="font-mono text-lg sm:text-2xl md:text-3xl max-w-3xl mt-5 leading-tight">WELCOME TO ABSURD. WASTE 5 MINUTES RESPONSIBLY.</p>
+      <div class="hub-actions"><button type="button" class="hub-random" onclick="openRandomAbsurd()">GIVE ME SOMETHING RANDOM →</button><button type="button" class="hub-create" onclick="document.getElementById('mia3-open')?.click()">MAKE SOMETHING ABSURD →</button></div>
     </div>
   </div>
 
@@ -590,7 +592,7 @@
       <div class="body">
         <div class="mia3-k">ABSURDIFICATION ENGINE</div>
         <h3 id="mia3-card-title">MAKE SOMETHING ABSURD.</h3>
-        <p>You don't need to be creative. We give you the ingredients. You make the terrible decisions.</p>
+        <p>Give us something normal. We will make it absurd. You make the terrible decisions.</p>
         <div class="mia3-charge" aria-hidden="true"><span></span><b>CHAOS LEVEL: UNNECESSARILY HIGH</b><i>⚡</i></div>
         <button class="mia3-open" id="mia3-open" type="button">ENTER THE CREATION LAB <span aria-hidden="true">→</span></button>
       </div>
@@ -989,6 +991,19 @@
       if (targetId === 'tool-zen' && window.absurdZenOpen) window.absurdZenOpen();
       window.dispatchEvent(new CustomEvent('absurd:view', {detail:targetId}));
       window.scrollTo({top:0, behavior:'instant'});
+    }
+
+    function openRandomAbsurd() {
+      const experiences = [
+        () => { switchView('view-hub'); nextFact30(); document.querySelector('.hub-card-facts')?.scrollIntoView({behavior:'smooth', block:'center'}); },
+        () => switchView('tool-dad'),
+        () => switchView('tool-mood'),
+        () => switchView('tool-veg'),
+        () => switchView('tool-zen'),
+        () => switchView('tool-button'),
+        () => document.getElementById('mia3-open')?.click()
+      ];
+      experiences[Math.floor(Math.random() * experiences.length)]();
     }
 
     // Landing Page Entry
